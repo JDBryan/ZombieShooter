@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    private bool hasGun = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,34 @@ public class Movement : MonoBehaviour
 		//Perform translation and rotation
 		transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle+90));
         transform.position += movement * Time.deltaTime;
+
+        if (Input.GetMouseButtonDown(0)) {
+            if (hasGun) {
+                Debug.Log("Bang");
+            } else {
+                Debug.Log("Swish");
+            }
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Check for a match with the specific tag on any GameObject that collides with your GameObject
+        if (collision.gameObject.tag == "Pickup")
+        {
+            Debug.Log("Do something here");
+            Destroy(collision.gameObject);
+            hasGun = true;
+        }
+    }
+
+    void OnMouseDown()
+    {
+        if (hasGun) {
+            Debug.Log("Bang");
+        } else {
+            Debug.Log("Swish");
+        }
     }
 
     float AngleBetweenTwoPoints(Vector2 a, Vector2 b) {
