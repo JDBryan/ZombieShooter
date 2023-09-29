@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyMoveScript : MonoBehaviour
 {
     public Transform target;
-    private float speed = 2f;
-    private float rotateSpeed = 0.025f;
+    private float speed = 50f;
+    private float rotateSpeed = 1.5f;
     private Rigidbody2D rb;
 
     private void Start() {
@@ -19,17 +19,19 @@ public class EnemyMoveScript : MonoBehaviour
         } else {
             RotateTowardsTarget();
         }
+        
     }
 
-    private void FixedUpdate() {
-        rb.velocity = transform.up * speed;
+    private void FixedUpdate()
+    {
+        rb.velocity = transform.up * speed * Time.deltaTime;
     }
 
     private void RotateTowardsTarget() {
         Vector2 targetDirection = target.position - transform.position;
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f;
         Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed * Time.deltaTime);
     }
 
     private void GetTarget () {
