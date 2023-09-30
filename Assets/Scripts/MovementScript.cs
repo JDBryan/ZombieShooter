@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// using System.Rigidbody2D
 
 public class Movement : MonoBehaviour
 {
     private bool hasGun = false;
+    private float health = 100f;
+    private float speed = 2f;
+    public GameObject bulletPrefab;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,11 +32,11 @@ public class Movement : MonoBehaviour
 
 		//Perform translation and rotation
 		transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle+90));
-        transform.position += movement * Time.deltaTime;
+        transform.position += movement * speed * Time.deltaTime;
 
         if (Input.GetMouseButtonDown(0)) {
             if (hasGun) {
-                Debug.Log("Bang");
+                this.FireGun();
             } else {
                 Debug.Log("Swish");
             }
@@ -43,10 +48,16 @@ public class Movement : MonoBehaviour
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
         if (collision.gameObject.tag == "Pickup")
         {
-            Debug.Log("Do something here");
             Destroy(collision.gameObject);
             hasGun = true;
         }
+    }
+
+    void FireGun() {
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+        Physics2D.IgnoreCollision(bullet.GetComponent<BoxCollider2D>(), GetComponent<CircleCollider2D>());
+        Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
+        bulletBody.AddForce(bulletBody.transform.up * 4000);
     }
 
     float AngleBetweenTwoPoints(Vector2 a, Vector2 b) {
