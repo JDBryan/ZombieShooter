@@ -18,21 +18,11 @@ public class Movement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0);
-		
-		//Get the Screen position of the mouse and player
-        Vector2 playerPosition = Camera.main.WorldToViewportPoint(transform.position);
-		Vector2 mousePosition = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
-		
-		//Get the angle between the player and the camera
-		float angle = AngleBetweenTwoPoints(playerPosition, mousePosition);
-
-		//Perform translation and rotation
-		transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle+90));
-        transform.position += movement * speed * Time.deltaTime;
+    {	
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        UpdateMovement(horizontal, vertical);
+        UpdateRotation();
 
         if (Input.GetMouseButtonDown(0)) {
             if (hasGun) {
@@ -41,6 +31,30 @@ public class Movement : MonoBehaviour
                 Debug.Log("Swish");
             }
         }
+    }
+
+    void UpdateMovement(float horizontal, float vertical) 
+    {
+        Vector3 movement = new Vector3(horizontal, vertical, 0);
+        float magnitude = movement.magnitude;
+        if (magnitude != 0) {
+            float scalar = speed / magnitude;
+            Vector3 scaledMovement = movement * scalar * Time.deltaTime;
+            transform.position += scaledMovement;
+        }
+    }
+
+    void UpdateRotation()
+    {
+        //Get the Screen position of the mouse and player
+        Vector2 playerPosition = (Vector2)transform.position;
+		Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		
+		//Get the angle between the player and the camera
+		float angle = AngleBetweenTwoPoints(playerPosition, mousePosition);
+
+		//Perform translation and rotation
+		transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle+90));
     }
 
     void OnCollisionEnter2D(Collision2D collision)
