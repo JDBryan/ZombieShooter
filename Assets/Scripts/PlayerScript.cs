@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Animator animator;
     private float health = 100f;
     private float speed = 2f;
     public GameObject bulletPrefab;
@@ -24,6 +25,10 @@ public class Player : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         UpdateMovement(horizontal, vertical);
         UpdateRotation();
+
+        Vector2 velocity = new Vector2(horizontal, vertical); 
+
+        animator.SetFloat("Speed", velocity.magnitude);
 
         if (Input.GetMouseButtonDown(0)) {
             if (activeGun == null) {
@@ -70,13 +75,6 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
-
-    // void FireGun() {
-    //     GameObject bullet = Instantiate(activeGun.bulletType, transform.position, transform.rotation);
-    //     Physics2D.IgnoreCollision(bullet.GetComponent<BoxCollider2D>(), GetComponent<CircleCollider2D>());
-    //     Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
-    //     bulletBody.AddForce(bulletBody.transform.up * 4000);
-    // }
 
     float AngleBetweenTwoPoints(Vector2 a, Vector2 b) {
 		return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
