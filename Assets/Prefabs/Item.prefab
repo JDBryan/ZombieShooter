@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d818d8a6549572044a8444c79eb7e9e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletType: {fileID: 0}
+  bulletType: {fileID: 5546224994513267629, guid: 5b4e83a4441f713469517fa8afb3d902, type: 3}
   fireRate: 0
 --- !u!1 &5665144977456983153
 GameObject:
