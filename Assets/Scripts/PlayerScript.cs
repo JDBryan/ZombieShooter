@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 // using System.Rigidbody2D
 
-public class Movement : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    private bool hasGun = false;
     private float health = 100f;
     private float speed = 2f;
     public GameObject bulletPrefab;
+    private GameObject activeGun;
+    // private List<Pistol> heldGuns;
     
     // Start is called before the first frame update
     void Start()
@@ -25,10 +26,10 @@ public class Movement : MonoBehaviour
         UpdateRotation();
 
         if (Input.GetMouseButtonDown(0)) {
-            if (hasGun) {
-                this.FireGun();
-            } else {
+            if (activeGun == null) {
                 Debug.Log("Swish");
+            } else {
+                activeGun.GetComponent<Pistol>().Fire();
             }
         }
     }
@@ -62,17 +63,20 @@ public class Movement : MonoBehaviour
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
         if (collision.gameObject.tag == "Pickup")
         {
+            Debug.Log("COLLIDED WITH PICKUP");
+            GameObject gun = collision.gameObject.transform.GetChild(0).gameObject;
+            gun.transform.parent = transform;
+            activeGun = gun;
             Destroy(collision.gameObject);
-            hasGun = true;
         }
     }
 
-    void FireGun() {
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-        Physics2D.IgnoreCollision(bullet.GetComponent<BoxCollider2D>(), GetComponent<CircleCollider2D>());
-        Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
-        bulletBody.AddForce(bulletBody.transform.up * 4000);
-    }
+    // void FireGun() {
+    //     GameObject bullet = Instantiate(activeGun.bulletType, transform.position, transform.rotation);
+    //     Physics2D.IgnoreCollision(bullet.GetComponent<BoxCollider2D>(), GetComponent<CircleCollider2D>());
+    //     Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
+    //     bulletBody.AddForce(bulletBody.transform.up * 4000);
+    // }
 
     float AngleBetweenTwoPoints(Vector2 a, Vector2 b) {
 		return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;

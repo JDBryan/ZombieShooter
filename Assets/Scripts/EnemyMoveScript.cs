@@ -31,17 +31,17 @@ public class EnemyMoveScript : MonoBehaviour
         rb.velocity = transform.up * speed * Time.deltaTime;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("COLLISION");
-        // //Check for a match with the specific tag on any GameObject that collides with your GameObject
-        // if (collision.gameObject.tag == "Projectile")
-        // {
-        //     Debug.Log("COLLISION WITH BULLET");
-        //     health -= 50;
-        //     Destroy(collision.gameObject);
-        // }
-    }
+    // void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     Debug.Log("COLLISION");
+    //     //Check for a match with the specific tag on any GameObject that collides with your GameObject
+    //     if (collision.gameObject.tag == "Projectile")
+    //     {
+    //         Debug.Log("COLLISION WITH BULLET");
+    //         health -= 50;
+    //         Destroy(collision.gameObject);
+    //     }
+    // }
 
     private void RotateTowardsTarget() {
         Vector2 targetDirection = target.position - transform.position;
