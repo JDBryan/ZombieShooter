@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public Animator animator;
     private bool hasGun = false;
     private float health = 100f;
     private float speed = 2f;
@@ -23,6 +24,10 @@ public class Movement : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         UpdateMovement(horizontal, vertical);
         UpdateRotation();
+
+        Vector2 velocity = new Vector2(horizontal, vertical); 
+
+        animator.SetFloat("Speed", velocity.magnitude);
 
         if (Input.GetMouseButtonDown(0)) {
             if (hasGun) {
