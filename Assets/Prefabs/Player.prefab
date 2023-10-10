@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -1043737299, guid: 9db2fb200a4a6de48b46e3299ce3a6ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5839021531235708057}
   bulletPrefab: {fileID: 0}
+  activeGun: {fileID: 0}
 --- !u!95 &5839021531235708057
 Animator:
   serializedVersion: 5
