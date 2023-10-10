@@ -12,11 +12,6 @@ public class Player : MonoBehaviour
     public Weapon activeWeapon;
     public List<Weapon> heldWeapons;
     
-    void Start()
-    {
-        transform.Rotate(0,0,270);
-    }
-
     void Update()
     {	
         float horizontal = Input.GetAxis("Horizontal");
