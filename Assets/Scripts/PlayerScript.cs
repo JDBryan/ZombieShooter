@@ -9,16 +9,14 @@ public class Player : MonoBehaviour
     private float health = 100f;
     private float speed = 2f;
     public GameObject bulletPrefab;
-    private GameObject activeGun;
+    public GameObject activeGun;
     // private List<Pistol> heldGuns;
     
-    // Start is called before the first frame update
     void Start()
     {
         transform.Rotate(0,0,270);
     }
 
-    // Update is called once per frame
     void Update()
     {	
         float horizontal = Input.GetAxis("Horizontal");

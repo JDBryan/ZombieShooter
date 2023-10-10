@@ -6,7 +6,7 @@ public class Pistol : MonoBehaviour
 {
     public GameObject bulletType;
     public float fireRate;
-    private float ammoCount = 20;
+    public float ammoCount = 20;
 
     public void Fire()
     {
