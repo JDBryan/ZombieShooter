@@ -16,10 +16,10 @@ public class UIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.activeGun == null) {
+        if (player.activeWeapon == null) {
             weaponInfoText.SetText("--");
         } else {
-            weaponInfoText.SetText(player.activeGun.GetComponent<Pistol>().ammoCount.ToString());
+            weaponInfoText.SetText(player.activeWeapon.GetComponent<Weapon>().ammoCount.ToString());
         }
         
     }

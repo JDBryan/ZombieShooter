@@ -9,8 +9,8 @@ public class Player : MonoBehaviour
     private float health = 100f;
     private float speed = 2f;
     public GameObject bulletPrefab;
-    public GameObject activeGun;
-    // private List<Pistol> heldGuns;
+    public Weapon activeWeapon;
+    public List<Weapon> heldWeapons;
     
     void Start()
     {
@@ -29,10 +29,10 @@ public class Player : MonoBehaviour
         animator.SetFloat("Speed", velocity.magnitude);
 
         if (Input.GetMouseButtonDown(0)) {
-            if (activeGun == null) {
+            if (activeWeapon == null) {
                 Debug.Log("Swish");
             } else {
-                activeGun.GetComponent<Pistol>().Fire();
+                activeWeapon.Fire();
             }
         }
     }
@@ -66,10 +66,9 @@ public class Player : MonoBehaviour
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
         if (collision.gameObject.tag == "Pickup")
         {
-            Debug.Log("COLLIDED WITH PICKUP");
-            GameObject gun = collision.gameObject.transform.GetChild(0).gameObject;
-            gun.transform.parent = transform;
-            activeGun = gun;
+            GameObject weapon = collision.gameObject.transform.GetChild(0).gameObject;
+            weapon.transform.parent = transform;
+            activeWeapon = weapon.GetComponent<Weapon>();
             Destroy(collision.gameObject);
         }
     }
