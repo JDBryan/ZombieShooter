@@ -16,11 +16,11 @@ public class UIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.activeWeapon == null) {
-            weaponInfoText.SetText("--");
-        } else {
-            weaponInfoText.SetText(player.activeWeapon.GetComponent<Weapon>().ammoCount.ToString());
+        Weapon activeWeapon = player.GetActiveWeapon();
+        string ammoCount = "inf";
+        if (!activeWeapon.hasInfiniteAmmo) {
+            ammoCount = activeWeapon.ammoCount.ToString();
         }
-        
+        weaponInfoText.SetText(player.GetActiveWeapon().name + ": " + ammoCount);
     }
 }

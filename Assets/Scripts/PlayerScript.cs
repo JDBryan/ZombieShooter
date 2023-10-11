@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using System.Rigidbody2D
 
 public class Player : MonoBehaviour
 {
     public Animator animator;
     private float health = 100f;
     private float speed = 2f;
-    public GameObject bulletPrefab;
-    public Weapon activeWeapon;
-    public List<Weapon> heldWeapons;
+    private int activeWeaponIndex;
+
+    void Start()
+    {
+        activeWeaponIndex = 0;
+    }
     
     void Update()
     {	
@@ -24,11 +26,11 @@ public class Player : MonoBehaviour
         animator.SetFloat("Speed", velocity.magnitude);
 
         if (Input.GetMouseButtonDown(0)) {
-            if (activeWeapon == null) {
-                Debug.Log("Swish");
-            } else {
-                activeWeapon.Fire();
-            }
+            this.GetActiveWeapon().Fire(this.transform);
+        }
+
+        if (Input.GetKeyDown("e")) {
+            activeWeaponIndex = (activeWeaponIndex + 1) % this.GetHeldWeapons().Count;
         }
     }
 
@@ -61,15 +63,32 @@ public class Player : MonoBehaviour
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
         if (collision.gameObject.tag == "Pickup")
         {
-            GameObject weapon = collision.gameObject.transform.GetChild(0).gameObject;
-            weapon.transform.parent = transform;
-            activeWeapon = weapon.GetComponent<Weapon>();
-            Destroy(collision.gameObject);
+            Debug.Log("Picking up weapon!");
+            GameObject weapon = collision.gameObject;
+            weapon.transform.parent = this.transform;
+            weapon.GetComponent<BoxCollider2D>().enabled = false;
+            weapon.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
     float AngleBetweenTwoPoints(Vector2 a, Vector2 b) {
 		return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
 	}
+
+    public List<Weapon> GetHeldWeapons() {
+        List<Weapon> heldWeapons = new List<Weapon>();
+        foreach (Transform weapon in this.transform) {
+            if(weapon.tag != "MainCamera") {
+                heldWeapons.Add(weapon.GetComponent<Weapon>());
+            }
+        }
+        Debug.Log(heldWeapons.Count);
+        return heldWeapons;
+    }
+
+    public Weapon GetActiveWeapon()
+    {
+      return this.GetHeldWeapons()[activeWeaponIndex];  
+    }
 }
 
