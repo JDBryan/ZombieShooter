@@ -10,12 +10,6 @@ public class BulletScript : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
