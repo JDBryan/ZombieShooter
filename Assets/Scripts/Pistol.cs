@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
+    private SpriteRenderer myRenderer;
+    public Sprite pistolFireSprite; 
+
     void Start() {
         this.weaponName = "Pistol";
         this.hasInfiniteAmmo = true;
         this.ammoCount = 0;
+        myRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     public override void Fire(Transform player)
@@ -21,6 +25,12 @@ public class Pistol : Weapon
         if (!this.hasInfiniteAmmo && this.ammoCount > 0) {
             this.ammoCount -= 1;
         }
+
+        ChangeGunSprite(pistolFireSprite);
+    }
+
+    void ChangeGunSprite(Sprite newSprite){
+        myRenderer.sprite = newSprite;
     }
 }
 

@@ -8,7 +8,7 @@ public class SpawnScript : MonoBehaviour
     private int enemyNumber = 5;
     private float countdown = 5f;
     private Vector3 spawnerSize;
-    private MeshRenderer myRenderer;
+    private BoxCollider2D myBox;
     public GameObject newEnemy;
     public GameObject controller;
 
@@ -16,8 +16,8 @@ public class SpawnScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myRenderer = GetComponent<MeshRenderer>();
-        spawnerSize = GetComponent<Renderer>().bounds.extents;
+        //myRenderer = GetComponent<MeshRenderer>();
+        spawnerSize = GetComponent<BoxCollider2D>().size;
         countdown = timeBetweenSpawn;
         enemyNumber = controller.GetComponentInParent<WaveControllerScript>().waveAmount;
     }
