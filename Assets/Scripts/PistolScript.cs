@@ -16,7 +16,7 @@ public class Pistol : Weapon
             GameObject bullet = Instantiate(bulletType, player.position, player.rotation);
             Physics2D.IgnoreCollision(bullet.GetComponent<BoxCollider2D>(), player.GetComponent<CircleCollider2D>());
             Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
-            bulletBody.AddForce(bulletBody.transform.up * 4000);
+            bulletBody.velocity = bulletBody.transform.up * 40;
         }
         if (!this.hasInfiniteAmmo && this.ammoCount > 0) {
             this.ammoCount -= 1;
