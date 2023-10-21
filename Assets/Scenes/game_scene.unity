@@ -273,12 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1e3d546f05b39c4b8ff9ead09594813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnController: {fileID: 0}
-  waveNumber: 0
-  waveInProgress: 0
-  baseSpawnAmount: 0
-  incrementalSpawnAmount: 0
-  currentEnemyCount: 0
+  spawnController: {fileID: 8749509107678213801}
 --- !u!1001 &527493353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -411,7 +406,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3153070579030585111, guid: e4f535f6ee3728f48aaf5322e1fcef1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.23
+      value: 16.57
       objectReference: {fileID: 0}
     - target: {fileID: 3153070579030585111, guid: e4f535f6ee3728f48aaf5322e1fcef1f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -33955,7 +33950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1974826335}
-  gameController: {fileID: 0}
+  gameController: {fileID: 514899036}
   weaponInfoText: {fileID: 5532356842692760651}
   roundNumberText: {fileID: 1182972763682441321}
 --- !u!224 &3690284578201707129
