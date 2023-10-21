@@ -5,14 +5,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public Transform target;
-    private int speed;
+    private float speed;
     private float rotateSpeed;
     private Rigidbody2D rigidBody;
     private int health;
-    private bool spawnEnded = false;
+    private bool spawnEnded;
 
     private void Start() {
-        this.speed = 6;
+        this.speed = 0.06f;
+        this.spawnEnded = false;
         this.rotateSpeed = 4f;
         this.health = 100;
         this.rigidBody = GetComponent<Rigidbody2D>();
@@ -23,9 +24,12 @@ public class Enemy : MonoBehaviour
         if (health <= 0) {
             Destroy(this.gameObject);
         }
+    }
+
+    private void FixedUpdate() {
         RotateTowardsTarget();
-        if (spawnEnded == true){
-            rigidBody.MovePosition(transform.position + transform.up * speed * Time.deltaTime);
+        if (spawnEnded == true) {
+            rigidBody.MovePosition(transform.position + transform.up * speed);
         }
     }
 
@@ -40,7 +44,7 @@ public class Enemy : MonoBehaviour
         health -= damageAmount;
     }
 
-    public void SpawnEnded (){
+    public void SpawnEnded() {
         spawnEnded = true;
     }
 
