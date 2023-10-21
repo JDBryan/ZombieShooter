@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     private float rotateSpeed;
     private Rigidbody2D rigidBody;
     private int health;
+    private bool spawnEnded = false;
 
     private void Start() {
         this.speed = 6;
@@ -23,7 +24,9 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
         RotateTowardsTarget();
-        rigidBody.MovePosition(transform.position + transform.up * speed * Time.deltaTime);
+        if (spawnEnded == true){
+            rigidBody.MovePosition(transform.position + transform.up * speed * Time.deltaTime);
+        }
     }
 
     private void RotateTowardsTarget() {
@@ -37,7 +40,7 @@ public class Enemy : MonoBehaviour
         health -= damageAmount;
     }
 
-    public void HasSpawnEnded (){
+    public void SpawnEnded (){
         spawnEnded = true;
     }
 
