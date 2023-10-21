@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5839021531235708057}
-  heldWeapons: []
+  speed: 1
 --- !u!95 &5839021531235708057
 Animator:
   serializedVersion: 5
@@ -200,11 +200,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4442287931835797768, guid: 3ff905448549311419ed7967c6305f87, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.57
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4442287931835797768, guid: 3ff905448549311419ed7967c6305f87, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.97854257
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4442287931835797768, guid: 3ff905448549311419ed7967c6305f87, type: 3}
       propertyPath: m_LocalPosition.z
@@ -236,6 +236,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4442287931835797768, guid: 3ff905448549311419ed7967c6305f87, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5790364247044592259, guid: 3ff905448549311419ed7967c6305f87, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
