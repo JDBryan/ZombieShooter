@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Animator animator;
+    [SerializeField] private GameController gameController;
+    [SerializeField] private Animator animator;
     private float health;
     private float speed;
     private int activeWeaponIndex;
@@ -82,6 +83,13 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             this.health -= 10;
+        }
+    }
+
+    public void Damage(int damageAmount) {
+        this.health -= 10;
+        if (this.health <= 0) {
+            this.gameController.EndGame();
         }
     }
 

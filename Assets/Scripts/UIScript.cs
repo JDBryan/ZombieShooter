@@ -5,16 +5,13 @@ using TMPro;
 
 public class UIScript : MonoBehaviour
 {
-    Player player;
-    public TMP_Text weaponInfoText;
-    // Start is called before the first frame update
-    void Start()
-    {
-        player = GameObject.Find("Player").GetComponent<Player>();
-    }
+    [SerializeField] private Player player;
+    [SerializeField] private GameController gameController;
+    [SerializeField] private TMP_Text weaponInfoText;
+    [SerializeField] private TMP_Text roundNumberText;
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         Weapon activeWeapon = player.GetActiveWeapon();
         string ammoCount = "inf";
@@ -22,5 +19,7 @@ public class UIScript : MonoBehaviour
             ammoCount = activeWeapon.ammoCount.ToString();
         }
         weaponInfoText.SetText(player.GetActiveWeapon().name + ": " + ammoCount);
+
+        roundNumberText.SetText(gameController.GetWaveNumber().ToString());
     }
 }
