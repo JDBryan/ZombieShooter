@@ -6,14 +6,14 @@ public class Player : MonoBehaviour
 {
     public Animator animator;
     private float health;
-    private int speed;
+    private float speed;
     private int activeWeaponIndex;
 
     void Start()
     {
         activeWeaponIndex = 0;
         health = 100;
-        speed = 14;
+        speed = 0.14f;
     }
     
     void Update()
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
         Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // Updating movement and mouse position
-        UpdateMovement(horizontal, vertical);
+        // UpdateMovement(horizontal, vertical);
         UpdateRotation(mousePosition);
 
         Vector2 velocity = new Vector2(horizontal, vertical); 
@@ -41,6 +41,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    void FixedUpdate() {
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        UpdateMovement(horizontal, vertical);
+    }
+
     void UpdateMovement(float horizontal, float vertical) 
     {
         Vector3 movement = new Vector3(horizontal, vertical, 0);
@@ -48,7 +54,7 @@ public class Player : MonoBehaviour
         Rigidbody2D rigidBody = this.GetComponent<Rigidbody2D>();
         if (magnitude != 0) {
             float scalar = speed / magnitude;
-            Vector3 scaledMovement = movement * scalar * Time.deltaTime;
+            Vector3 scaledMovement = movement * scalar;
             rigidBody.MovePosition(transform.position + scaledMovement);
         }
     }
