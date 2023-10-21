@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
     }
 
     // Increments wave kill count by one. Checks if the kill count for the wave is equal
-    // to the number of enemies that we intended to spawn. If so ends wave
+    // to the number of enemies that we intended to spawn. If so ends wave.
     public void RegisterEnemyDeath()
     {
         this.waveKillCount += 1;

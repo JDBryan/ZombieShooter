@@ -10,7 +10,6 @@ public class Spawner : MonoBehaviour
     private int spawnQueue;
     private float lastSpawnTime;
 
-    // Start is called before the first frame update
     void Start()
     {
         foreach(Transform spawnArea in transform) {
@@ -19,7 +18,10 @@ public class Spawner : MonoBehaviour
         lastSpawnTime = Time.time;
     }
 
-    void Update() {
+    void Update() 
+    {
+        // Per spawn interval, if the spawnQueue is not empty, spawn a single enemy
+        // and decrement the spawn queue
         if (spawnQueue > 0 && Time.time - lastSpawnTime >= spawnInterval) {
             this.SpawnEnemy();
             spawnQueue -= 1;
@@ -27,15 +29,16 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public void SpawnEnemy()
+    // Spawns a single enemy within the bounds of one of the spawn areas
+    private void SpawnEnemy()
     {
-        // Get a random spawn area from our list of spawn areas 
+        // Get a random spawn area from the list of spawn areas 
         System.Random random = new System.Random();
         Transform spawnArea = spawnAreas[random.Next(spawnAreas.Count)].transform;
 
-        Vector3 extents = spawnArea.GetComponent<SpriteRenderer>().bounds.extents;        
-
         // Find a random point within this spawn area
+        Vector3 extents = spawnArea.GetComponent<SpriteRenderer>().bounds.extents; 
+
         float minX = spawnArea.position.x - extents.x;
         float maxX = spawnArea.position.x + extents.x;
         float minY = spawnArea.position.y - extents.y;
@@ -45,15 +48,13 @@ public class Spawner : MonoBehaviour
         Instantiate(enemy, spawnPoint, this.transform.rotation);
     }
 
-    public void SetSpawnInterval(int interval) {
+    public void SetSpawnInterval(int interval) 
+    {
         this.spawnInterval = interval;
     }
 
-    public void EnqueueSpawns(int spawnAmount) {
+    public void EnqueueSpawns(int spawnAmount) 
+    {
         this.spawnQueue += spawnAmount;
-    }
-
-    public bool IsSpawnQueueEmpty() {
-        return this.spawnQueue == 0;
     }
 }
