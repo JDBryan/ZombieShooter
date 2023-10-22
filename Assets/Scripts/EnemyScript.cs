@@ -22,10 +22,6 @@ public class Enemy : MonoBehaviour
         this.gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
-    private void Update() {
-
-    }
-
     private void FixedUpdate() {
         RotateTowardsTarget();
         if (spawnEnded == true) {

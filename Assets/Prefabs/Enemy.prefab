@@ -100,8 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf1e9723a7225245bca76f34b58502a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  gameController: {fileID: 4709898543090224120, guid: 8ec1845c2da5e764e974cf559dbae553, type: 3}
 --- !u!50 &4564020692395794932
 Rigidbody2D:
   serializedVersion: 4
@@ -118,7 +116,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 1
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 53c80544b0fb4d148b365951167e965e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class UIScript : MonoBehaviour
+public class UserInterface : MonoBehaviour
 {
     [SerializeField] private Player player;
-    [SerializeField] private GameController gameController;
     [SerializeField] private TMP_Text weaponInfoText;
-    [SerializeField] private TMP_Text roundNumberText;
+    [SerializeField] private TMP_Text waveNumberText;
+    [SerializeField] private TMP_Text healthBar;
+
+    public void SetWaveNumber(int waveNumber) {
+        waveNumberText.SetText(waveNumber.ToString());
+    }
 
     // Update is called once per frame
     void LateUpdate()
@@ -20,6 +24,6 @@ public class UIScript : MonoBehaviour
         }
         weaponInfoText.SetText(player.GetActiveWeapon().name + ": " + ammoCount);
 
-        roundNumberText.SetText(gameController.GetWaveNumber().ToString());
+        healthBar.SetText(player.GetHealth().ToString());
     }
 }
