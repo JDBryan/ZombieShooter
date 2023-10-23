@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform target;
+    private Transform target;
+    private GameController gameController;
     private float speed;
     private float rotateSpeed;
     private Rigidbody2D rigidBody;
@@ -18,12 +19,11 @@ public class Enemy : MonoBehaviour
         this.health = 100;
         this.rigidBody = GetComponent<Rigidbody2D>();
         this.target = GameObject.FindGameObjectWithTag("Player").transform;
+        this.gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     private void Update() {
-        if (health <= 0) {
-            Destroy(this.gameObject);
-        }
+
     }
 
     private void FixedUpdate() {
@@ -42,10 +42,13 @@ public class Enemy : MonoBehaviour
 
     public void Damage(int damageAmount) {
         health -= damageAmount;
+        if (health <= 0) {
+            gameController.RegisterEnemyDeath();
+            Destroy(this.gameObject);
+        }
     }
 
     public void SpawnEnded() {
         spawnEnded = true;
     }
-
 }
