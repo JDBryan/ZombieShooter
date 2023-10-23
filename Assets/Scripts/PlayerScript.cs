@@ -6,33 +6,24 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private GameController gameController;
     [SerializeField] private Animator animator;
-    private float health;
+    private int health;
     private float speed;
     private int activeWeaponIndex;
+    private Vector2 velocity;
 
     void Start()
     {
         activeWeaponIndex = 0;
         health = 100;
         speed = 0.14f;
+        velocity = new Vector2(0, 0);
     }
     
     void Update()
     {	
-        // Getting inputs for movement and mouseposition
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // Getting user inputs
+        this.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        // Updating movement and mouse position
-        // UpdateMovement(horizontal, vertical);
-        UpdateRotation(mousePosition);
-
-        Vector2 velocity = new Vector2(horizontal, vertical); 
-
-        animator.SetFloat("Speed", velocity.magnitude);
-
-        //Checking for use inputs
         if (Input.GetMouseButtonDown(0)) {
             this.GetActiveWeapon().Fire(this.transform);
         }
@@ -40,23 +31,27 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown("e")) {
             activeWeaponIndex = (activeWeaponIndex + 1) % this.GetHeldWeapons().Count;
         }
+        
+        animator.SetFloat("Speed", this.velocity.magnitude);
+    }
+
+    void LateUpdate() {
+        Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        UpdateRotation(mousePosition);
     }
 
     void FixedUpdate() {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        UpdateMovement(horizontal, vertical);
+        UpdateMovement();
     }
 
-    void UpdateMovement(float horizontal, float vertical) 
+    void UpdateMovement() 
     {
-        Vector3 movement = new Vector3(horizontal, vertical, 0);
-        float magnitude = movement.magnitude;
+        float magnitude = this.velocity.magnitude;
         Rigidbody2D rigidBody = this.GetComponent<Rigidbody2D>();
         if (magnitude != 0) {
             float scalar = speed / magnitude;
-            Vector3 scaledMovement = movement * scalar;
-            rigidBody.MovePosition(transform.position + scaledMovement);
+            Vector2 movement = this.velocity * scalar;
+            rigidBody.MovePosition(transform.position + (Vector3)movement);
         }
     }
 
@@ -83,6 +78,10 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             this.health -= 10;
+            Rigidbody2D rigidBody = GetComponent<Rigidbody2D>();
+            Vector3 direction = transform.position - collision.gameObject.transform.position;
+            rigidBody.AddForce(direction * 1000, ForceMode2D.Impulse);
+            rigidBody.AddForce(-direction * 1000, ForceMode2D.Impulse);
         }
     }
 
@@ -111,7 +110,11 @@ public class Player : MonoBehaviour
 
     public Weapon GetActiveWeapon()
     {
-      return this.GetHeldWeapons()[activeWeaponIndex];  
+        return this.GetHeldWeapons()[activeWeaponIndex];  
+    }
+
+    public int GetHealth() {
+        return this.health;
     }
 }
 

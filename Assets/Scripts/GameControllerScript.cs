@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private Spawner spawnController;
+    [SerializeField] private UserInterface UserInterface;
     private int waveNumber;
     private bool waveInProgress;
     private int baseSpawnAmount;
@@ -22,7 +23,10 @@ public class GameController : MonoBehaviour
     }
 
     void Update()
-    {        
+    {   
+        // Define the conditions for starting a new round in here
+        // At the moment we wait for space bar press but this could also 
+        // Be a timed wait.
         if (!this.waveInProgress && Input.GetKeyDown("space")) {
             this.StartWave();
         }
@@ -33,6 +37,7 @@ public class GameController : MonoBehaviour
         this.waveKillCount = 0;
         this.waveNumber += 1;
         this.spawnController.EnqueueSpawns(this.GetWaveSpawnTotal());
+        this.UserInterface.SetWaveNumber(this.waveNumber);
     }
 
     private void EndWave() {
@@ -40,7 +45,7 @@ public class GameController : MonoBehaviour
     }
 
     // Increments wave kill count by one. Checks if the kill count for the wave is equal
-    // to the number of enemies that we intended to spawn. If so ends wave
+    // to the number of enemies that we intended to spawn. If so ends wave.
     public void RegisterEnemyDeath()
     {
         this.waveKillCount += 1;
