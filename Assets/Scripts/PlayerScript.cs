@@ -24,10 +24,6 @@ public class Player : MonoBehaviour
         // Getting user inputs
         this.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if (Input.GetMouseButtonDown(0)) {
-            this.GetActiveWeapon().Fire(this.transform);
-        }
-
         if (Input.GetKeyDown("e")) {
             activeWeaponIndex = (activeWeaponIndex + 1) % this.GetHeldWeapons().Count;
         }
@@ -38,6 +34,10 @@ public class Player : MonoBehaviour
     void LateUpdate() {
         Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         UpdateRotation(mousePosition);
+
+        if (Input.GetMouseButtonDown(0)) {
+            this.GetActiveWeapon().Fire(this.transform);
+        }
     }
 
     void FixedUpdate() {

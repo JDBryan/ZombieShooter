@@ -14,16 +14,22 @@ public class UserInterface : MonoBehaviour
         waveNumberText.SetText(waveNumber.ToString());
     }
 
+    public void SetHealthBar(int health) {
+        healthBar.SetText(health.ToString());
+    }
+
+    public void SetWeaponInfoText(Weapon activeWeapon) {
+        string ammoText = activeWeapon.hasInfiniteAmmo ? "inf" : activeWeapon.ammoCount.ToString();
+        weaponInfoText.SetText(activeWeapon.name + ": " + ammoText);
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {
         Weapon activeWeapon = player.GetActiveWeapon();
-        string ammoCount = "inf";
-        if (!activeWeapon.hasInfiniteAmmo) {
-            ammoCount = activeWeapon.ammoCount.ToString();
-        }
-        weaponInfoText.SetText(player.GetActiveWeapon().name + ": " + ammoCount);
 
-        healthBar.SetText(player.GetHealth().ToString());
+        this.SetWeaponInfoText(activeWeapon);
+
+        this.SetHealthBar(player.GetHealth());
     }
 }
