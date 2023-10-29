@@ -24,12 +24,19 @@ public class Player : MonoBehaviour
         // Getting user inputs
         this.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
+        this.GetActiveWeapon().ChangeGunSpriteToIdle();
+
         if (Input.GetMouseButtonDown(0)) {
             this.GetActiveWeapon().Fire(this.transform);
+            if (this.GetActiveWeapon().hasInfiniteAmmo || this.GetActiveWeapon().ammoCount > 0){
+                this.GetActiveWeapon().ChangeGunSpriteToFire();
+                }
         }
 
         if (Input.GetKeyDown("e")) {
+            this.GetActiveWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = false;
             activeWeaponIndex = (activeWeaponIndex + 1) % this.GetHeldWeapons().Count;
+            this.GetActiveWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
         
         animator.SetFloat("Speed", this.velocity.magnitude);
@@ -69,6 +76,10 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Pickup")
         {
             GameObject weapon = collision.gameObject;
+            weapon.transform.rotation = this.transform.rotation;
+            weapon.transform.position = this.transform.position;
+            weapon.transform.Rotate(0.0f,0.0f,90.0f);
+            weapon.transform.Translate(0.875f,0.0f,0.0f);
             weapon.transform.parent = this.transform;
             weapon.GetComponent<BoxCollider2D>().enabled = false;
             weapon.GetComponent<SpriteRenderer>().enabled = false;
@@ -116,5 +127,7 @@ public class Player : MonoBehaviour
     public int GetHealth() {
         return this.health;
     }
+
+    
 }
 

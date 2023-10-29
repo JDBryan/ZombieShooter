@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shotgun : Weapon
 {
+
     void Start() {
         this.weaponName = "Shotgun";
         this.hasInfiniteAmmo = false;
@@ -22,5 +23,14 @@ public class Shotgun : Weapon
             this.ammoCount -= 1;
         }
     }
+
+    public override void ChangeGunSpriteToFire(){
+        gameObject.GetComponent<SpriteRenderer>().sprite = gunFireSprite;
+    }
+
+    public override void ChangeGunSpriteToIdle(){
+        gameObject.GetComponent<SpriteRenderer>().sprite = gunSprite;
+    }
+
 }
 

@@ -9,6 +9,15 @@ public abstract class Weapon : MonoBehaviour
     public float fireRate;
     public float ammoCount;
     public bool hasInfiniteAmmo;
+    private SpriteRenderer gunRenderer;
+    public Sprite gunFireSprite; 
+    public Sprite gunSprite;
 
     public abstract void Fire(Transform playerTranform);
+
+    public abstract void ChangeGunSpriteToFire();
+
+    public abstract void ChangeGunSpriteToIdle();
+
+
 }

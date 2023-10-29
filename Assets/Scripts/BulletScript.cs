@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<Enemy>().Damage(10);
+            other.gameObject.GetComponent<Enemy>().Damage(10,this.transform.rotation);
         }
         Destroy(this.gameObject);
     }

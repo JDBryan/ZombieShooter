@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 5
   m_Sprite: {fileID: 1353053960, guid: 63f70ae765f00ad4d929bdd6b0dc26d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf1e9723a7225245bca76f34b58502a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BloodSplat: {fileID: 1481774045222291892, guid: db5a0d9353b24504482a89a6b7ddb343, type: 3}
 --- !u!50 &4564020692395794932
 Rigidbody2D:
   serializedVersion: 4

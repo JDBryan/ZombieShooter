@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rigidBody;
     private int health;
     private bool spawnEnded;
+    public GameObject BloodSplat;
 
     private void Start() {
         this.speed = 0.06f;
@@ -36,9 +37,10 @@ public class Enemy : MonoBehaviour
         transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed * Time.deltaTime);
     }
 
-    public void Damage(int damageAmount) {
+    public void Damage(int damageAmount, Quaternion bulletRotation) {
         health -= damageAmount;
         if (health <= 0) {
+            Instantiate(BloodSplat, this.transform.position, bulletRotation);
             gameController.RegisterEnemyDeath();
             Destroy(this.gameObject);
         }
