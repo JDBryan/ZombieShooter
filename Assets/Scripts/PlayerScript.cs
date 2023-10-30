@@ -24,11 +24,8 @@ public class Player : MonoBehaviour
         // Getting user inputs
         this.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-<<<<<<< HEAD
         
 
-=======
->>>>>>> 50019ed9e50e54b13480f29405cdc8e33f87bb28
         if (Input.GetKeyDown("e")) {
             this.GetActiveWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = false;
             activeWeaponIndex = (activeWeaponIndex + 1) % this.GetHeldWeapons().Count;

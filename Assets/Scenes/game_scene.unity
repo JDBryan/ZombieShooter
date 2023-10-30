@@ -2805,6 +2805,10 @@ PrefabInstance:
       propertyPath: m_MaskInteraction
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9135521706191330987, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4122191085778374287, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
