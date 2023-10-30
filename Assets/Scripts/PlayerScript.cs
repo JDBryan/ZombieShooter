@@ -24,15 +24,11 @@ public class Player : MonoBehaviour
         // Getting user inputs
         this.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        this.GetActiveWeapon().ChangeGunSpriteToIdle();
+<<<<<<< HEAD
+        
 
-        if (Input.GetMouseButtonDown(0)) {
-            this.GetActiveWeapon().Fire(this.transform);
-            if (this.GetActiveWeapon().hasInfiniteAmmo || this.GetActiveWeapon().ammoCount > 0){
-                this.GetActiveWeapon().ChangeGunSpriteToFire();
-                }
-        }
-
+=======
+>>>>>>> 50019ed9e50e54b13480f29405cdc8e33f87bb28
         if (Input.GetKeyDown("e")) {
             this.GetActiveWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = false;
             activeWeaponIndex = (activeWeaponIndex + 1) % this.GetHeldWeapons().Count;
@@ -45,6 +41,15 @@ public class Player : MonoBehaviour
     void LateUpdate() {
         Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         UpdateRotation(mousePosition);
+
+        this.GetActiveWeapon().ChangeGunSpriteToIdle();
+
+        if (Input.GetMouseButtonDown(0)) {
+            this.GetActiveWeapon().Fire(this.transform);
+            if (this.GetActiveWeapon().hasInfiniteAmmo || this.GetActiveWeapon().ammoCount > 0){
+                this.GetActiveWeapon().ChangeGunSpriteToFire();
+                }
+        }
     }
 
     void FixedUpdate() {
