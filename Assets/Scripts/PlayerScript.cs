@@ -113,9 +113,9 @@ public class Player : MonoBehaviour
     // Returns a list of the currently held weapons 
     public List<Weapon> GetHeldWeapons() {
         List<Weapon> heldWeapons = new List<Weapon>();
-        foreach (Transform weapon in this.transform) {
-            if(weapon.tag != "MainCamera") {
-                heldWeapons.Add(weapon.GetComponent<Weapon>());
+        foreach (Transform child in this.transform) {
+            if(child.GetComponent<Weapon>() != null) {
+                heldWeapons.Add(child.GetComponent<Weapon>());
             }
         }
         return heldWeapons;
