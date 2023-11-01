@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private float speed;
     private int activeWeaponIndex;
     private Vector2 velocity;
+    private List<KnockBack> activeKnockBacks;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
         health = 100;
         speed = 0.14f;
         velocity = new Vector2(0, 0);
+        activeKnockBacks = new List<KnockBack>();
     }
     
     void Update()
@@ -51,6 +53,17 @@ public class Player : MonoBehaviour
 
     void FixedUpdate() {
         UpdateMovement();
+        List<KnockBack> finishedKnockbacks = new List<KnockBack>();
+        foreach(KnockBack knockback in this.activeKnockBacks) {
+            GetComponent<Rigidbody2D>().MovePosition(transform.position + knockback.GetMoveDistance());
+            if (knockback.IsOver()) {
+                finishedKnockbacks.Add(knockback);
+            }
+        }   
+
+        foreach(KnockBack knockback in finishedKnockbacks) {
+            this.activeKnockBacks.Remove(knockback);
+        }
     }
 
     void UpdateMovement() 
@@ -92,17 +105,15 @@ public class Player : MonoBehaviour
         {
             this.health -= 10;
             Rigidbody2D rigidBody = GetComponent<Rigidbody2D>();
-            Vector3 direction = transform.position - collision.gameObject.transform.position;
-            rigidBody.AddForce(direction * 1000, ForceMode2D.Impulse);
-            rigidBody.AddForce(-direction * 1000, ForceMode2D.Impulse);
+            Vector3 direction = (transform.position - collision.gameObject.transform.position).normalized;
+
+            this.activeKnockBacks.Add(new KnockBack(direction, 0.4f, 0.1f));
         }
     }
 
     public void Damage(int damageAmount) {
         this.health -= 10;
-        if (this.health <= 0) {
-            this.gameController.EndGame();
-        }
+        this.gameController.UpdatePlayerHealth(this.health);
     }
 
     // Helper function to calculate the angle from point a to point b

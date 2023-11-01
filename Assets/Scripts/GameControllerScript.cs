@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private Spawner spawnController;
-    [SerializeField] private UserInterface UserInterface;
+    [SerializeField] private UserInterface userInterface;
     private int waveNumber;
     private bool waveInProgress;
     private int baseSpawnAmount;
@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
         this.waveKillCount = 0;
         this.waveNumber += 1;
         this.spawnController.EnqueueSpawns(this.GetWaveSpawnTotal());
-        this.UserInterface.SetWaveNumber(this.waveNumber);
+        this.userInterface.SetWaveNumber(this.waveNumber);
     }
 
     private void EndWave() {
@@ -62,7 +62,14 @@ public class GameController : MonoBehaviour
        return (this.waveNumber - 1 * this.incrementalSpawnAmount) + this.baseSpawnAmount;
     }
 
-    public void EndGame() {
+    public void UpdatePlayerHealth(int health) {
+        this.userInterface.SetHealthBar(health);
+        if (health <= 0) {
+            this.EndGame();
+        }
+    }
 
+    public void EndGame() {
+        
     }
 }
