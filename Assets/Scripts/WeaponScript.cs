@@ -12,6 +12,7 @@ public abstract class Weapon : MonoBehaviour
     private SpriteRenderer gunRenderer;
     public Sprite gunFireSprite; 
     public Sprite gunSprite;
+    public float lastFireTime;
 
     public abstract void Fire(Transform playerTranform);
 
