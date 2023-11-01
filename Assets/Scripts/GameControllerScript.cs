@@ -63,6 +63,7 @@ public class GameController : MonoBehaviour
     }
 
     public void UpdatePlayerHealth(int health) {
+        Debug.Log("Updating player ");
         this.userInterface.SetHealthBar(health);
         if (health <= 0) {
             this.EndGame();
@@ -70,6 +71,6 @@ public class GameController : MonoBehaviour
     }
 
     public void EndGame() {
-        
+        this.userInterface.EnableGameOverScreen();
     }
 }

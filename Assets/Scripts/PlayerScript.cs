@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
         //Check if collision object is an enemy
         if (collision.gameObject.tag == "Enemy")
         {
-            this.health -= 10;
+            this.Damage(10);
             Rigidbody2D rigidBody = GetComponent<Rigidbody2D>();
             Vector3 direction = (transform.position - collision.gameObject.transform.position).normalized;
 
@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
     }
 
     public void Damage(int damageAmount) {
-        this.health -= 10;
+        this.health -= damageAmount;
         this.gameController.UpdatePlayerHealth(this.health);
     }
 
