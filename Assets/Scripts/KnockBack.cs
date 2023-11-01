@@ -1,32 +1,5 @@
 using UnityEngine;
 
-// public class KnockBack {
-//     private Vector3 direction;
-//     private float startTime;
-//     private float recoveryLength;
-//     private float magnitude;
-//     private float lastRecoveryForceTime;
-
-//     public KnockBack(Vector3 direction, float magnitude) {
-//         this.direction = direction;
-//         this.startTime = Time.time;
-//         this.recoveryLength = 0.2f;
-//         this.magnitude = magnitude;
-//         this.lastRecoveryForceTime = this.startTime;
-//     }
-
-
-//     public Vector3 GetRecoveryForce() {
-//         float scalar = (Time.time - this.lastRecoveryForceTime) / this.recoveryLength;
-//         return -(direction * magnitude * scalar);
-//     }
-
-
-//     public bool IsOver() {
-//         return Time.time - this.startTime >= this.recoveryLength;
-//     }
-// }
-
 public class KnockBack {
     private Vector3 direction;
     private float startTime;
