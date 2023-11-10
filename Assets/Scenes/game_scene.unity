@@ -3965,6 +3965,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4074988203105084791, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
+      propertyPath: clipSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4074988203105084791, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
+      propertyPath: clipCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4074988203105084791, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
+      propertyPath: gunUISprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ce5cc658dbf9bfe40a35fb8ed5899613, type: 3}
+    - target: {fileID: 4560661388237302305, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
+      propertyPath: UI
+      value: 
+      objectReference: {fileID: 2704612777868138929}
     - target: {fileID: 4560661388237302305, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
       propertyPath: gameController
       value: 
@@ -4938,7 +4954,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3690284578201707129}
-  - {fileID: 1245484878}
   - {fileID: 1499430927960814801}
   - {fileID: 1216345373}
   - {fileID: 1151980329}
@@ -11500,6 +11515,7 @@ Transform:
   m_Children:
   - {fileID: 552732808}
   - {fileID: 108175710}
+  - {fileID: 1806346812}
   m_Father: {fileID: 969375794}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1151980330
@@ -11995,140 +12011,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d54d5d7b5506e58428c7f3be90d0e7de, type: 3}
---- !u!1 &1245484875
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1245484878}
-  - component: {fileID: 1245484877}
-  - component: {fileID: 1245484876}
-  m_Layer: 5
-  m_Name: HealthBar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1245484876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245484875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: New Text
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1245484877
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245484875}
-  m_CullTransparentMesh: 1
---- !u!224 &1245484878
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245484875}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 969375794}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -174.4}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &1273708297 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2752307201792272277, guid: d54d5d7b5506e58428c7f3be90d0e7de, type: 3}
@@ -38991,9 +38873,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 2970554324930191022, guid: bf19f8997bfd9c140816dc35ee03e171, type: 3}
+      propertyPath: clipSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970554324930191022, guid: bf19f8997bfd9c140816dc35ee03e171, type: 3}
       propertyPath: gunSprite
       value: 
       objectReference: {fileID: 21300000, guid: 38243ca7872576a4d82a1e852cd38ecb, type: 3}
+    - target: {fileID: 2970554324930191022, guid: bf19f8997bfd9c140816dc35ee03e171, type: 3}
+      propertyPath: gunUISprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cad678de96c422f44a428206fa355b47, type: 3}
     - target: {fileID: 2970554324930191022, guid: bf19f8997bfd9c140816dc35ee03e171, type: 3}
       propertyPath: gunFireSprite
       value: 
@@ -39119,6 +39009,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3724158498758123089, guid: 1bb7d5a757167b2419ed6abc9c192783, type: 3}
   m_PrefabInstance: {fileID: 301351377}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1806346811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1806346812}
+  m_Layer: 0
+  m_Name: GunUIBullets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1806346812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806346811}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.37, y: -1.62, z: 0}
+  m_LocalScale: {x: 1.4159292, y: 1.4159292, z: 1.4159292}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1151980329}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1811240676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49027,13 +48948,14 @@ MonoBehaviour:
   player: {fileID: 1974826335}
   weaponInfoText: {fileID: 5532356842692760651}
   waveNumberText: {fileID: 1182972763682441321}
-  healthBar: {fileID: 1245484876}
+  healthBar: {fileID: 0}
   deathScreen: {fileID: 552603123}
-  ActiveWeapon: {fileID: 552732807}
-  SecondaryWeapon: {fileID: 108175709}
-  PistolSprite: {fileID: 21300000, guid: ce5cc658dbf9bfe40a35fb8ed5899613, type: 3}
-  ShotgunSprite: {fileID: 21300000, guid: cad678de96c422f44a428206fa355b47, type: 3}
-  HealthBarMask: {fileID: 1454310244}
+  activeWeaponUI: {fileID: 552732807}
+  secondaryWeaponUI: {fileID: 108175709}
+  healthBarMask: {fileID: 1454310244}
+  bulletUI: {fileID: 5081452987004254808, guid: 8043a29b0bdfabc4599b889dc571cfd5, type: 3}
+  bulletUIParent: {fileID: 1806346811}
+  bulletUIList: []
 --- !u!224 &3690284578201707129
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49043,14 +48965,14 @@ RectTransform:
   m_GameObject: {fileID: 6167567833323743939}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 969375794}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -292, y: -174.4}
+  m_AnchoredPosition: {x: -289.4, y: -134}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5532356842692760651
@@ -49136,7 +49058,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 48.129993, y: 0, z: 46.941532, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

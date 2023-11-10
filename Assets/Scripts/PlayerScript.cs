@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private GameController gameController;
     [SerializeField] private Animator animator;
+    [SerializeField] private UserInterface UI;
     private int health;
     private float speed;
     private int activeWeaponIndex;
@@ -26,28 +27,44 @@ public class Player : MonoBehaviour
         // Getting user inputs
         this.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        
+        if (Time.time - GetActiveWeapon().lastFireTime > 0.1f){
+            this.GetActiveWeapon().ChangeGunSpriteToIdle();
+        }
 
         if (Input.GetKeyDown("e")) {
             this.GetActiveWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = false;
             activeWeaponIndex = (activeWeaponIndex + 1) % this.GetHeldWeapons().Count;
             this.GetActiveWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            UI.SetUIWeapons();
+            UI.truncateBulletsList(this.GetActiveWeapon().clipCount);
+            UI.fillClip(this.GetActiveWeapon().clipCount);
+        }
+
+        if (Input.GetKeyDown("r")) {
+            if (this.GetActiveWeapon().ammoCount >= this.GetActiveWeapon().clipSize || this.GetActiveWeapon().hasInfiniteAmmo){
+                this.GetActiveWeapon().clipCount = this.GetActiveWeapon().clipSize;
+                UI.fillClip(this.GetActiveWeapon().clipSize);
+            }
+            if (!this.GetActiveWeapon().hasInfiniteAmmo && this.GetActiveWeapon().ammoCount < this.GetActiveWeapon().clipSize){
+                this.GetActiveWeapon().clipCount = this.GetActiveWeapon().ammoCount;
+                UI.fillClip(this.GetActiveWeapon().ammoCount);
+            }
         }
         
         animator.SetFloat("Speed", this.velocity.magnitude);
+
     }
 
     void LateUpdate() {
         Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         UpdateRotation(mousePosition);
 
-        this.GetActiveWeapon().ChangeGunSpriteToIdle();
+        
 
         if (Input.GetMouseButtonDown(0)) {
             this.GetActiveWeapon().Fire(this.transform);
-            if (this.GetActiveWeapon().hasInfiniteAmmo || this.GetActiveWeapon().ammoCount > 0){
-                this.GetActiveWeapon().ChangeGunSpriteToFire();
-                }
+
+            UI.truncateBulletsList(this.GetActiveWeapon().clipCount);
         }
     }
 
@@ -114,6 +131,9 @@ public class Player : MonoBehaviour
     public void Damage(int damageAmount) {
         this.health -= damageAmount;
         this.gameController.UpdatePlayerHealth(this.health);
+        if (this.health <= 0){
+            animator.SetBool("Dead", true);
+        }
     }
 
     // Helper function to calculate the angle from point a to point b
@@ -135,6 +155,10 @@ public class Player : MonoBehaviour
     public Weapon GetActiveWeapon()
     {
         return this.GetHeldWeapons()[activeWeaponIndex];  
+    }
+
+    public Weapon GetSecondaryWeapon(){
+        return this.GetHeldWeapons()[(activeWeaponIndex + 1) % this.GetHeldWeapons().Count];
     }
 
     public int GetHealth() {

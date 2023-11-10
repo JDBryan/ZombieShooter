@@ -7,11 +7,14 @@ public abstract class Weapon : MonoBehaviour
     public string weaponName;
     public GameObject bulletType;
     public float fireRate;
-    public float ammoCount;
+    public int ammoCount;
     public bool hasInfiniteAmmo;
+    public int clipSize;
+    public int clipCount;
     private SpriteRenderer gunRenderer;
     public Sprite gunFireSprite; 
     public Sprite gunSprite;
+    public Sprite gunUISprite;
     public float lastFireTime;
 
     public abstract void Fire(Transform playerTranform);
