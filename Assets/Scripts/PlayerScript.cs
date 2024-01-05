@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private UserInterface UI;
     private int health;
+    private int maxHealth;
     private float speed;
     private int activeWeaponIndex;
     private Vector2 velocity;
@@ -16,7 +17,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         activeWeaponIndex = 0;
-        health = 100;
+        maxHealth = 100;
+        health = maxHealth;
         speed = 0.14f;
         velocity = new Vector2(0, 0);
         activeKnockBacks = new List<KnockBack>();
@@ -115,6 +117,18 @@ public class Player : MonoBehaviour
             weapon.transform.parent = this.transform;
             weapon.GetComponent<BoxCollider2D>().enabled = false;
             weapon.GetComponent<SpriteRenderer>().enabled = false;
+        }
+
+        if (collision.gameObject.tag == "Health")
+        {   
+            this.health += collision.gameObject.GetComponent<SetHealthPack>().healthAmount;
+            if (this.health > this.maxHealth){
+                this.health = this.maxHealth;
+            }
+            this.gameController.UpdatePlayerHealth(this.health);
+            Debug.Log(this.health);
+            Destroy(collision.gameObject);
+            
         }
 
         //Check if collision object is an enemy
