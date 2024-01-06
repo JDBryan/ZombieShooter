@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private GameController gameController;
     [SerializeField] private Animator animator;
-    [SerializeField] private UserInterface UI;
+    [SerializeField] private UserInterface UserInterface;
     private int health;
     private int maxHealth;
     private float speed;
@@ -20,6 +20,14 @@ public class Player : MonoBehaviour
         maxHealth = 100;
         health = maxHealth;
         speed = 0.14f;
+        velocity = new Vector2(0, 0);
+        activeKnockBacks = new List<KnockBack>();
+    }
+
+    void OnEnable()
+    {
+        activeWeaponIndex = 0;
+        health = maxHealth;
         velocity = new Vector2(0, 0);
         activeKnockBacks = new List<KnockBack>();
     }
@@ -37,24 +45,23 @@ public class Player : MonoBehaviour
             this.GetActiveWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = false;
             activeWeaponIndex = (activeWeaponIndex + 1) % this.GetHeldWeapons().Count;
             this.GetActiveWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            UI.SetUIWeapons();
-            UI.truncateBulletsList(this.GetActiveWeapon().clipCount);
-            UI.fillClip(this.GetActiveWeapon().clipCount);
+            UserInterface.SetWeapons();
+            UserInterface.truncateBulletsList(this.GetActiveWeapon().clipCount);
+            UserInterface.fillClip(this.GetActiveWeapon().clipCount);
         }
 
         if (Input.GetKeyDown("r")) {
             if (this.GetActiveWeapon().ammoCount >= this.GetActiveWeapon().clipSize || this.GetActiveWeapon().hasInfiniteAmmo){
                 this.GetActiveWeapon().clipCount = this.GetActiveWeapon().clipSize;
-                UI.fillClip(this.GetActiveWeapon().clipSize);
+                UserInterface.fillClip(this.GetActiveWeapon().clipSize);
             }
             if (!this.GetActiveWeapon().hasInfiniteAmmo && this.GetActiveWeapon().ammoCount < this.GetActiveWeapon().clipSize){
                 this.GetActiveWeapon().clipCount = this.GetActiveWeapon().ammoCount;
-                UI.fillClip(this.GetActiveWeapon().ammoCount);
+                UserInterface.fillClip(this.GetActiveWeapon().ammoCount);
             }
         }
         
         animator.SetFloat("Speed", this.velocity.magnitude);
-
     }
 
     void LateUpdate() {
@@ -66,7 +73,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) {
             this.GetActiveWeapon().Fire(this.transform);
 
-            UI.truncateBulletsList(this.GetActiveWeapon().clipCount);
+            UserInterface.truncateBulletsList(this.GetActiveWeapon().clipCount);
         }
     }
 

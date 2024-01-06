@@ -10,23 +10,39 @@ public class UserInterface : MonoBehaviour
     [SerializeField] private TMP_Text waveNumberText;
     [SerializeField] private TMP_Text healthBar;
     [SerializeField] private GameObject deathScreen;
+    [SerializeField] private GameObject startMenu;
     [SerializeField] private GameObject activeWeaponUI;
     [SerializeField] private GameObject secondaryWeaponUI;
     [SerializeField] private GameObject healthBarMask;
     [SerializeField] private GameObject bulletUI;
     [SerializeField] private GameObject bulletUIParent;
+    [SerializeField] private GameObject hud;
     private Vector3 bulletUIPosition;
     public List<GameObject> bulletUIList;
 
     void Start(){
         this.bulletUIPosition = this.bulletUIParent.transform.position;
         bulletUIList = MakeUIBullets();
-        SetUIWeapons();
+        SetWeapons();
         truncateBulletsList(player.GetActiveWeapon().clipCount);
+    }
+
+    void LateUpdate()
+    {
+        this.SetWeaponInfoText(player.GetActiveWeapon());
     }
 
     public void SetWaveNumber(int waveNumber) {
         waveNumberText.SetText(waveNumber.ToString());
+    }
+
+    public void DisableHud() {
+        this.hud.SetActive(false);
+    }
+
+    public void EnableHud() {
+        this.hud.SetActive(true);
+        waveNumberText.SetText("");
     }
 
     public void SetHealthBar(int health) {
@@ -37,14 +53,14 @@ public class UserInterface : MonoBehaviour
         }
     }
 
-    private void SetUIWeaponSprite(Weapon weapon, GameObject targetUIWeapon){
+    private void SetWeaponSprite(Weapon weapon, GameObject targetUIWeapon){
         Sprite newSprite = weapon.gunUISprite;        
         targetUIWeapon.GetComponent<SpriteRenderer>().sprite = newSprite;
     }
 
-    public void SetUIWeapons(){
-        SetUIWeaponSprite(player.GetActiveWeapon(), activeWeaponUI);
-        SetUIWeaponSprite(player.GetSecondaryWeapon(), secondaryWeaponUI);
+    public void SetWeapons(){
+        SetWeaponSprite(player.GetActiveWeapon(), activeWeaponUI);
+        SetWeaponSprite(player.GetSecondaryWeapon(), secondaryWeaponUI);
     }
 
     private List<GameObject> MakeUIBullets(){
@@ -81,14 +97,11 @@ public class UserInterface : MonoBehaviour
         weaponInfoText.SetText(ammoText);
     }
 
-    public void EnableGameOverScreen() {
-        Debug.Log("ENDING GAME");
-        this.deathScreen.SetActive(true);
+    public void SetGameOverScreenActive(bool active) {
+        this.deathScreen.SetActive(active);
     }
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        this.SetWeaponInfoText(player.GetActiveWeapon());
+    public void SetStartMenuActive(bool active) {
+        this.startMenu.SetActive(active);
     }
 }
