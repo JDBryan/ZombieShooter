@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    // Fake change
     public string weaponName;
     public GameObject bulletType;
     public float fireRate;
@@ -22,6 +23,4 @@ public abstract class Weapon : MonoBehaviour
     public abstract void ChangeGunSpriteToFire();
 
     public abstract void ChangeGunSpriteToIdle();
-
-
 }
