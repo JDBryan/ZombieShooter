@@ -12,4 +12,9 @@ public class PlayerCamera : MonoBehaviour
     {
         this.transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, this.transform.position.z);
     }
+
+    public void GetNewTransform() 
+    {
+        this.playerTransform = FindObjectOfType<Player>().transform;
+    }
 }

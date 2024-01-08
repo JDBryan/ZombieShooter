@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private GameController gameController;
+    
     [SerializeField] private Animator animator;
-    [SerializeField] private UserInterface UI;
-    private int health;
+    [SerializeField] private Pistol pistol;
+
+    private GameController gameController;
+    private UserInterface userInterface;
+    public int health;
     private int maxHealth;
     private float speed;
     private int activeWeaponIndex;
@@ -16,57 +19,23 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        activeWeaponIndex = 0;
-        maxHealth = 100;
-        health = maxHealth;
-        speed = 0.14f;
-        velocity = new Vector2(0, 0);
-        activeKnockBacks = new List<KnockBack>();
+        this.gameController = FindObjectOfType<GameController>();
+        this.userInterface = FindObjectOfType<UserInterface>();
+        this.maxHealth = 100;
+        this.speed = 0.14f;
+        this.velocity = new Vector2(0, 0);
+        this.activeWeaponIndex = 0;
+        this.health = maxHealth;
+        this.activeKnockBacks = new List<KnockBack>();
+        this.GetComponent<Rigidbody2D>().MovePosition(new Vector3(0, 65, 0));
     }
     
     void Update()
     {	
-        // Getting user inputs
-        this.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        animator.SetFloat("Speed", this.velocity.magnitude);
 
         if (Time.time - GetActiveWeapon().lastFireTime > 0.1f){
             this.GetActiveWeapon().ChangeGunSpriteToIdle();
-        }
-
-        if (Input.GetKeyDown("e")) {
-            this.GetActiveWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            activeWeaponIndex = (activeWeaponIndex + 1) % this.GetHeldWeapons().Count;
-            this.GetActiveWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            UI.SetUIWeapons();
-            UI.truncateBulletsList(this.GetActiveWeapon().clipCount);
-            UI.fillClip(this.GetActiveWeapon().clipCount);
-        }
-
-        if (Input.GetKeyDown("r")) {
-            if (this.GetActiveWeapon().ammoCount >= this.GetActiveWeapon().clipSize || this.GetActiveWeapon().hasInfiniteAmmo){
-                this.GetActiveWeapon().clipCount = this.GetActiveWeapon().clipSize;
-                UI.fillClip(this.GetActiveWeapon().clipSize);
-            }
-            if (!this.GetActiveWeapon().hasInfiniteAmmo && this.GetActiveWeapon().ammoCount < this.GetActiveWeapon().clipSize){
-                this.GetActiveWeapon().clipCount = this.GetActiveWeapon().ammoCount;
-                UI.fillClip(this.GetActiveWeapon().ammoCount);
-            }
-        }
-        
-        animator.SetFloat("Speed", this.velocity.magnitude);
-
-    }
-
-    void LateUpdate() {
-        Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        UpdateRotation(mousePosition);
-
-        
-
-        if (Input.GetMouseButtonDown(0)) {
-            this.GetActiveWeapon().Fire(this.transform);
-
-            UI.truncateBulletsList(this.GetActiveWeapon().clipCount);
         }
     }
 
@@ -85,6 +54,34 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SetVelocity(Vector2 velocity)
+    {
+        this.velocity = velocity;
+    }
+
+    public void FireActiveWeapon() {
+        this.GetActiveWeapon().Fire(this.transform);
+        userInterface.UpdateWeaponInfo();
+    }
+
+    public void SwitchWeapon() {
+        this.GetActiveWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        this.GetSecondaryWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        this.activeWeaponIndex = (activeWeaponIndex + 1) % this.GetHeldWeapons().Count;
+        this.userInterface.UpdateWeaponInfo();
+    }
+
+    public void ReloadWeapon() 
+    {
+        if (this.GetActiveWeapon().ammoCount >= this.GetActiveWeapon().clipSize || this.GetActiveWeapon().hasInfiniteAmmo){
+            this.GetActiveWeapon().clipCount = this.GetActiveWeapon().clipSize;
+        } else {
+            this.GetActiveWeapon().clipCount = this.GetActiveWeapon().ammoCount;
+        }
+
+        this.userInterface.UpdateWeaponInfo();
+    }
+
     void UpdateMovement() 
     {
         float magnitude = this.velocity.magnitude;
@@ -97,7 +94,7 @@ public class Player : MonoBehaviour
     }
 
     // Updates the rotation of the player wrt the current position of the mouse
-    void UpdateRotation(Vector2 mousePosition)
+    public void UpdateRotation(Vector2 mousePosition)
     {
         Vector2 playerPosition = (Vector2)transform.position;
 		float angle = AngleBetweenTwoPoints(playerPosition, mousePosition);
@@ -128,7 +125,6 @@ public class Player : MonoBehaviour
             this.gameController.UpdatePlayerHealth(this.health);
             Debug.Log(this.health);
             Destroy(collision.gameObject);
-            
         }
 
         //Check if collision object is an enemy
@@ -146,8 +142,20 @@ public class Player : MonoBehaviour
         this.health -= damageAmount;
         this.gameController.UpdatePlayerHealth(this.health);
         if (this.health <= 0){
-            animator.SetBool("Dead", true);
+            this.Kill();
         }
+    }
+
+    public void EnableUserInput()
+    {
+        this.GetComponent<PlayerUserInput>().enabled = true;
+    }
+
+    private void Kill() {
+        this.animator.SetBool("Dead", true);
+        this.GetActiveWeapon().GetComponent<SpriteRenderer>().enabled = false;
+        this.GetComponent<Rigidbody2D>().simulated = false;
+        this.GetComponent<PlayerUserInput>().enabled = false;
     }
 
     // Helper function to calculate the angle from point a to point b
@@ -178,7 +186,4 @@ public class Player : MonoBehaviour
     public int GetHealth() {
         return this.health;
     }
-
-    
 }
-

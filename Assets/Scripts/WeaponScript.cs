@@ -24,6 +24,4 @@ public abstract class Weapon : MonoBehaviour
     public abstract void ChangeGunSpriteToFire();
 
     public abstract void ChangeGunSpriteToIdle();
-
-
 }
