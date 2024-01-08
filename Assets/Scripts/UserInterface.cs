@@ -10,41 +10,49 @@ public class UserInterface : MonoBehaviour
     [SerializeField] private TMP_Text waveNumberText;
     [SerializeField] private TMP_Text healthBar;
     [SerializeField] private GameObject deathScreen;
+    [SerializeField] private GameObject startMenu;
     [SerializeField] private GameObject activeWeaponUI;
     [SerializeField] private GameObject secondaryWeaponUI;
     [SerializeField] private GameObject healthBarMask;
     [SerializeField] private GameObject bulletUI;
     [SerializeField] private GameObject bulletUIParent;
+    [SerializeField] private GameObject hud;
     private Vector3 bulletUIPosition;
     public List<GameObject> bulletUIList;
 
-    void Start(){
+    void Start() {
         this.bulletUIPosition = this.bulletUIParent.transform.position;
         bulletUIList = MakeUIBullets();
-        SetUIWeapons();
-        truncateBulletsList(player.GetActiveWeapon().clipCount);
+        this.UpdateWeaponInfo();
+    }
+
+    public void Reset()
+    {
+        this.player = FindObjectOfType<Player>();
+        this.UpdateHealthBar();
+        this.UpdateWeaponInfo();
+        this.waveNumberText.SetText("");
     }
 
     public void SetWaveNumber(int waveNumber) {
         waveNumberText.SetText(waveNumber.ToString());
     }
 
-    public void SetHealthBar(int health) {
+    public void DisableHud() {
+        this.hud.SetActive(false);
+    }
+
+    public void EnableHud() {
+        this.hud.SetActive(true);
+    }
+
+    public void UpdateHealthBar() {
+        int health = this.player.health;
         if (health >= 0){
             float healthPercent = (float)health / (float)100;
             float newHealthPosition = healthPercent * 7.76f;
             healthBarMask.transform.SetLocalPositionAndRotation(new Vector3(newHealthPosition, 0f, 0f), healthBarMask.transform.rotation);
         }
-    }
-
-    private void SetUIWeaponSprite(Weapon weapon, GameObject targetUIWeapon){
-        Sprite newSprite = weapon.gunUISprite;        
-        targetUIWeapon.GetComponent<SpriteRenderer>().sprite = newSprite;
-    }
-
-    public void SetUIWeapons(){
-        SetUIWeaponSprite(player.GetActiveWeapon(), activeWeaponUI);
-        SetUIWeaponSprite(player.GetSecondaryWeapon(), secondaryWeaponUI);
     }
 
     private List<GameObject> MakeUIBullets(){
@@ -64,31 +72,33 @@ public class UserInterface : MonoBehaviour
         return bulletList;
     }
 
-    public void truncateBulletsList(int newLength){
-        for (int bullet = newLength; bullet < 30; bullet++){
-            bulletUIList[bullet].SetActive(false);
-        }
-    }
+    public void UpdateWeaponInfo() {
+        Weapon primaryWeapon = player.GetActiveWeapon();
+        Weapon secondaryWeapon = player.GetSecondaryWeapon();
+        
+        // Update active and non active weapon UI sprites
+        this.activeWeaponUI.GetComponent<SpriteRenderer>().sprite = primaryWeapon.gunUISprite;
+        this.secondaryWeaponUI.GetComponent<SpriteRenderer>().sprite = secondaryWeapon.gunUISprite;
 
-    public void fillClip(int size){
-        for (int bullet = 0; bullet < size; bullet++){
-            bulletUIList[bullet].SetActive(true);
+        // Update clip graphic
+        int bulletsInClip = primaryWeapon.clipCount;
+        for (int i = 0; i < bulletsInClip; i++) {
+            bulletUIList[i].SetActive(true);
         }
-    }
+        for (int i = bulletsInClip; i < 30; i++) {
+            bulletUIList[i].SetActive(false);
+        }
 
-    public void SetWeaponInfoText(Weapon weapon) {
-        string ammoText = weapon.hasInfiniteAmmo ? "inf" : weapon.ammoCount.ToString();
+        // Update total ammo text
+        string ammoText = primaryWeapon.hasInfiniteAmmo ? "inf" : primaryWeapon.ammoCount.ToString();
         weaponInfoText.SetText(ammoText);
     }
 
-    public void EnableGameOverScreen() {
-        Debug.Log("ENDING GAME");
-        this.deathScreen.SetActive(true);
+    public void SetGameOverScreenActive(bool active) {
+        this.deathScreen.SetActive(active);
     }
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        this.SetWeaponInfoText(player.GetActiveWeapon());
+    public void SetStartMenuActive(bool active) {
+        this.startMenu.SetActive(active);
     }
 }

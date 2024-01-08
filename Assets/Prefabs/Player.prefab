@@ -94,8 +94,9 @@ GameObject:
   - component: {fileID: 9135521706191330987}
   - component: {fileID: 4430393994851297311}
   - component: {fileID: 8121045321187858240}
-  - component: {fileID: 4560661388237302305}
   - component: {fileID: 7881580342363779285}
+  - component: {fileID: -7960225832099072131}
+  - component: {fileID: 5954684194975434499}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -234,20 +235,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &4560661388237302305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7677924341975350108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd3a722739cd0b418c1b0838b59d96f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameController: {fileID: 0}
-  animator: {fileID: 7881580342363779285}
 --- !u!95 &7881580342363779285
 Animator:
   serializedVersion: 5
@@ -269,6 +256,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-7960225832099072131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7677924341975350108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd3a722739cd0b418c1b0838b59d96f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7881580342363779285}
+  pistol: {fileID: -6174521936289684252, guid: 3ff905448549311419ed7967c6305f87, type: 3}
+  health: 0
+--- !u!114 &5954684194975434499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7677924341975350108}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3917d52263ffa8b4bb2d9a19196e39db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1351912413471228307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,6 +295,10 @@ PrefabInstance:
       propertyPath: gunSprite
       value: 
       objectReference: {fileID: 21300000, guid: acb2dec3dddb3304a968854dcc209275, type: 3}
+    - target: {fileID: -6174521936289684252, guid: 3ff905448549311419ed7967c6305f87, type: 3}
+      propertyPath: gunUISprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ce5cc658dbf9bfe40a35fb8ed5899613, type: 3}
     - target: {fileID: -6174521936289684252, guid: 3ff905448549311419ed7967c6305f87, type: 3}
       propertyPath: gunFireSprite
       value: 
@@ -368,6 +386,10 @@ PrefabInstance:
     - target: {fileID: 5790364247044592259, guid: 3ff905448549311419ed7967c6305f87, type: 3}
       propertyPath: m_SortingOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5790364247044592259, guid: 3ff905448549311419ed7967c6305f87, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5790364247044592259, guid: 3ff905448549311419ed7967c6305f87, type: 3}
       propertyPath: m_Materials.Array.data[0]

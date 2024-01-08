@@ -9,9 +9,11 @@ public class Spawner : MonoBehaviour
     private int spawnInterval;
     private int spawnQueue;
     private float lastSpawnTime;
+    private GameObject AllEnemies;
 
     void Start()
     {
+        this.AllEnemies = new GameObject();
         foreach(Transform spawnArea in transform) {
             spawnAreas.Add(spawnArea);
         }
@@ -27,6 +29,11 @@ public class Spawner : MonoBehaviour
             spawnQueue -= 1;
             lastSpawnTime = Time.time;
         }
+    }
+
+    public void KillAllEnemies() {
+        Destroy(this.AllEnemies);
+        this.AllEnemies = new GameObject();
     }
 
     // Spawns a single enemy within the bounds of one of the spawn areas
@@ -45,7 +52,7 @@ public class Spawner : MonoBehaviour
         float maxY = spawnArea.position.y + extents.y;
         Vector3 spawnPoint = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), 0f);
 
-        Instantiate(enemy, spawnPoint, this.transform.rotation);
+        Instantiate(enemy, spawnPoint, this.transform.rotation, AllEnemies.transform);
     }
 
     public void SetSpawnInterval(int interval) 
