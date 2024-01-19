@@ -77,11 +77,11 @@ public class UserInterface : MonoBehaviour
         Weapon secondaryWeapon = player.GetSecondaryWeapon();
         
         // Update active and non active weapon UI sprites
-        this.activeWeaponUI.GetComponent<SpriteRenderer>().sprite = primaryWeapon.gunUISprite;
-        this.secondaryWeaponUI.GetComponent<SpriteRenderer>().sprite = secondaryWeapon.gunUISprite;
+        this.activeWeaponUI.GetComponent<SpriteRenderer>().sprite = primaryWeapon.userInterfaceSprite;
+        this.secondaryWeaponUI.GetComponent<SpriteRenderer>().sprite = secondaryWeapon.userInterfaceSprite;
 
         // Update clip graphic
-        int bulletsInClip = primaryWeapon.clipCount;
+        int bulletsInClip = primaryWeapon.roundsLeftInClip;
         for (int i = 0; i < bulletsInClip; i++) {
             bulletUIList[i].SetActive(true);
         }
@@ -90,7 +90,7 @@ public class UserInterface : MonoBehaviour
         }
 
         // Update total ammo text
-        string ammoText = primaryWeapon.hasInfiniteAmmo ? "inf" : primaryWeapon.ammoCount.ToString();
+        string ammoText = primaryWeapon.hasInfiniteAmmo ? "inf" : (primaryWeapon.currentAmmoCount - primaryWeapon.roundsLeftInClip).ToString();
         weaponInfoText.SetText(ammoText);
     }
 
