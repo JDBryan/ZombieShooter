@@ -22,15 +22,19 @@ public class PlayerUserInput : MonoBehaviour
         if (Input.GetKeyDown("r")) {
             player.ReloadWeapon();
         }
+
+        if (Input.GetMouseButtonDown(0)) {
+            player.PullTrigger();
+        }
+
+        if (Input.GetMouseButtonUp(0)) {
+            player.ReleaseTrigger();
+        }
     }
 
     void LateUpdate() 
     {
         Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         player.UpdateRotation(mousePosition);
-
-        if (Input.GetMouseButtonDown(0)) {
-            player.FireActiveWeapon();
-        }
     }
 }

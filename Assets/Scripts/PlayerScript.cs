@@ -4,29 +4,37 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    
-    [SerializeField] private Animator animator;
-    [SerializeField] private Pistol pistol;
-
-    private GameController gameController;
-    private UserInterface userInterface;
-    public int health;
+    // Player parameters
     private int maxHealth;
     private float speed;
+
+    // Tracking
+    public int health;
     private int activeWeaponIndex;
     private Vector2 velocity;
     private List<KnockBack> activeKnockBacks;
 
+    // Game object references
+    [SerializeField] private Animator animator;
+    private GameController gameController;
+    private UserInterface userInterface;
+
     void Start()
     {
-        this.gameController = FindObjectOfType<GameController>();
-        this.userInterface = FindObjectOfType<UserInterface>();
+        // Player parameters
         this.maxHealth = 100;
         this.speed = 0.14f;
+
+        // Tracking
         this.velocity = new Vector2(0, 0);
         this.activeWeaponIndex = 0;
         this.health = maxHealth;
         this.activeKnockBacks = new List<KnockBack>();
+
+        // Game object references
+        this.gameController = FindObjectOfType<GameController>();
+        this.userInterface = FindObjectOfType<UserInterface>();
+        
         this.GetComponent<Rigidbody2D>().MovePosition(new Vector3(0, 65, 0));
     }
     
@@ -34,8 +42,8 @@ public class Player : MonoBehaviour
     {	
         animator.SetFloat("Speed", this.velocity.magnitude);
 
-        if (Time.time - GetActiveWeapon().lastFireTime > 0.1f){
-            this.GetActiveWeapon().ChangeGunSpriteToIdle();
+        if (Time.time - GetActiveWeapon().lastRoundFiredTime > 0.1f){
+            this.GetActiveWeapon().ChangeSpriteToIdle();
         }
     }
 
@@ -59,8 +67,16 @@ public class Player : MonoBehaviour
         this.velocity = velocity;
     }
 
+    public void PullTrigger() {
+        this.GetActiveWeapon().PullTrigger();
+    }
+
+    public void ReleaseTrigger() {
+        this.GetActiveWeapon().ReleaseTrigger();
+    }
+
     public void FireActiveWeapon() {
-        this.GetActiveWeapon().Fire(this.transform);
+        this.GetActiveWeapon().Fire();
         userInterface.UpdateWeaponInfo();
     }
 
@@ -73,10 +89,11 @@ public class Player : MonoBehaviour
 
     public void ReloadWeapon() 
     {
-        if (this.GetActiveWeapon().ammoCount >= this.GetActiveWeapon().clipSize || this.GetActiveWeapon().hasInfiniteAmmo){
-            this.GetActiveWeapon().clipCount = this.GetActiveWeapon().clipSize;
+        if (this.GetActiveWeapon().currentAmmoCount >= this.GetActiveWeapon().clipSize 
+            || this.GetActiveWeapon().hasInfiniteAmmo){
+            this.GetActiveWeapon().roundsLeftInClip = this.GetActiveWeapon().clipSize;
         } else {
-            this.GetActiveWeapon().clipCount = this.GetActiveWeapon().ammoCount;
+            this.GetActiveWeapon().roundsLeftInClip = this.GetActiveWeapon().currentAmmoCount;
         }
 
         this.userInterface.UpdateWeaponInfo();

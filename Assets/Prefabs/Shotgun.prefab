@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6625861870858184774}
   - component: {fileID: 2049476358321393400}
   - component: {fileID: 7794200981301102884}
-  - component: {fileID: 2970554324930191022}
+  - component: {fileID: 8446699286591675746}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Pickup
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2970554324930191022
+--- !u!114 &8446699286591675746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,13 +140,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 5665144977456983153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd85b5a714a3c8345af1a7362071dc5d, type: 3}
+  m_Script: {fileID: 11500000, guid: eadbd5d472f155843b9309a7c44e1346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: 
-  bulletType: {fileID: 5546224994513267629, guid: 5b4e83a4441f713469517fa8afb3d902, type: 3}
+  bulletPrefab: {fileID: 5546224994513267629, guid: 5b4e83a4441f713469517fa8afb3d902, type: 3}
+  isAutomatic: 0
   fireRate: 0
-  ammoCount: 0
+  clipSize: 0
   hasInfiniteAmmo: 0
-  gunFireSprite: {fileID: 21300000, guid: 1841aa09ba4bb5d47a1b503c1ff5ec48, type: 3}
-  gunSprite: {fileID: 21300000, guid: 38243ca7872576a4d82a1e852cd38ecb, type: 3}
+  initialAmmoCount: 0
+  currentAmmoCount: 0
+  roundsLeftInClip: 0
+  lastRoundFiredTime: 0
+  triggerHeld: 0
+  roundsFiredWhileTriggerHeld: 0
+  spriteRenderer: {fileID: 2049476358321393400}
+  fireSprite: {fileID: 21300000, guid: 1841aa09ba4bb5d47a1b503c1ff5ec48, type: 3}
+  idleSprite: {fileID: 21300000, guid: 38243ca7872576a4d82a1e852cd38ecb, type: 3}
+  userInterfaceSprite: {fileID: 21300000, guid: cad678de96c422f44a428206fa355b47, type: 3}
+  userInterface: {fileID: 0}
