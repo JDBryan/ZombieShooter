@@ -11,6 +11,7 @@ public class UserInterface : MonoBehaviour
     [SerializeField] private TMP_Text healthBar;
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject startMenu;
+    [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject activeWeaponUI;
     [SerializeField] private GameObject secondaryWeaponUI;
     [SerializeField] private GameObject healthBarMask;
@@ -100,5 +101,9 @@ public class UserInterface : MonoBehaviour
 
     public void SetStartMenuActive(bool active) {
         this.startMenu.SetActive(active);
+    }
+
+    public void SetPauseMenuActive(bool active) {
+        this.pauseMenu.SetActive(active);
     }
 }
