@@ -168,6 +168,10 @@ public class Player : MonoBehaviour
         this.GetComponent<PlayerUserInput>().enabled = true;
     }
 
+    public void DisableUserInput() {
+        this.GetComponent<PlayerUserInput>().enabled = false;
+    }
+
     private void Kill() {
         this.animator.SetBool("Dead", true);
         this.GetActiveWeapon().GetComponent<SpriteRenderer>().enabled = false;

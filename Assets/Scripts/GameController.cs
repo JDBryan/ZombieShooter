@@ -45,6 +45,14 @@ public class GameController : MonoBehaviour
             this.ResetGame();
         }
 
+        if (this.gameState == GameState.Active && Input.GetKeyDown(KeyCode.Escape)) {
+            this.PauseGame();
+        }
+
+        else if (this.gameState == GameState.Paused && Input.GetKeyDown(KeyCode.Escape)) {
+            this.ResumeGame();
+        }
+
         if (this.gameState == GameState.Active && !this.waveInProgress) {
             if (Time.time - this.lastWaveEndedTime >= this.waveIntervalTime) {
                 this.StartWave();
@@ -68,6 +76,8 @@ public class GameController : MonoBehaviour
     }
 
     public void ResetGame() {
+        Time.timeScale = 1;
+        this.userInterface.SetPauseMenuActive(false);
         this.waveNumber = 0;
         this.waveKillCount = 0;
         this.waveInProgress = false;
@@ -78,6 +88,22 @@ public class GameController : MonoBehaviour
         Destroy(this.player.gameObject);
         this.player = Instantiate(this.playerPrefab);
         this.camera.GetNewTransform();        
+    }
+
+    public void PauseGame() {
+        Time.timeScale = 0;
+        this.player.DisableUserInput();
+        this.gameState = GameState.Paused;
+        this.userInterface.SetPauseMenuActive(true);
+        this.userInterface.DisableHud();
+    }
+
+    public void ResumeGame() {
+        Time.timeScale = 1;
+        this.player.EnableUserInput();
+        this.gameState = GameState.Active;
+        this.userInterface.SetPauseMenuActive(false);
+        this.userInterface.EnableHud();
     }
 
     private void StartWave() {
