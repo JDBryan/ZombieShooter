@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -99,6 +98,10 @@ public class Player : MonoBehaviour
         this.userInterface.UpdateWeaponInfo();
     }
 
+    public void RefillWeaponAmmo(Weapon weapon) {
+        weapon.currentAmmoCount = weapon.initialAmmoCount + weapon.roundsLeftInClip;
+    }
+
     void UpdateMovement() 
     {
         float magnitude = this.velocity.magnitude;
@@ -133,6 +136,25 @@ public class Player : MonoBehaviour
             weapon.GetComponent<SpriteRenderer>().enabled = false;
         }
 
+        //Check if collision object is an ammo pack single
+        if (collision.gameObject.tag == "AmmoSingleWeapon")
+        {
+            RefillWeaponAmmo(GetActiveWeapon());
+            userInterface.UpdateWeaponInfo();
+            Destroy(collision.gameObject);
+        }
+
+        //Check if collision object is an ammo pack all
+        if (collision.gameObject.tag == "AmmoAllWeapons")
+        {
+            foreach (Weapon weapon in GetHeldWeapons()){
+                RefillWeaponAmmo(weapon);
+            }
+            userInterface.UpdateWeaponInfo();
+            Destroy(collision.gameObject);
+        }
+
+        //Check if collision object is a health pack
         if (collision.gameObject.tag == "Health")
         {   
             this.health += collision.gameObject.GetComponent<SetHealthPack>().healthAmount;

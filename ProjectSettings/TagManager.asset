@@ -9,6 +9,8 @@ TagManager:
   - Obstacle
   - Enemy
   - Health
+  - AmmoSingleWeapon
+  - AmmoAllWeapons
   layers:
   - Default
   - TransparentFX
