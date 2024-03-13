@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Transform target;
+    private Vector3 target;
     private GameController gameController;
+    private Pathfinder pathfinder;
     private float speed;
     private float rotateSpeed;
     private Rigidbody2D rigidBody;
@@ -19,11 +20,13 @@ public class Enemy : MonoBehaviour
         this.rotateSpeed = 4f;
         this.health = 100;
         this.rigidBody = GetComponent<Rigidbody2D>();
-        this.target = GameObject.FindGameObjectWithTag("Player").transform;
+        this.target = GameObject.FindGameObjectWithTag("Player").transform.position;
         this.gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        this.pathfinder = GameObject.Find("GameController").GetComponent<Pathfinder>();
     }
 
     private void FixedUpdate() {
+        this.target = this.pathfinder.NextDestination(this.gameObject.transform.position);
         RotateTowardsTarget();
         if (spawnEnded == true) {
             rigidBody.MovePosition(transform.position + transform.up * speed);
@@ -31,7 +34,7 @@ public class Enemy : MonoBehaviour
     }
 
     private void RotateTowardsTarget() {
-        Vector2 targetDirection = target.position - transform.position;
+        Vector2 targetDirection = target - transform.position;
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f;
         Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
         transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed * Time.deltaTime);
