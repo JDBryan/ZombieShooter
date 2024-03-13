@@ -725,8 +725,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.08009994, y: -0.60120004, z: 0}
-    m_Extent: {x: 1.9885, y: 1.6343, z: 0}
+    m_Center: {x: -0.07435, y: -0.61255, z: 0}
+    m_Extent: {x: 1.98605, y: 1.63535, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5469,8 +5469,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.18760002, y: -0.067499995, z: 0}
-    m_Extent: {x: 2.1845999, y: 2.1931, z: 0}
+    m_Center: {x: -0.19335002, y: -0.07000005, z: 0}
+    m_Extent: {x: 2.18555, y: 2.1957998, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5636,6 +5636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 514899035}
   - component: {fileID: 514899037}
+  - component: {fileID: 514899038}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -5675,6 +5676,18 @@ MonoBehaviour:
   player: {fileID: 527493355}
   playerPrefab: {fileID: -7960225832099072131, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
   camera: {fileID: 293484551}
+--- !u!114 &514899038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514899033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9ec78afee19ba4dab322002a7acc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &527493353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6800,6 +6813,10 @@ PrefabInstance:
     - target: {fileID: 3764502786613091700, guid: a49620d829805e54aba951a2236d6477, type: 3}
       propertyPath: m_Name
       value: MedBayBed_image (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3764502786613091700, guid: a49620d829805e54aba951a2236d6477, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 5012579254050629489, guid: a49620d829805e54aba951a2236d6477, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16465,9 +16482,10 @@ GameObject:
   - component: {fileID: 1538596162}
   - component: {fileID: 1538596164}
   - component: {fileID: 1538596163}
+  - component: {fileID: 1538596165}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42436,6 +42454,42 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &1538596165
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538596161}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!1001 &1542040249
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43842,6 +43896,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MedBayBed_image (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3764502786613091700, guid: a49620d829805e54aba951a2236d6477, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 6206412609526185223, guid: a49620d829805e54aba951a2236d6477, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.63
@@ -43975,7 +44033,7 @@ GameObject:
   - component: {fileID: 1944438761}
   m_Layer: 0
   m_Name: cockpit_desk2_image
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54997,7 +55055,7 @@ GameObject:
   - component: {fileID: 2108666101}
   m_Layer: 0
   m_Name: cockpit_desk3_image
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55396,6 +55454,10 @@ PrefabInstance:
     - target: {fileID: 3764502786613091700, guid: a49620d829805e54aba951a2236d6477, type: 3}
       propertyPath: m_Name
       value: MedBayBed_image
+      objectReference: {fileID: 0}
+    - target: {fileID: 3764502786613091700, guid: a49620d829805e54aba951a2236d6477, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6206412609526185223, guid: a49620d829805e54aba951a2236d6477, type: 3}
       propertyPath: m_LocalPosition.x
