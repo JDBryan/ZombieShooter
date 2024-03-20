@@ -725,8 +725,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.07435, y: -0.61255, z: 0}
-    m_Extent: {x: 1.98605, y: 1.63535, z: 0}
+    m_Center: {x: -0.08405, y: -0.60609996, z: 0}
+    m_Extent: {x: 1.9842501, y: 1.6242, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5469,8 +5469,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.19335002, y: -0.07000005, z: 0}
-    m_Extent: {x: 2.18555, y: 2.1957998, z: 0}
+    m_Center: {x: -0.18309999, y: -0.069650054, z: 0}
+    m_Extent: {x: 2.1934, y: 2.1981502, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -16483,9 +16483,9 @@ GameObject:
   - component: {fileID: 1538596164}
   - component: {fileID: 1538596163}
   - component: {fileID: 1538596165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

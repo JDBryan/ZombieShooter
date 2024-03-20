@@ -268,8 +268,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd3a722739cd0b418c1b0838b59d96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
   animator: {fileID: 7881580342363779285}
+  pistol: {fileID: -6174521936289684252, guid: 3ff905448549311419ed7967c6305f87, type: 3}
+  health: 0
 --- !u!114 &5954684194975434499
 MonoBehaviour:
   m_ObjectHideFlags: 0
