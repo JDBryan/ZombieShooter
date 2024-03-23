@@ -59,16 +59,15 @@ public class Shotgun : Weapon
 
                 for (int i = 0; i < this.bulletsPerShot; i++)
                 {
-                    Transform bulletRotation = player;
-                    bulletRotation.eulerAngles = new Vector3(
-                        bulletRotation.eulerAngles.x,
-                        bulletRotation.eulerAngles.y,
-                        bulletRotation.eulerAngles.z + Random.Range(-10, 10)
+                    GameObject bullet = Instantiate(bulletPrefab, player.position, player.rotation);
+                    bullet.transform.eulerAngles = new Vector3(
+                        bullet.transform.eulerAngles.x,
+                        bullet.transform.eulerAngles.y,
+                        bullet.transform.eulerAngles.z + Random.Range(-10, 10)
                     );
-                    GameObject bullet = Instantiate(bulletPrefab, player.position, bulletRotation.rotation);
                     Physics2D.IgnoreCollision(bullet.GetComponent<BoxCollider2D>(), player.GetComponent<CircleCollider2D>());
                     Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
-                    bulletBody.velocity = bulletBody.transform.up * 20;
+                    bulletBody.velocity = bulletBody.transform.up * 40;
                 }
 
             if (this.hasInfiniteAmmo){
