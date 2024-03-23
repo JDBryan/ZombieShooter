@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Shotgun : Weapon
 {
-
+    int bulletsPerShot;
     void Start() {
         // Weapon parameters
         this.isAutomatic = false;
-        this.fireRate = 1f;
+        this.fireRate = 0.5f;
         this.clipSize = 5;
         this.hasInfiniteAmmo = false;
         this.initialAmmoCount = 20;
+        this.bulletsPerShot = 5;
 
         // Weapon tracking
         this.currentAmmoCount = this.initialAmmoCount;
@@ -56,10 +57,19 @@ public class Shotgun : Weapon
             if (this.roundsLeftInClip > 0) {
                 this.ChangeSpriteToFire();
 
-                GameObject bullet = Instantiate(bulletPrefab, player.position, player.rotation);
-                Physics2D.IgnoreCollision(bullet.GetComponent<BoxCollider2D>(), player.GetComponent<CircleCollider2D>());
-                Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
-                bulletBody.velocity = bulletBody.transform.up * 40;
+                for (int i = 0; i < this.bulletsPerShot; i++)
+                {
+                    Transform bulletRotation = player;
+                    bulletRotation.eulerAngles = new Vector3(
+                        bulletRotation.eulerAngles.x,
+                        bulletRotation.eulerAngles.y,
+                        bulletRotation.eulerAngles.z + Random.Range(-10, 10)
+                    );
+                    GameObject bullet = Instantiate(bulletPrefab, player.position, bulletRotation.rotation);
+                    Physics2D.IgnoreCollision(bullet.GetComponent<BoxCollider2D>(), player.GetComponent<CircleCollider2D>());
+                    Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
+                    bulletBody.velocity = bulletBody.transform.up * 20;
+                }
 
             if (this.hasInfiniteAmmo){
                 this.roundsLeftInClip -= 1;
