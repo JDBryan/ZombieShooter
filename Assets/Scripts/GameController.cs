@@ -37,10 +37,6 @@ public class GameController : MonoBehaviour
 
     void Update()
     {   
-        if (this.gameState == GameState.StartMenu && Input.GetKeyDown("space")) {
-            this.StartGame();
-        }
-
         if (this.gameState == GameState.Over && Input.GetKeyDown("space")) {
             this.ResetGame();
         }
@@ -60,7 +56,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void StartGame() {
+    public void StartGame() {
         this.userInterface.Reset();
         this.gameState = GameState.Active;
         this.userInterface.SetStartMenuActive(false);
@@ -87,7 +83,7 @@ public class GameController : MonoBehaviour
         this.userInterface.SetStartMenuActive(true);
         Destroy(this.player.gameObject);
         this.player = Instantiate(this.playerPrefab);
-        this.camera.GetNewTransform();        
+        this.camera.GetNewTransform();  
     }
 
     public void PauseGame() {

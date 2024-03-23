@@ -19,7 +19,7 @@ public class ButtonHighlightControl : MonoBehaviour, IPointerEnterHandler, IPoin
             EventSystem.current.SetSelectedGameObject(NullButton);
         }
 
-    public void OnDisable()
+    public void OnEnable()
         {
             if (NullButton != null){
                 EventSystem.current.SetSelectedGameObject(NullButton);
