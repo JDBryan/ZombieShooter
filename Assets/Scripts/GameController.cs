@@ -16,7 +16,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private UserInterface userInterface;
     [SerializeField] private Player player;
     [SerializeField] private Player playerPrefab;
-    [SerializeField] private PlayerCamera camera;
+    [SerializeField] private PlayerCamera playerCamera;
+    [SerializeField] private AudioClip deathNoise;
     private GameState gameState;
     private int waveNumber;
     private bool waveInProgress;
@@ -83,7 +84,7 @@ public class GameController : MonoBehaviour
         this.userInterface.SetStartMenuActive(true);
         Destroy(this.player.gameObject);
         this.player = Instantiate(this.playerPrefab);
-        this.camera.GetNewTransform();  
+        this.playerCamera.GetNewTransform();  
     }
 
     public void PauseGame() {
@@ -120,6 +121,7 @@ public class GameController : MonoBehaviour
     // to the number of enemies that we intended to spawn. If so ends wave.
     public void RegisterEnemyDeath()
     {
+        GetComponent<AudioSource>().PlayOneShot(deathNoise);
         this.waveKillCount += 1;
         if (this.waveKillCount == this.GetWaveSpawnTotal()) {
             this.EndWave();
