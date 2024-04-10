@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf1e9723a7225245bca76f34b58502a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0.06
+  health: 100
   BloodSplat: {fileID: 1481774045222291892, guid: db5a0d9353b24504482a89a6b7ddb343, type: 3}
 --- !u!50 &4564020692395794932
 Rigidbody2D:

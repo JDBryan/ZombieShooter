@@ -7,18 +7,16 @@ public class Enemy : MonoBehaviour
     private Vector3 target;
     private GameController gameController;
     private Pathfinder pathfinder;
-    private float speed;
+    [SerializeField] private float speed;
     private float rotateSpeed;
     private Rigidbody2D rigidBody;
-    private int health;
+    [SerializeField] private int health;
     private bool spawnEnded;
     public GameObject BloodSplat;
 
     private void Start() {
-        this.speed = 0.06f;
         this.spawnEnded = false;
         this.rotateSpeed = 4f;
-        this.health = 100;
         this.rigidBody = GetComponent<Rigidbody2D>();
         this.target = GameObject.FindGameObjectWithTag("Player").transform.position;
         this.gameController = GameObject.Find("GameController").GetComponent<GameController>();
