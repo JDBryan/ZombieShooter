@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum GameState 
+public enum GameState 
 {
   Active,
   Paused,
@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Player playerPrefab;
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private AudioClip deathNoise;
-    private GameState gameState;
+    [HideInInspector] public GameState gameState;
     private int waveNumber;
     private bool waveInProgress;
     private int baseSpawnAmount;

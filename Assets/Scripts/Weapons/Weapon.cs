@@ -26,6 +26,7 @@ public abstract class Weapon : MonoBehaviour
     public Sprite idleSprite;
     public Sprite userInterfaceSprite;
     public UserInterface userInterface;
+    public GameObject shockwavePrefab;
 
     // Fires a single round from the gun
     public abstract void Fire();

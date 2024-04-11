@@ -49,9 +49,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Non-Lit
+    uniqueID: 3712594215
+    locked: 0
   - name: UI
     uniqueID: 1922914987
     locked: 0
-  - name: Non-Lit
-    uniqueID: 3712594215
+  - name: CameraSortingLayer
+    uniqueID: 2371373047
     locked: 0
