@@ -57,6 +57,8 @@ public class Shotgun : Weapon
             if (this.roundsLeftInClip > 0) {
                 this.ChangeSpriteToFire();
                 GetComponent<AudioSource>().PlayOneShot(fireSound);
+                this.spawnShockwave(player);
+
                 for (int i = 0; i < this.bulletsPerShot; i++)
                 {
                     GameObject bullet = Instantiate(bulletPrefab, player.position, player.rotation);
@@ -90,6 +92,10 @@ public class Shotgun : Weapon
 
     public override void ChangeSpriteToIdle(){
         gameObject.GetComponent<SpriteRenderer>().sprite = this.idleSprite;
+    }
+
+    private void spawnShockwave(Transform player){
+        GameObject wave = Instantiate(shockwavePrefab, this.transform.position, Quaternion.identity, player);
     }
 
 }

@@ -161,6 +161,7 @@ MonoBehaviour:
   idleSprite: {fileID: 21300000, guid: 38243ca7872576a4d82a1e852cd38ecb, type: 3}
   userInterfaceSprite: {fileID: 21300000, guid: cad678de96c422f44a428206fa355b47, type: 3}
   userInterface: {fileID: 0}
+  shockwavePrefab: {fileID: 8483999471685610074, guid: ae581d766f2a540408a72e7bf476647e, type: 3}
 --- !u!82 &-1788064756154147702
 AudioSource:
   m_ObjectHideFlags: 0
