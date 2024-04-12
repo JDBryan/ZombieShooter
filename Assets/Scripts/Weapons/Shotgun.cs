@@ -56,7 +56,7 @@ public class Shotgun : Weapon
             this.lastRoundFiredTime = currentTime;
             if (this.roundsLeftInClip > 0) {
                 this.ChangeSpriteToFire();
-
+                GetComponent<AudioSource>().PlayOneShot(fireSound);
                 for (int i = 0; i < this.bulletsPerShot; i++)
                 {
                     GameObject bullet = Instantiate(bulletPrefab, player.position, player.rotation);

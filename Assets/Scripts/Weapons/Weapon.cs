@@ -11,13 +11,14 @@ public abstract class Weapon : MonoBehaviour
     public int clipSize;
     public bool hasInfiniteAmmo;
     public int initialAmmoCount;
+    public AudioClip fireSound;
 
     // Weapon tracking
-    public int currentAmmoCount;
-    public int roundsLeftInClip;
-    public float lastRoundFiredTime;
-    public bool triggerHeld;
-    public int roundsFiredWhileTriggerHeld;
+    [HideInInspector] public int currentAmmoCount;
+    [HideInInspector] public int roundsLeftInClip;
+    [HideInInspector] public float lastRoundFiredTime;
+    [HideInInspector] public bool triggerHeld;
+    [HideInInspector] public int roundsFiredWhileTriggerHeld;
 
     // Sprite rendering
     public SpriteRenderer spriteRenderer;

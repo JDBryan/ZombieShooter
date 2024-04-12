@@ -1,17 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ButtonHighlightControl : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ButtonHighlightControl : 
+    MonoBehaviour, 
+    IPointerEnterHandler, 
+    IPointerExitHandler, 
+    ISelectHandler
 {
-
     [SerializeField] private GameObject NullButton;
 
     public void OnPointerEnter(PointerEventData eventData)
         {
             EventSystem.current.SetSelectedGameObject(this.gameObject);
+        }
+
+    public void OnSelect(BaseEventData eventData)
+        {
+            GameObject.Find("UserInterface").GetComponent<UserInterface>().PlayButtonSelectSound();
         }
  
     public void OnPointerExit(PointerEventData eventData)
