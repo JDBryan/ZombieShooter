@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 
     // Game object references
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioClip deathNoise;
+    [SerializeField] private AudioClip hitNoise;
     private GameController gameController;
     private UserInterface userInterface;
 
@@ -182,6 +184,8 @@ public class Player : MonoBehaviour
         this.gameController.UpdatePlayerHealth(this.health);
         if (this.health <= 0){
             this.Kill();
+        } else {
+            GetComponent<AudioSource>().PlayOneShot(hitNoise);
         }
     }
 
@@ -195,6 +199,7 @@ public class Player : MonoBehaviour
     }
 
     private void Kill() {
+        GetComponent<AudioSource>().PlayOneShot(deathNoise);
         this.animator.SetBool("Dead", true);
         this.GetActiveWeapon().GetComponent<SpriteRenderer>().enabled = false;
         this.GetComponent<Rigidbody2D>().simulated = false;

@@ -18,6 +18,9 @@ public class UserInterface : MonoBehaviour
     [SerializeField] private GameObject bulletUI;
     [SerializeField] private GameObject bulletUIParent;
     [SerializeField] private GameObject hud;
+    [SerializeField] private AudioClip buttonHoverSound;
+    [SerializeField] private AudioClip buttonClickSound;
+
     private Vector3 bulletUIPosition;
     public List<GameObject> bulletUIList;
 
@@ -33,6 +36,14 @@ public class UserInterface : MonoBehaviour
         this.UpdateHealthBar();
         this.UpdateWeaponInfo();
         this.waveNumberText.SetText("");
+    }
+
+    public void PlayButtonSelectSound() {
+        GetComponent<AudioSource>().PlayOneShot(buttonHoverSound);
+    }
+
+    public void PlayButtonClickSound() {
+        GetComponent<AudioSource>().PlayOneShot(buttonClickSound);
     }
 
     public void SetWaveNumber(int waveNumber) {

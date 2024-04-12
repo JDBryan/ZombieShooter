@@ -55,7 +55,7 @@ public class Pistol : Weapon
             this.lastRoundFiredTime = currentTime;
             if (this.roundsLeftInClip > 0) {
                 this.ChangeSpriteToFire();
-
+                GetComponent<AudioSource>().PlayOneShot(fireSound);
                 GameObject bullet = Instantiate(bulletPrefab, player.position, player.rotation);
                 Physics2D.IgnoreCollision(bullet.GetComponent<BoxCollider2D>(), player.GetComponent<CircleCollider2D>());
                 Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
