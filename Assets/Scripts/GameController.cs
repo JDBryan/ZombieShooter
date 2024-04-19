@@ -38,10 +38,6 @@ public class GameController : MonoBehaviour
 
     void Update()
     {   
-        if (this.gameState == GameState.Over && Input.GetKeyDown("space")) {
-            this.ResetGame();
-        }
-
         if (this.gameState == GameState.Active && Input.GetKeyDown(KeyCode.Escape)) {
             this.PauseGame();
         }
