@@ -41,11 +41,13 @@ public class Enemy : MonoBehaviour
     }
 
     public void Damage(int damageAmount, Quaternion bulletRotation) {
-        health -= damageAmount;
-        if (health <= 0) {
-            Instantiate(BloodSplat, this.transform.position, bulletRotation);
-            gameController.RegisterEnemyDeath();
-            Destroy(this.gameObject);
+        if (health > 0){
+            health -= damageAmount;
+            if (health <= 0) {
+                Instantiate(BloodSplat, this.transform.position, bulletRotation);
+                gameController.RegisterEnemyDeath();
+                Destroy(this.gameObject);
+            }
         }
     }
 
