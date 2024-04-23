@@ -98,3 +98,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodMask: {fileID: 2098371861036055541, guid: 1c174575596dffa42beeaafb5e8413cc, type: 3}
+  bloodParent: {fileID: 0}

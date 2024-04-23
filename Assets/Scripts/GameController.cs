@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Player playerPrefab;
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private AudioClip deathNoise;
+    public GameObject bloodParent;
     [HideInInspector] public GameState gameState;
     private int waveNumber;
     private bool waveInProgress;
@@ -78,6 +79,7 @@ public class GameController : MonoBehaviour
         this.gameState = GameState.StartMenu;
         this.userInterface.SetGameOverScreenActive(false);
         this.userInterface.SetStartMenuActive(true);
+        this.DestroyBloodSplats();
         Destroy(this.player.gameObject);
         this.player = Instantiate(this.playerPrefab);
         this.playerCamera.GetNewTransform();  
@@ -136,6 +138,12 @@ public class GameController : MonoBehaviour
         this.userInterface.UpdateHealthBar();
         if (health <= 0) {
             this.EndGame();
+        }
+    }
+
+    private void DestroyBloodSplats(){
+        foreach (Transform splat in this.bloodParent.transform){
+            Destroy(splat.gameObject);
         }
     }
 }
