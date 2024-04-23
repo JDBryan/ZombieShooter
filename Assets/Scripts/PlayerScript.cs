@@ -35,8 +35,6 @@ public class Player : MonoBehaviour
         // Game object references
         this.gameController = FindObjectOfType<GameController>();
         this.userInterface = FindObjectOfType<UserInterface>();
-        
-        this.GetComponent<Rigidbody2D>().MovePosition(new Vector3(0, 65, 0));
     }
     
     void Update()
