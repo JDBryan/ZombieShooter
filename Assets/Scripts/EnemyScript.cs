@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Vector3 target;
-    private GameController gameController;
-    private Pathfinder pathfinder;
-    private float speed;
-    private float rotateSpeed;
-    private Rigidbody2D rigidBody;
-    private int health;
-    private bool spawnEnded;
-    public GameObject BloodSplat;
+    // Parameters
+    [SerializeField] private int maxHealth;
+    [SerializeField] private float speed;
+    [SerializeField] private float rotateSpeed;
+
+    // Tracking
+    [HideInInspector] private int currentHealth;
+    [HideInInspector] private bool spawnEnded;
+    [HideInInspector] private Vector3 target;
+
+    // Object references
+    [SerializeField] private GameObject bloodSplat;
+    [HideInInspector] private GameController gameController;
+    [HideInInspector] private Pathfinder pathfinder;
 
     private void Start() {
-        this.speed = 0.06f;
+        // Tracking
         this.spawnEnded = false;
-        this.rotateSpeed = 4f;
-        this.health = 100;
-        this.rigidBody = GetComponent<Rigidbody2D>();
+        this.currentHealth = this.maxHealth;
         this.target = GameObject.FindGameObjectWithTag("Player").transform.position;
+
+        // Object references
         this.gameController = GameObject.Find("GameController").GetComponent<GameController>();
         this.pathfinder = GameObject.Find("GameController").GetComponent<Pathfinder>();
     }
@@ -29,7 +34,7 @@ public class Enemy : MonoBehaviour
         this.target = this.pathfinder.NextDestination(this.gameObject.transform.position);
         RotateTowardsTarget();
         if (spawnEnded == true) {
-            rigidBody.MovePosition(transform.position + transform.up * speed);
+            this.GetComponent<Rigidbody2D>().MovePosition(transform.position + transform.up * speed);
         }
     }
 
@@ -41,10 +46,10 @@ public class Enemy : MonoBehaviour
     }
 
     public void Damage(int damageAmount, Quaternion bulletRotation) {
-        if (health > 0){
-            health -= damageAmount;
-            if (health <= 0) {
-                Instantiate(BloodSplat, this.transform.position, bulletRotation);
+        if (this.currentHealth > 0){
+            this.currentHealth -= damageAmount;
+            if (this.currentHealth <= 0) {
+                Instantiate(this.bloodSplat, this.transform.position, bulletRotation);
                 gameController.RegisterEnemyDeath();
                 Destroy(this.gameObject);
             }

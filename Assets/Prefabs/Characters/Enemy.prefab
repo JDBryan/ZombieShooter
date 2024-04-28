@@ -101,8 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf1e9723a7225245bca76f34b58502a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BloodSplat: {fileID: 1481774045222291892, guid: db5a0d9353b24504482a89a6b7ddb343, type: 3}
-  deathNoise: {fileID: 8300000, guid: 48b38569ea402044b81745e53eb96749, type: 3}
+  maxHealth: 100
+  speed: 0.06
+  rotateSpeed: 4
+  bloodSplat: {fileID: 1481774045222291892, guid: db5a0d9353b24504482a89a6b7ddb343, type: 3}
 --- !u!50 &4564020692395794932
 Rigidbody2D:
   serializedVersion: 4

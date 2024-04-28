@@ -59,7 +59,7 @@ public class UserInterface : MonoBehaviour
     }
 
     public void UpdateHealthBar() {
-        int health = this.player.health;
+        int health = this.player.currentHealth;
         if (health >= 0){
             float healthPercent = (float)health / (float)100;
             float newHealthPosition = healthPercent * 7.76f;
