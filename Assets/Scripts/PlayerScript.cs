@@ -4,37 +4,35 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // Player parameters
-    private int maxHealth;
-    private float speed;
+    [SerializeField] private int maxHealth;
+    [SerializeField] private float speed;
+    [SerializeField] private float inventorySize;
 
     // Tracking
-    public int health;
-    private int activeWeaponIndex;
-    private Vector2 velocity;
-    private List<KnockBack> activeKnockBacks;
+    [HideInInspector] public int currentHealth;
+    [HideInInspector] private int activeWeaponIndex;
+    [HideInInspector] private Vector2 velocity;
+    [HideInInspector] private List<KnockBack> activeKnockBacks;
 
-    // Game object references
-    [SerializeField] private Animator animator;
+    // Object references
     [SerializeField] private AudioClip deathNoise;
     [SerializeField] private AudioClip hitNoise;
-    private GameController gameController;
-    private UserInterface userInterface;
+    [HideInInspector] private Animator animator;
+    [HideInInspector] private GameController gameController;
+    [HideInInspector] private UserInterface userInterface;
 
     void Start()
     {
-        // Player parameters
-        this.maxHealth = 100;
-        this.speed = 0.14f;
-
         // Tracking
         this.velocity = new Vector2(0, 0);
         this.activeWeaponIndex = 0;
-        this.health = maxHealth;
+        this.currentHealth = maxHealth;
         this.activeKnockBacks = new List<KnockBack>();
 
         // Game object references
         this.gameController = FindObjectOfType<GameController>();
         this.userInterface = FindObjectOfType<UserInterface>();
+        this.animator = this.GetComponent<Animator>();
     }
     
     void Update()
@@ -80,10 +78,8 @@ public class Player : MonoBehaviour
     }
 
     public void SwitchWeapon() {
-        this.GetActiveWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        this.GetSecondaryWeapon().gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        this.activeWeaponIndex = (activeWeaponIndex + 1) % this.GetHeldWeapons().Count;
-        this.userInterface.UpdateWeaponInfo();
+        this.ReleaseTrigger();
+        this.SetActiveWeapon((activeWeaponIndex + 1) % this.GetHeldWeapons().Count);
     }
 
     public void ReloadWeapon() 
@@ -126,14 +122,7 @@ public class Player : MonoBehaviour
         //Check if collision object is a pickup
         if (collision.gameObject.tag == "Pickup")
         {
-            GameObject weapon = collision.gameObject;
-            weapon.transform.rotation = this.transform.rotation;
-            weapon.transform.position = this.transform.position;
-            weapon.transform.Rotate(0.0f,0.0f,90.0f);
-            weapon.transform.Translate(0.875f,0.0f,0.0f);
-            weapon.transform.parent = this.transform;
-            weapon.GetComponent<BoxCollider2D>().enabled = false;
-            weapon.GetComponent<SpriteRenderer>().enabled = false;
+            this.PickupWeapon(collision.gameObject);
         }
 
         //Check if collision object is an ammo pack single
@@ -157,12 +146,12 @@ public class Player : MonoBehaviour
         //Check if collision object is a health pack
         if (collision.gameObject.tag == "Health")
         {   
-            this.health += collision.gameObject.GetComponent<SetHealthPack>().healthAmount;
-            if (this.health > this.maxHealth){
-                this.health = this.maxHealth;
+            this.currentHealth += collision.gameObject.GetComponent<SetHealthPack>().healthAmount;
+            if (this.currentHealth > this.maxHealth){
+                this.currentHealth = this.maxHealth;
             }
-            this.gameController.UpdatePlayerHealth(this.health);
-            Debug.Log(this.health);
+            this.gameController.UpdatePlayerHealth(this.currentHealth);
+            Debug.Log(this.currentHealth);
             Destroy(collision.gameObject);
         }
 
@@ -170,17 +159,15 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             this.Damage(10);
-            Rigidbody2D rigidBody = GetComponent<Rigidbody2D>();
             Vector3 direction = (transform.position - collision.gameObject.transform.position).normalized;
-
             this.activeKnockBacks.Add(new KnockBack(direction, 0.4f, 0.1f));
         }
     }
 
     public void Damage(int damageAmount) {
-        this.health -= damageAmount;
-        this.gameController.UpdatePlayerHealth(this.health);
-        if (this.health <= 0){
+        this.currentHealth -= damageAmount;
+        this.gameController.UpdatePlayerHealth(this.currentHealth);
+        if (this.currentHealth <= 0){
             this.Kill();
         } else {
             GetComponent<AudioSource>().PlayOneShot(hitNoise);
@@ -202,6 +189,38 @@ public class Player : MonoBehaviour
         this.GetActiveWeapon().GetComponent<SpriteRenderer>().enabled = false;
         this.GetComponent<Rigidbody2D>().simulated = false;
         this.GetComponent<PlayerUserInput>().enabled = false;
+    }
+
+    private void PickupWeapon(GameObject weapon)
+    {
+        if (this.GetHeldWeapons().Count >= this.inventorySize) {
+            this.DropActiveWeapon();
+        }
+        weapon.transform.rotation = this.transform.rotation;
+        weapon.transform.position = this.transform.position;
+        weapon.transform.Rotate(0.0f,0.0f,90.0f);
+        weapon.transform.Translate(0.875f,0.0f,0.0f);
+        weapon.transform.parent = this.transform;
+        weapon.GetComponent<BoxCollider2D>().enabled = false;
+        weapon.GetComponent<SpriteRenderer>().enabled = false;
+        this.SetActiveWeapon(this.GetHeldWeapons().Count - 1);
+    }
+
+    private void DropActiveWeapon()
+    {
+        Weapon weapon = this.GetActiveWeapon();
+        weapon.transform.parent = null;
+        Destroy(weapon.gameObject);
+        this.SetActiveWeapon(this.GetHeldWeapons().Count - 1);
+    }
+
+    private void SetActiveWeapon(int index) {
+        foreach(Weapon weapon in this.GetHeldWeapons()) {
+            weapon.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        this.GetHeldWeapons()[index].gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        this.activeWeaponIndex = index;
+        this.userInterface.UpdateWeaponInfo();
     }
 
     // Helper function to calculate the angle from point a to point b
@@ -230,6 +249,6 @@ public class Player : MonoBehaviour
     }
 
     public int GetHealth() {
-        return this.health;
+        return this.currentHealth;
     }
 }
