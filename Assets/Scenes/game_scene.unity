@@ -740,8 +740,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.08405006, y: -0.60155004, z: 0}
-    m_Extent: {x: 1.98485, y: 1.63465, z: 0}
+    m_Center: {x: -0.08914995, y: -0.5986, z: 0}
+    m_Extent: {x: 1.9841499, y: 1.6329, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2087,8 +2087,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.18865001, y: -0.06254995, z: 0}
-    m_Extent: {x: 2.18675, y: 2.18755, z: 0}
+    m_Center: {x: -0.18404996, y: -0.06560004, z: 0}
+    m_Extent: {x: 2.19355, y: 2.1985998, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -54725,7 +54725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8fd7bc0105ac74b83adca0dac4585c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 8633827478535560660, guid: 9cc72ab71f9b3e14fbd49608cf2f277a, type: 3}
+  smallEnemy: {fileID: 8633827478535560660, guid: 9cc72ab71f9b3e14fbd49608cf2f277a, type: 3}
+  bigEnemy: {fileID: 5192581726804504525, guid: 9d16c2721533925469695b51100e7efe, type: 3}
   spawnAreas: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
