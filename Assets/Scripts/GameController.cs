@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public enum GameState 
@@ -22,8 +23,11 @@ public class GameController : MonoBehaviour
     [HideInInspector] public GameState gameState;
     private int waveNumber;
     private bool waveInProgress;
-    private int baseSpawnAmount;
-    private int incrementalSpawnAmount;
+    private int smallEnemyBaseSpawnAmount;
+    private int bigEnemyBaseSpawnAmount;
+
+    private float smallEnemyIncrementalSpawnAmount;
+    private float bigEnemyIncrementalSpawnAmount;
     private int waveKillCount;
     private float lastWaveEndedTime;
     private int waveIntervalTime;
@@ -31,8 +35,10 @@ public class GameController : MonoBehaviour
     void Start()
     {
         this.gameState = GameState.StartMenu;
-        this.baseSpawnAmount = 2;
-        this.incrementalSpawnAmount = 1;
+        this.smallEnemyBaseSpawnAmount = 2;
+        this.bigEnemyBaseSpawnAmount = 1;
+        this.smallEnemyIncrementalSpawnAmount = 1;
+        this.bigEnemyIncrementalSpawnAmount = 0.5f;
         this.waveIntervalTime = 5;
         this.spawnController.SetSpawnInterval(2);
     }
@@ -106,7 +112,10 @@ public class GameController : MonoBehaviour
         this.waveInProgress = true;
         this.waveKillCount = 0;
         this.waveNumber += 1;
-        this.spawnController.EnqueueSpawns(this.GetWaveSpawnTotal());
+        this.spawnController.EnqueueSmallEnemySpawns(this.GetSmallEnemyWaveSpawnTotal());
+        this.spawnController.EnqueueBigEnemySpawns(this.GetBigEnemyWaveSpawnTotal());
+        Debug.Log(this.GetSmallEnemyWaveSpawnTotal());
+        Debug.Log(this.GetBigEnemyWaveSpawnTotal());
         this.userInterface.SetWaveNumber(this.waveNumber);
     }
 
@@ -121,7 +130,7 @@ public class GameController : MonoBehaviour
     {
         GetComponent<AudioSource>().PlayOneShot(deathNoise);
         this.waveKillCount += 1;
-        if (this.waveKillCount == this.GetWaveSpawnTotal()) {
+        if (this.waveKillCount == this.GetSmallEnemyWaveSpawnTotal() + this.GetBigEnemyWaveSpawnTotal()) {
             this.EndWave();
         }
     }
@@ -130,8 +139,12 @@ public class GameController : MonoBehaviour
         return this.waveNumber;
     }
 
-    private int GetWaveSpawnTotal() {
-       return (this.waveNumber - 1 * this.incrementalSpawnAmount) + this.baseSpawnAmount;
+    private int GetSmallEnemyWaveSpawnTotal() {
+       return (int)((this.waveNumber - 1) * this.smallEnemyIncrementalSpawnAmount) + this.smallEnemyBaseSpawnAmount;
+    }
+
+    private int GetBigEnemyWaveSpawnTotal() {
+       return (int)(((this.waveNumber - 1) * this.bigEnemyIncrementalSpawnAmount)) + this.bigEnemyBaseSpawnAmount;
     }
 
     public void UpdatePlayerHealth(int health) {

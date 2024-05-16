@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static System.Random;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject smallEnemy;
+
+    [SerializeField] private GameObject bigEnemy;
+
     [SerializeField] private List<Transform> spawnAreas;
     private int spawnInterval;
-    private int spawnQueue;
+    private int smallEnemySpawnQueue;
+    private int bigEnemySpawnQueue;
+
     private float lastSpawnTime;
     private GameObject AllEnemies;
 
@@ -24,9 +31,8 @@ public class Spawner : MonoBehaviour
     {
         // Per spawn interval, if the spawnQueue is not empty, spawn a single enemy
         // and decrement the spawn queue
-        if (spawnQueue > 0 && Time.time - lastSpawnTime >= spawnInterval) {
+        if (smallEnemySpawnQueue + bigEnemySpawnQueue > 0 && Time.time - lastSpawnTime >= spawnInterval) {
             this.SpawnEnemy();
-            spawnQueue -= 1;
             lastSpawnTime = Time.time;
         }
     }
@@ -52,7 +58,15 @@ public class Spawner : MonoBehaviour
         float maxY = spawnArea.position.y + extents.y;
         Vector3 spawnPoint = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), 0f);
 
-        Instantiate(enemy, spawnPoint, this.transform.rotation, AllEnemies.transform);
+        int total = this.smallEnemySpawnQueue + this.bigEnemySpawnQueue;
+        int choice = Random.Range(1, total + 1);
+        if (choice <= this.smallEnemySpawnQueue) {
+                Instantiate(smallEnemy, spawnPoint, this.transform.rotation, AllEnemies.transform);
+                this.smallEnemySpawnQueue -= 1;
+        } else {
+                Instantiate(bigEnemy, spawnPoint, this.transform.rotation, AllEnemies.transform);
+                this.bigEnemySpawnQueue -= 1;
+        }
     }
 
     public void SetSpawnInterval(int interval) 
@@ -60,8 +74,13 @@ public class Spawner : MonoBehaviour
         this.spawnInterval = interval;
     }
 
-    public void EnqueueSpawns(int spawnAmount) 
+    public void EnqueueSmallEnemySpawns(int spawnAmount) 
     {
-        this.spawnQueue += spawnAmount;
+        this.smallEnemySpawnQueue += spawnAmount;
+    }
+    
+    public void EnqueueBigEnemySpawns(int spawnAmount) 
+    {
+        this.bigEnemySpawnQueue += spawnAmount;
     }
 }
