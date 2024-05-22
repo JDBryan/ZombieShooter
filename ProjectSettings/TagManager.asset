@@ -12,6 +12,8 @@ TagManager:
   - AmmoSingleWeapon
   - AmmoAllWeapons
   - Floor
+  - ShotgunStation
+  - AutomaticRifleStation
   layers:
   - Default
   - TransparentFX

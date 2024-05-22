@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     [HideInInspector] private Animator animator;
     [HideInInspector] private GameController gameController;
     [HideInInspector] private UserInterface userInterface;
+    private Interactable selectedInteractable;
 
     void Start()
     {
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
         this.gameController = FindObjectOfType<GameController>();
         this.userInterface = FindObjectOfType<UserInterface>();
         this.animator = this.GetComponent<Animator>();
+        this.selectedInteractable = null;
     }
     
     void Update()
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
         if (Time.time - GetActiveWeapon().lastRoundFiredTime > 0.1f){
             this.GetActiveWeapon().ChangeSpriteToIdle();
         }
+        FindClosestInteractable();
     }
 
     void FixedUpdate() {
@@ -191,7 +194,7 @@ public class Player : MonoBehaviour
         this.GetComponent<PlayerUserInput>().enabled = false;
     }
 
-    private void PickupWeapon(GameObject weapon)
+    public void PickupWeapon(GameObject weapon)
     {
         if (this.GetHeldWeapons().Count >= this.inventorySize) {
             this.DropActiveWeapon();
@@ -209,6 +212,10 @@ public class Player : MonoBehaviour
     private void DropActiveWeapon()
     {
         Weapon weapon = this.GetActiveWeapon();
+        GameObject weaponStation = GameObject.FindGameObjectWithTag(weapon.name + "Station");
+        if (weaponStation != null){
+            weaponStation.GetComponent<WeaponStation>().RestockWeapon();
+        }
         weapon.transform.parent = null;
         Destroy(weapon.gameObject);
         this.SetActiveWeapon(this.GetHeldWeapons().Count - 1);
@@ -250,5 +257,44 @@ public class Player : MonoBehaviour
 
     public int GetHealth() {
         return this.currentHealth;
+    }
+
+    public void RefillAmmoFromStation(GameObject stationWeapon){
+        foreach (Transform child in this.transform){
+            if (child.gameObject == stationWeapon) {
+                this.RefillWeaponAmmo(child.GetComponent<Weapon>());
+                userInterface.UpdateWeaponInfo();
+            }
+        }
+    }
+
+    public void FindClosestInteractable(){
+        Interactable[] interactables = FindObjectsByType<Interactable>(FindObjectsSortMode.None);
+        if (interactables != null & interactables.Length != 0){
+            Interactable closestItem = interactables[0];
+            float smallestDistance = Mathf.Infinity;
+
+            foreach (Interactable item in interactables){
+                float distance = Vector3.Distance(item.gameObject.transform.position, this.transform.position);
+                if (distance < smallestDistance){
+                    smallestDistance = distance;
+                    closestItem = item;
+                }
+            }
+            if (smallestDistance < closestItem.selectionRadius & closestItem.selected == false){
+                closestItem.Select();
+                this.selectedInteractable = closestItem;
+            }
+            if (smallestDistance > closestItem.selectionRadius & closestItem.selected == true){
+                closestItem.Deselect();
+                this.selectedInteractable = null;
+            }
+        }
+    }
+
+    public void Interact(){
+        if (this.selectedInteractable != null){
+            this.selectedInteractable.Interact();
+        }
     }
 }

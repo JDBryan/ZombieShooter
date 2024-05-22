@@ -88,7 +88,10 @@ public class GameController : MonoBehaviour
         this.DestroyBloodSplats();
         Destroy(this.player.gameObject);
         this.player = Instantiate(this.playerPrefab);
-        this.playerCamera.GetNewTransform();  
+        this.playerCamera.GetNewTransform(); 
+        foreach (WeaponStation station in GameObject.FindObjectsByType<WeaponStation>(FindObjectsSortMode.None)){
+            station.ResetStation(this.player);
+        } 
     }
 
     public void PauseGame() {
