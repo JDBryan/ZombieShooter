@@ -30,6 +30,10 @@ public class PlayerUserInput : MonoBehaviour
         if (Input.GetMouseButtonUp(0)) {
             player.ReleaseTrigger();
         }
+
+        if (Input.GetKeyDown("f")) {
+            player.Interact();
+        }
     }
 
     void LateUpdate() 
