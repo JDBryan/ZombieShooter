@@ -272,7 +272,9 @@ MonoBehaviour:
   maxHealth: 100
   speed: 0.14
   inventorySize: 2
+  interactionRadius: 2
   currentHealth: 0
+  money: 0
   deathNoise: {fileID: 8300000, guid: d0acab290b7dc114b9d37a61a40fef70, type: 3}
   hitNoise: {fileID: 8300000, guid: e26387a74bd39604c944b6d165b206c8, type: 3}
 --- !u!114 &5954684194975434499
@@ -410,6 +412,14 @@ PrefabInstance:
     - target: {fileID: 3276183387182028889, guid: 3ff905448549311419ed7967c6305f87, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276183387182028889, guid: 3ff905448549311419ed7967c6305f87, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276183387182028889, guid: 3ff905448549311419ed7967c6305f87, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4442287931835797768, guid: 3ff905448549311419ed7967c6305f87, type: 3}
       propertyPath: m_LocalScale.x

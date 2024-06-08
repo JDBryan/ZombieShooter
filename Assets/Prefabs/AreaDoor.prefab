@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5421745760630673875}
   m_Layer: 0
   m_Name: RightDoor
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 1d72498d5ce985a4faa9b3fc088f3e75, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -164,9 +164,10 @@ GameObject:
   - component: {fileID: 6309608887853340488}
   - component: {fileID: 2922530470862107126}
   - component: {fileID: 8531226000262989387}
+  - component: {fileID: 7713433987103961156}
   m_Layer: 0
   m_Name: LeftDoor
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -251,7 +252,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 9033b85cd08c13d4bbb2215c084acb58, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -304,6 +305,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.9959998, y: 0.6813965}
   m_EdgeRadius: 0
+--- !u!114 &7713433987103961156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230216008036889716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537d828563050d2489c7a0ca49541854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3348963429663619174
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +448,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e560856519a7141b936455c499e1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 2100000, guid: 350acd2ba7d78bb44b87f6ff78f202d5, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: 2d1963404eec72741b5fbe30ec8211fc, type: 2}
+  failMaterial: {fileID: 2100000, guid: bcea251ff2398384f941ab29b2062a9a, type: 2}
+  myRenderers: []
+  selected: 0
+  baseCost: 1
+  player: {fileID: 0}
   leftAnimator: {fileID: 2922530470862107126}
   rightAnimator: {fileID: 1992969972101460640}
   open: 0

@@ -8,6 +8,7 @@ public class UserInterface : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private TMP_Text weaponInfoText;
     [SerializeField] private TMP_Text waveNumberText;
+    [SerializeField] private TMP_Text moneyText;
     [SerializeField] private TMP_Text healthBar;
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject startMenu;
@@ -36,6 +37,7 @@ public class UserInterface : MonoBehaviour
         this.UpdateHealthBar();
         this.UpdateWeaponInfo();
         this.waveNumberText.SetText("");
+        this.moneyText.SetText("");
     }
 
     public void PlayButtonSelectSound() {
@@ -48,6 +50,10 @@ public class UserInterface : MonoBehaviour
 
     public void SetWaveNumber(int waveNumber) {
         waveNumberText.SetText(waveNumber.ToString());
+    }
+
+    public void SetMoneyNumber(int money){
+        moneyText.SetText(money.ToString());
     }
 
     public void DisableHud() {

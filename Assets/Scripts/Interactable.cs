@@ -7,9 +7,13 @@ public class Interactable : MonoBehaviour
 
     [SerializeField] private Material defaultMaterial;
     [SerializeField] private Material selectedMaterial;
-    private SpriteRenderer myRenderer;
+    [SerializeField] private Material failMaterial;
+    [HideInInspector] public List<SpriteRenderer> myRenderers;
     [HideInInspector] public bool selected;
-    public float selectionRadius;
+    [HideInInspector] private bool failed;
+    [HideInInspector] private float waitTime;
+    [SerializeField] public int baseCost;
+    [HideInInspector] public Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -18,18 +22,47 @@ public class Interactable : MonoBehaviour
     }
 
     public void Init(){
-        this.myRenderer = GetComponent<SpriteRenderer>();
+        this.myRenderers = new List<SpriteRenderer>();
+        if (GetComponent<SpriteRenderer>() != null){
+            this.myRenderers.Add(GetComponent<SpriteRenderer>());
+        }
         this.selected = false;
+        this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        this.failed = false;
+        this.waitTime = 0f;
+    }
+
+    private void LateUpdate(){
+        //this changes the material when a purchace fails for a small amount of time. 
+        if (this.failed == true){
+            this.waitTime += Time.deltaTime;
+            foreach (SpriteRenderer renderer in this.myRenderers){
+                renderer.material = failMaterial;
+            }
+            if (this.waitTime > 0.1f){
+                this.waitTime = 0.0f;
+                this.failed = false;
+            }
+        }
     }
 
     public void Select(){
         this.selected = true;
-        this.myRenderer.material = selectedMaterial;
+        foreach (SpriteRenderer renderer in this.myRenderers){
+            renderer.material = selectedMaterial;
+        }
     }
 
     public void Deselect(){
         this.selected = false;
-        this.myRenderer.material = defaultMaterial;
+        foreach (SpriteRenderer renderer in this.myRenderers){
+            renderer.material = defaultMaterial;
+        }
+    }
+
+    public void TriggerFailedInteract(){
+        this.failed = true;
     }
 
     public virtual void Interact(){}

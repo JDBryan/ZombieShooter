@@ -7,12 +7,14 @@ public class Player : MonoBehaviour
     [SerializeField] private int maxHealth;
     [SerializeField] private float speed;
     [SerializeField] private float inventorySize;
+    [SerializeField] private float interactionRadius;
 
     // Tracking
     [HideInInspector] public int currentHealth;
     [HideInInspector] private int activeWeaponIndex;
     [HideInInspector] private Vector2 velocity;
     [HideInInspector] private List<KnockBack> activeKnockBacks;
+    [HideInInspector] public int money;
 
     // Object references
     [SerializeField] private AudioClip deathNoise;
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
         this.activeWeaponIndex = 0;
         this.currentHealth = maxHealth;
         this.activeKnockBacks = new List<KnockBack>();
+        this.money = 0;
 
         // Game object references
         this.gameController = FindObjectOfType<GameController>();
@@ -212,7 +215,7 @@ public class Player : MonoBehaviour
     private void DropActiveWeapon()
     {
         Weapon weapon = this.GetActiveWeapon();
-        GameObject weaponStation = GameObject.FindGameObjectWithTag(weapon.name + "Station");
+        GameObject weaponStation = GameObject.Find("WeaponStation_" + weapon.name);
         if (weaponStation != null){
             weaponStation.GetComponent<WeaponStation>().RestockWeapon();
         }
@@ -280,14 +283,14 @@ public class Player : MonoBehaviour
                     smallestDistance = distance;
                     closestItem = item;
                 }
+                if (item.selected){
+                    item.Deselect();
+                }
             }
-            if (smallestDistance < closestItem.selectionRadius & closestItem.selected == false){
+            this.selectedInteractable = null;
+            if (smallestDistance < interactionRadius){
                 closestItem.Select();
                 this.selectedInteractable = closestItem;
-            }
-            if (smallestDistance > closestItem.selectionRadius & closestItem.selected == true){
-                closestItem.Deselect();
-                this.selectedInteractable = null;
             }
         }
     }
@@ -296,5 +299,10 @@ public class Player : MonoBehaviour
         if (this.selectedInteractable != null){
             this.selectedInteractable.Interact();
         }
+    }
+
+    public void ChangePlayerMoney(int changeInMoney){
+        this.money += changeInMoney;
+        this.userInterface.SetMoneyNumber(this.money);
     }
 }

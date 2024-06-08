@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int maxHealth;
     [SerializeField] private float speed;
     [SerializeField] private float rotateSpeed;
+    [SerializeField] public int moneyForPlayer;
 
     // Tracking
     [HideInInspector] private int currentHealth;
@@ -18,11 +19,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject bloodSplat;
     [HideInInspector] private GameController gameController;
     [HideInInspector] private Pathfinder pathfinder;
+    private Player player;
 
     private void Start() {
         // Tracking
         this.spawnEnded = false;
         this.currentHealth = this.maxHealth;
+        this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         this.target = GameObject.FindGameObjectWithTag("Player").transform.position;
 
         // Object references
@@ -31,7 +34,9 @@ public class Enemy : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        this.target = this.pathfinder.NextDestination(this.gameObject.transform.position);
+        if (this.pathfinder.CheckIfCellInCameFrom(this.gameObject.transform.position)){
+            this.target = this.pathfinder.NextDestination(this.gameObject.transform.position);
+        }
         RotateTowardsTarget();
         if (spawnEnded == true) {
             this.GetComponent<Rigidbody2D>().MovePosition(transform.position + transform.up * speed);
@@ -50,7 +55,7 @@ public class Enemy : MonoBehaviour
             this.currentHealth -= damageAmount;
             if (this.currentHealth <= 0) {
                 Instantiate(this.bloodSplat, this.transform.position, bulletRotation);
-                gameController.RegisterEnemyDeath();
+                gameController.RegisterEnemyDeath(this);
                 Destroy(this.gameObject);
             }
         }
