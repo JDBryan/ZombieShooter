@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2065037395451321642, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.725683
+      value: 28.29
       objectReference: {fileID: 0}
     - target: {fileID: 2065037395451321642, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 61.839592
+      value: 28.92
       objectReference: {fileID: 0}
     - target: {fileID: 2065037395451321642, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.7512947
       objectReference: {fileID: 0}
     - target: {fileID: 2065037395451321642, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: m_LocalRotation.w
@@ -26,15 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2065037395451321642, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2065037395451321642, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2065037395451321642, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2065037395451321642, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2098679396660131403, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: m_TagString
-      value: ShotgunStation
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6047717853908543298, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: prefabWeapon

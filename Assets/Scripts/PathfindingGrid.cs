@@ -11,7 +11,7 @@ public class PathfindingGrid
     private float originX;
     private float originY;
 
-    private Dictionary<Vector2,List<Vector2>> pathfindingGraph;
+    public Dictionary<Vector2,List<Vector2>> pathfindingGraph;
 
     private Dictionary<Vector2,bool> obstacleDict;
 
@@ -23,11 +23,7 @@ public class PathfindingGrid
         this.originX = gridOriginX;
         this.originY = gridOriginY;
 
-        this.pathfindingGraph = new Dictionary<Vector2,List<Vector2>>();
-        this.obstacleDict = new Dictionary<Vector2,bool>();
-        MakeObstacleDict();
-        MakeGraph();
-        DebugObstacleDetection();
+        this.CalibrateGraph();
         
     }
 
@@ -66,6 +62,13 @@ public class PathfindingGrid
 
     public List<Vector2> GetGraphNeighbours(Vector2 cell){
         return this.pathfindingGraph[cell];
+    }
+
+    public void CalibrateGraph(){
+        this.pathfindingGraph = new Dictionary<Vector2,List<Vector2>>();
+        this.obstacleDict = new Dictionary<Vector2,bool>();
+        MakeObstacleDict();
+        MakeGraph();
     }
 
     //---------PRIVATE METHODS-------------------------------------------
@@ -131,8 +134,8 @@ public class PathfindingGrid
 //---------DEBUGGING FUNCTIONS---------------------------------
 
     public void DebugFillCell(int x, int y){
-        Debug.DrawLine(GetCellCenter(x,y)-new Vector2(this.cellSize/4,0), GetCellCenter(x,y)+new Vector2(this.cellSize/4,0), Color.white, 200f);
-        Debug.DrawLine(GetCellCenter(x,y)-new Vector2(0,this.cellSize/4), GetCellCenter(x,y)+new Vector2(0,this.cellSize/4), Color.white, 200f);
+        Debug.DrawLine(GetCellCenter(x,y)-new Vector2(this.cellSize/4,0), GetCellCenter(x,y)+new Vector2(this.cellSize/4,0), Color.white, 5f);
+        Debug.DrawLine(GetCellCenter(x,y)-new Vector2(0,this.cellSize/4), GetCellCenter(x,y)+new Vector2(0,this.cellSize/4), Color.white, 5f);
     }
 
     public void DebugObstacleDetection(){

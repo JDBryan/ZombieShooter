@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private AudioClip deathNoise;
     public GameObject bloodParent;
+    [SerializeField] private GameObject doorPrefab;
     [HideInInspector] public GameState gameState;
     private int waveNumber;
     private bool waveInProgress;
@@ -92,6 +93,8 @@ public class GameController : MonoBehaviour
         foreach (WeaponStation station in GameObject.FindObjectsByType<WeaponStation>(FindObjectsSortMode.None)){
             station.ResetStation(this.player);
         } 
+        this.ResetAreaDoors();
+        this.gameObject.GetComponent<Pathfinder>().Reset();
     }
 
     public void PauseGame() {
@@ -117,8 +120,6 @@ public class GameController : MonoBehaviour
         this.waveNumber += 1;
         this.spawnController.EnqueueSmallEnemySpawns(this.GetSmallEnemyWaveSpawnTotal());
         this.spawnController.EnqueueBigEnemySpawns(this.GetBigEnemyWaveSpawnTotal());
-        Debug.Log(this.GetSmallEnemyWaveSpawnTotal());
-        Debug.Log(this.GetBigEnemyWaveSpawnTotal());
         this.userInterface.SetWaveNumber(this.waveNumber);
     }
 
@@ -129,9 +130,10 @@ public class GameController : MonoBehaviour
 
     // Increments wave kill count by one. Checks if the kill count for the wave is equal
     // to the number of enemies that we intended to spawn. If so ends wave.
-    public void RegisterEnemyDeath()
+    public void RegisterEnemyDeath(Enemy enemy)
     {
         GetComponent<AudioSource>().PlayOneShot(deathNoise);
+        this.player.ChangePlayerMoney(enemy.moneyForPlayer);
         this.waveKillCount += 1;
         if (this.waveKillCount == this.GetSmallEnemyWaveSpawnTotal() + this.GetBigEnemyWaveSpawnTotal()) {
             this.EndWave();
@@ -160,6 +162,18 @@ public class GameController : MonoBehaviour
     private void DestroyBloodSplats(){
         foreach (Transform splat in this.bloodParent.transform){
             Destroy(splat.gameObject);
+        }
+    }
+
+    private void ResetAreaDoors(){
+        Transform doorParent = GameObject.Find("AreaDoors").transform;
+        List<Transform> locations = new List<Transform>();
+        foreach (AreaDoor door in GameObject.FindObjectsByType<AreaDoor>(FindObjectsSortMode.None)){
+            locations.Add(door.transform);
+            Destroy(door.gameObject);
+        }
+        foreach (Transform newTransform in locations){
+            Instantiate(doorPrefab, newTransform.position, newTransform.rotation, doorParent);
         }
     }
 }
