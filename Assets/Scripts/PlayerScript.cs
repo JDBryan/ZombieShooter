@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,7 +45,7 @@ public class Player : MonoBehaviour
     {	
         animator.SetFloat("Speed", this.velocity.magnitude);
 
-        if (Time.time - GetActiveWeapon().lastRoundFiredTime > 0.1f){
+        if (this.GetActiveWeapon() != null && Time.time - GetActiveWeapon().lastRoundFiredTime > 0.1f){
             this.GetActiveWeapon().ChangeSpriteToIdle();
         }
         FindClosestInteractable();
@@ -71,33 +72,32 @@ public class Player : MonoBehaviour
     }
 
     public void PullTrigger() {
-        this.GetActiveWeapon().PullTrigger();
+        if (this.GetActiveWeapon() != null)
+        {
+            this.GetActiveWeapon().PullTrigger();
+        }
     }
 
     public void ReleaseTrigger() {
-        this.GetActiveWeapon().ReleaseTrigger();
-    }
-
-    public void FireActiveWeapon() {
-        this.GetActiveWeapon().Fire();
-        userInterface.UpdateWeaponInfo();
+        if (this.GetActiveWeapon() != null)
+        {
+            this.GetActiveWeapon().ReleaseTrigger();
+        }
     }
 
     public void SwitchWeapon() {
-        this.ReleaseTrigger();
+        if (this.GetHeldWeapons().Count < 2) {
+            return;
+        }
+        this.GetActiveWeapon().StopReload();
         this.SetActiveWeapon((activeWeaponIndex + 1) % this.GetHeldWeapons().Count);
     }
 
     public void ReloadWeapon() 
     {
-        if (this.GetActiveWeapon().currentAmmoCount >= this.GetActiveWeapon().clipSize 
-            || this.GetActiveWeapon().hasInfiniteAmmo){
-            this.GetActiveWeapon().roundsLeftInClip = this.GetActiveWeapon().clipSize;
-        } else {
-            this.GetActiveWeapon().roundsLeftInClip = this.GetActiveWeapon().currentAmmoCount;
+        if (this.GetActiveWeapon() != null) {
+            this.GetActiveWeapon().TriggerReload();
         }
-
-        this.userInterface.UpdateWeaponInfo();
     }
 
     public void RefillWeaponAmmo(Weapon weapon) {
@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
         }
 
         //Check if collision object is an ammo pack single
-        if (collision.gameObject.tag == "AmmoSingleWeapon")
+        if (collision.gameObject.tag == "AmmoSingleWeapon" && this.GetActiveWeapon() != null)
         {
             RefillWeaponAmmo(GetActiveWeapon());
             userInterface.UpdateWeaponInfo();
@@ -192,7 +192,9 @@ public class Player : MonoBehaviour
     private void Kill() {
         GetComponent<AudioSource>().PlayOneShot(deathNoise);
         this.animator.SetBool("Dead", true);
-        this.GetActiveWeapon().GetComponent<SpriteRenderer>().enabled = false;
+        if (this.GetActiveWeapon() != null){
+            this.GetActiveWeapon().GetComponent<SpriteRenderer>().enabled = false;
+        }
         this.GetComponent<Rigidbody2D>().simulated = false;
         this.GetComponent<PlayerUserInput>().enabled = false;
     }
@@ -215,6 +217,9 @@ public class Player : MonoBehaviour
     private void DropActiveWeapon()
     {
         Weapon weapon = this.GetActiveWeapon();
+        if (weapon == null) {
+            return;
+        }
         GameObject weaponStation = GameObject.Find("WeaponStation_" + weapon.name);
         if (weaponStation != null){
             weaponStation.GetComponent<WeaponStation>().RestockWeapon();
@@ -251,15 +256,25 @@ public class Player : MonoBehaviour
 
     public Weapon GetActiveWeapon()
     {
-        return this.GetHeldWeapons()[activeWeaponIndex];  
+        if (this.GetHeldWeapons().Count == 0) 
+        {
+            return null;
+        } 
+        else
+        {
+            return this.GetHeldWeapons()[activeWeaponIndex];
+        }
     }
 
     public Weapon GetSecondaryWeapon(){
-        return this.GetHeldWeapons()[(activeWeaponIndex + 1) % this.GetHeldWeapons().Count];
-    }
-
-    public int GetHealth() {
-        return this.currentHealth;
+        if (this.GetHeldWeapons().Count < 2) 
+        {
+            return null;
+        } 
+        else
+        {
+            return this.GetHeldWeapons()[(activeWeaponIndex + 1) % this.GetHeldWeapons().Count];
+        }
     }
 
     public void RefillAmmoFromStation(GameObject stationWeapon){

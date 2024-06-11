@@ -61,7 +61,7 @@ public class WeaponStation : Interactable
                 this.cost = ammoCost;
             }
             else if (!this.weaponOnSale & !this.restockInProgress & this.player.GetActiveWeapon().gameObject.name == this.prefabWeapon.name){
-                this.player.ChangePlayerMoney(this.cost);
+                this.player.ChangePlayerMoney(-this.cost);
                 player.RefillAmmoFromStation(this.weapon);
                 this.restockInProgress = true;
                 animator.SetBool("Reload", true);

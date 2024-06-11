@@ -146,22 +146,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7366498701029477317, guid: 8c4bdde36e917b44b94addda2aec007f, type: 3}
   isAutomatic: 0
-  fireRate: 0
-  clipSize: 0
+  fireRate: 0.75
+  clipSize: 5
   hasInfiniteAmmo: 0
-  initialAmmoCount: 0
+  initialAmmoCount: 20
   fireSound: {fileID: 8300000, guid: d3247579c549643a5b3a95f9224eaf3c, type: 3}
+  reloadTime: 2
+  bulletSpeed: 20
+  bulletSpread: 15
+  fireSprite: {fileID: 21300000, guid: 1841aa09ba4bb5d47a1b503c1ff5ec48, type: 3}
+  idleSprite: {fileID: 21300000, guid: 38243ca7872576a4d82a1e852cd38ecb, type: 3}
+  userInterfaceSprite: {fileID: 21300000, guid: cad678de96c422f44a428206fa355b47, type: 3}
+  shockwavePrefab: {fileID: 8483999471685610074, guid: ae581d766f2a540408a72e7bf476647e, type: 3}
+  userInterface: {fileID: 0}
+  spriteRenderer: {fileID: 2049476358321393400}
+  reloadStartTime: 0
+  reloadInProgress: 0
   currentAmmoCount: 0
   roundsLeftInClip: 0
   lastRoundFiredTime: 0
   triggerHeld: 0
   roundsFiredWhileTriggerHeld: 0
-  spriteRenderer: {fileID: 2049476358321393400}
-  fireSprite: {fileID: 21300000, guid: 1841aa09ba4bb5d47a1b503c1ff5ec48, type: 3}
-  idleSprite: {fileID: 21300000, guid: 38243ca7872576a4d82a1e852cd38ecb, type: 3}
-  userInterfaceSprite: {fileID: 21300000, guid: cad678de96c422f44a428206fa355b47, type: 3}
-  userInterface: {fileID: 0}
-  shockwavePrefab: {fileID: 8483999471685610074, guid: ae581d766f2a540408a72e7bf476647e, type: 3}
+  bulletsPerShot: 5
 --- !u!82 &-1788064756154147702
 AudioSource:
   m_ObjectHideFlags: 0

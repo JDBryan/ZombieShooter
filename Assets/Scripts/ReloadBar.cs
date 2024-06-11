@@ -14,18 +14,20 @@ public class ReloadBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.progress = 0.5f;
+        this.progress = 0f;
         this.slider = this.transform.GetChild(0).gameObject;
         this.startPosition = -0.7f;
         this.endPosition = 0.7f;
     }
 
-    void Update(){
+    void Update()
+    {
         this.slider.transform.localPosition = new Vector3(xPosition(),this.slider.transform.localPosition.y,0f);
     }
 
-    private float xPosition(){
+    private float xPosition()
+    {
         float scale = this.endPosition - this.startPosition;
-        return ((this.progress * scale) + this.startPosition); 
+        return (this.progress * scale) + this.startPosition; 
     }
 }

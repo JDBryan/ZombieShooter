@@ -17,10 +17,12 @@ public class UserInterface : MonoBehaviour
     [SerializeField] private GameObject secondaryWeaponUI;
     [SerializeField] private GameObject healthBarMask;
     [SerializeField] private GameObject bulletUI;
+    [SerializeField] private GameObject weaponUI;
     [SerializeField] private GameObject bulletUIParent;
     [SerializeField] private GameObject hud;
     [SerializeField] private AudioClip buttonHoverSound;
     [SerializeField] private AudioClip buttonClickSound;
+    [SerializeField] private GameObject reloadBar;
 
     private Vector3 bulletUIPosition;
     public List<GameObject> bulletUIList;
@@ -50,6 +52,16 @@ public class UserInterface : MonoBehaviour
 
     public void SetWaveNumber(int waveNumber) {
         waveNumberText.SetText(waveNumber.ToString());
+    }
+
+    public void SetReloadBar(float progress)
+    {
+        reloadBar.SetActive(true);
+        reloadBar.GetComponent<ReloadBar>().progress = progress;
+        if (progress >= 1f)
+        {
+            reloadBar.SetActive(false);
+        }
     }
 
     public void SetMoneyNumber(int money){
@@ -93,10 +105,20 @@ public class UserInterface : MonoBehaviour
     public void UpdateWeaponInfo() {
         Weapon primaryWeapon = player.GetActiveWeapon();
         Weapon secondaryWeapon = player.GetSecondaryWeapon();
+
+        if (primaryWeapon == null) {
+            this.weaponUI.SetActive(false);
+            return;
+        } 
+        else 
+        {
+            this.weaponUI.SetActive(true);
+        }
         
         // Update active and non active weapon UI sprites
-        this.activeWeaponUI.GetComponent<SpriteRenderer>().sprite = primaryWeapon.userInterfaceSprite;
-        this.secondaryWeaponUI.GetComponent<SpriteRenderer>().sprite = secondaryWeapon.userInterfaceSprite;
+        this.activeWeaponUI.GetComponent<SpriteRenderer>().sprite = primaryWeapon == null ? null : primaryWeapon.userInterfaceSprite;
+        this.secondaryWeaponUI.GetComponent<SpriteRenderer>().sprite = secondaryWeapon == null ? null : secondaryWeapon.userInterfaceSprite;
+
 
         // Update clip graphic
         int bulletsInClip = primaryWeapon.roundsLeftInClip;
@@ -108,7 +130,7 @@ public class UserInterface : MonoBehaviour
         }
 
         // Update total ammo text
-        string ammoText = primaryWeapon.hasInfiniteAmmo ? "inf" : (primaryWeapon.currentAmmoCount - primaryWeapon.roundsLeftInClip).ToString();
+        string ammoText = primaryWeapon.hasInfiniteAmmo ? "inf" : primaryWeapon.currentAmmoCount.ToString();
         weaponInfoText.SetText(ammoText);
     }
 
