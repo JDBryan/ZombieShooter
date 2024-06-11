@@ -120,6 +120,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6047717853908543298, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: ammoCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047717853908543298, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
+      propertyPath: baseCost
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6047717853908543298, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
