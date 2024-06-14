@@ -312,7 +312,7 @@ public class Player : MonoBehaviour
 
     public void Interact(){
         if (this.selectedInteractable != null){
-            this.selectedInteractable.Interact();
+            this.selectedInteractable.Interact(this);
         }
     }
 

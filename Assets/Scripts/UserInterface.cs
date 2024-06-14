@@ -9,28 +9,24 @@ public class UserInterface : MonoBehaviour
     [SerializeField] private TMP_Text weaponInfoText;
     [SerializeField] private TMP_Text waveNumberText;
     [SerializeField] private TMP_Text moneyText;
-    [SerializeField] private TMP_Text healthBar;
+    [SerializeField] private GameObject healthBar;
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject startMenu;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject activeWeaponUI;
     [SerializeField] private GameObject secondaryWeaponUI;
-    [SerializeField] private GameObject healthBarMask;
-    [SerializeField] private GameObject bulletUI;
-    [SerializeField] private GameObject weaponUI;
-    [SerializeField] private GameObject bulletUIParent;
     [SerializeField] private GameObject hud;
     [SerializeField] private AudioClip buttonHoverSound;
     [SerializeField] private AudioClip buttonClickSound;
     [SerializeField] private GameObject reloadBar;
+    [SerializeField] private GameObject clips;
+    [SerializeField] private GameObject weaponUI;
 
-    private Vector3 bulletUIPosition;
-    public List<GameObject> bulletUIList;
+    private Vector3 gunHUDPosition;
 
     void Start() {
-        this.bulletUIPosition = this.bulletUIParent.transform.position;
-        bulletUIList = MakeUIBullets();
         this.UpdateWeaponInfo();
+        this.DisableHud();
     }
 
     public void Reset()
@@ -80,26 +76,9 @@ public class UserInterface : MonoBehaviour
         int health = this.player.currentHealth;
         if (health >= 0){
             float healthPercent = (float)health / (float)100;
-            float newHealthPosition = healthPercent * 7.76f;
-            healthBarMask.transform.SetLocalPositionAndRotation(new Vector3(newHealthPosition, 0f, 0f), healthBarMask.transform.rotation);
+            Material material = healthBar.GetComponent<SpriteRenderer>().material;
+            material.SetFloat("_Progress", healthPercent);
         }
-    }
-
-    private List<GameObject> MakeUIBullets(){
-        float pixelSize = 1f / 16f;
-        List<GameObject> bulletList = new List<GameObject>();
-        for (int index = 0; index < 30; index++){
-            float xDistance = (index % 15) * pixelSize * 3f;
-            float yDistance = pixelSize * 3f;
-            Vector3 bulletPosition = bulletUIPosition + new Vector3(xDistance, 0f, 0f);
-            if (index >= 15){
-                bulletPosition.y = bulletUIPosition.y - yDistance;
-            }
-            GameObject newBullet = Instantiate(bulletUI, bulletPosition, this.transform.rotation);
-            newBullet.transform.parent = bulletUIParent.transform;
-            bulletList.Add(newBullet);         
-        }
-        return bulletList;
     }
 
     public void UpdateWeaponInfo() {
@@ -121,12 +100,15 @@ public class UserInterface : MonoBehaviour
 
 
         // Update clip graphic
-        int bulletsInClip = primaryWeapon.roundsLeftInClip;
-        for (int i = 0; i < bulletsInClip; i++) {
-            bulletUIList[i].SetActive(true);
-        }
-        for (int i = bulletsInClip; i < 30; i++) {
-            bulletUIList[i].SetActive(false);
+        for (int clip = 0; clip < clips.transform.childCount; clip++){
+            Transform child = clips.transform.GetChild(clip);
+            if (child.gameObject.GetComponent<Clip>().weapon.name == primaryWeapon.name){
+                child.gameObject.SetActive(true);
+                child.gameObject.GetComponent<Clip>().UpdateClipInfo(primaryWeapon);
+            }
+            else{
+                child.gameObject.SetActive(false);
+            }
         }
 
         // Update total ammo text

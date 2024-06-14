@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1714103761333331526, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 3.0625
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714103761333331526, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 1.875
+      objectReference: {fileID: 0}
     - target: {fileID: 2065037395451321642, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32.04
@@ -56,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 2070203149, guid: e4595d86d7ec03540985d99d589f8253, type: 3}
+    - target: {fileID: 4520644716615641681, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6047717853908543298, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: prefabWeapon
       value: 
@@ -65,9 +77,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9100000, guid: 438657c3df310eb47bc281c02911c0ee, type: 2}
     - target: {fileID: 7995433918553548466, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
+      propertyPath: m_Size.x
+      value: 3.0625
+      objectReference: {fileID: 0}
+    - target: {fileID: 7995433918553548466, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
+      propertyPath: m_Size.y
+      value: 1.875
+      objectReference: {fileID: 0}
+    - target: {fileID: 7995433918553548466, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1314434653, guid: e4595d86d7ec03540985d99d589f8253, type: 3}
+      objectReference: {fileID: 18009328, guid: e4595d86d7ec03540985d99d589f8253, type: 3}
+    - target: {fileID: 7995433918553548466, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4632561787118154743, guid: ff734d16b3e14d94f9e5e6285c216c13, type: 3}

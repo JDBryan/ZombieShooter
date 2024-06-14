@@ -156,7 +156,7 @@ MonoBehaviour:
   bulletSpread: 6
   fireSprite: {fileID: 21300000, guid: b84836d2f5f136f4cbfab9cf4e53d77e, type: 3}
   idleSprite: {fileID: 21300000, guid: be7993a9ebf0cbe439c5e2709c941e73, type: 3}
-  userInterfaceSprite: {fileID: 21300000, guid: ce5cc658dbf9bfe40a35fb8ed5899613, type: 3}
+  userInterfaceSprite: {fileID: 21300000, guid: 6adf33e145bd21e48bb0da7efcf2da6c, type: 3}
   shockwavePrefab: {fileID: 0}
   userInterface: {fileID: 0}
   spriteRenderer: {fileID: 0}

@@ -12,7 +12,7 @@ public class Shotgun : Weapon
         Transform player = this.transform.parent;
         this.ChangeSpriteToFire();
         GetComponent<AudioSource>().PlayOneShot(fireSound);
-        Instantiate(shockwavePrefab, this.transform.position, Quaternion.identity, player);
+        //Instantiate(shockwavePrefab, this.transform.position, Quaternion.identity, player);
         for (int i = 0; i < this.bulletsPerShot; i++)
         {
             GameObject bullet = Instantiate(bulletPrefab, player.position, player.rotation);

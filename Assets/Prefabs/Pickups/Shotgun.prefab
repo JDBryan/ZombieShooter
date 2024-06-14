@@ -157,7 +157,7 @@ MonoBehaviour:
   fireSprite: {fileID: 21300000, guid: 1841aa09ba4bb5d47a1b503c1ff5ec48, type: 3}
   idleSprite: {fileID: 21300000, guid: 38243ca7872576a4d82a1e852cd38ecb, type: 3}
   userInterfaceSprite: {fileID: 21300000, guid: cad678de96c422f44a428206fa355b47, type: 3}
-  shockwavePrefab: {fileID: 8483999471685610074, guid: ae581d766f2a540408a72e7bf476647e, type: 3}
+  shockwavePrefab: {fileID: 0}
   userInterface: {fileID: 0}
   spriteRenderer: {fileID: 2049476358321393400}
   reloadStartTime: 0
