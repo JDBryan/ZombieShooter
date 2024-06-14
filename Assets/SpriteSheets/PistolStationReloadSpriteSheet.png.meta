@@ -1,0 +1,1174 @@
+fileFormatVersion: 2
+guid: ef751cf5cbb66954ea424e94fee3124e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 180
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 128339c61a3d87345a8134aa6880ada2
+      internalID: 318036835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 180
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 487b7e0c27768de44a3a5923e272b25f
+      internalID: 777576588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 180
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8641084e3b0376c43b5f1c41cd286896
+      internalID: -1646140736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 180
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cf351b070f27f74abb2f1e639c7132c
+      internalID: 636166038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 180
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a00d971e56eba74ca3d2f7ca12ab7aa
+      internalID: 570779980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 180
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d128b77be29466a4c98c49633c80072f
+      internalID: -2134016056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 180
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ec929b3fd2313d459ed092db259cee0
+      internalID: -1048837722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 150
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c770aec4167c4745a45b3419227d737
+      internalID: -1466505660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 150
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18a9ccae10ef371419787e76ce9ec4b1
+      internalID: 53553349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 150
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c9ff905b10ec0d43b429cac61fecd4e
+      internalID: -1190670906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 150
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a6a1ded59fabd94d98de495ceb13e3d
+      internalID: 368493293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 150
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a36635bc36fd1b4ca39ddb2562078a5
+      internalID: 2384640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_12
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 150
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be0e58f6d5677544991d64db8d668e94
+      internalID: -258550353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_13
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 150
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 151e15d85a970e74e86d2efe5056b8cc
+      internalID: -648543909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c2e8787e9518d546bb7355ff51cd265
+      internalID: 206136658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 120
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 870bf38bcc350d847b3dfa9d422de95c
+      internalID: 330402419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_16
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 120
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c9e724c126850f43b3835bf98578f45
+      internalID: 443891984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 120
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca5211b0a5741de4fafc9dae41d9a0f8
+      internalID: 1982118297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_18
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 120
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ed761302b161be4493ffcd608274f18
+      internalID: -1705426067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_19
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 120
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad038a5ee2bc7ba4585211134cbc71c7
+      internalID: 1858573489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_20
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 120
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06ad7a093fdee694c94e274703e35998
+      internalID: -568563105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 90
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ebf786a4a82b3644b67535d1c8cddc9
+      internalID: 791112501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_22
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 90
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e19eed47962134c4290ca57698753acd
+      internalID: -181315212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_23
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 90
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d801a1b128ae5844093da5523e256e71
+      internalID: 404925520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_24
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 90
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c70825e91b206f4dac343e7157b0205
+      internalID: -1889591277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_25
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 90
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83599ba94b65244479289fa1de4ef2c5
+      internalID: -1244348798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_26
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 90
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 522aee45bf58d12408f52bb9b92cbdc7
+      internalID: 1997296817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_27
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 90
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 594e2dfbcca6f8647b999001ddd2d728
+      internalID: -1913841045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 60
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d9c0de5967d77b429b70334e1aa343e
+      internalID: -769487736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_29
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 60
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c1b5f1259d1d3a4ca425f1d06b945f6
+      internalID: 1461355058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_30
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 60
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65325d89b9041f843a2f40198c2d4a70
+      internalID: 435205490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_31
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 60
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86fddf570f673ec47a87a15c95d20d15
+      internalID: 1491215146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_32
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 60
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74dadb59b6f97ea47910889dbcd93d0e
+      internalID: 1404370352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_33
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 60
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f285c9e8f9af5446943629ca40f6709
+      internalID: -1863445811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_34
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 60
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01eaca170e6d9194885c41f0b6e7af6f
+      internalID: -859519501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 30
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45282f2c1cbe3ff40b5825f4de9b56a6
+      internalID: 557684816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_36
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 30
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf8dd8b62db2bb74bbf9b0b484b971cb
+      internalID: 2086970833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_37
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 30
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f90423acab30acc4dbef6534717f49f4
+      internalID: -1793555681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_38
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 30
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53b44f7ef095aa44a8b1db6406983fe3
+      internalID: 731879644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_39
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 30
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fc6813675a6aaf4baae4b715da9d9e7
+      internalID: 1297237247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_40
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 30
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f953432474a46c04ebf1bbb4e8a7e24a
+      internalID: 1758185916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_41
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 30
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fa03f2ef7741aa41b4feaca104b17a3
+      internalID: -407105011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd1109d12c1a5f44aa460e8e51cee877
+      internalID: 1419284612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_43
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 0
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65e1d116f52914c40a412a7cc09e3c21
+      internalID: 832341701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_44
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 0
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a4c7103e17dd5d4286b85ce7f68191d
+      internalID: -1311472997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_45
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 0
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecdcf9b438078414a967e1d2718a20b9
+      internalID: 1036865272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PistolStationReloadSpriteSheet_46
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 0
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0e9436dac7dce94985fc216a6a295c4
+      internalID: 1079880939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PistolStationReloadSpriteSheet_0: 318036835
+      PistolStationReloadSpriteSheet_1: 777576588
+      PistolStationReloadSpriteSheet_10: 368493293
+      PistolStationReloadSpriteSheet_11: 2384640
+      PistolStationReloadSpriteSheet_12: -258550353
+      PistolStationReloadSpriteSheet_13: -648543909
+      PistolStationReloadSpriteSheet_14: 206136658
+      PistolStationReloadSpriteSheet_15: 330402419
+      PistolStationReloadSpriteSheet_16: 443891984
+      PistolStationReloadSpriteSheet_17: 1982118297
+      PistolStationReloadSpriteSheet_18: -1705426067
+      PistolStationReloadSpriteSheet_19: 1858573489
+      PistolStationReloadSpriteSheet_2: -1646140736
+      PistolStationReloadSpriteSheet_20: -568563105
+      PistolStationReloadSpriteSheet_21: 791112501
+      PistolStationReloadSpriteSheet_22: -181315212
+      PistolStationReloadSpriteSheet_23: 404925520
+      PistolStationReloadSpriteSheet_24: -1889591277
+      PistolStationReloadSpriteSheet_25: -1244348798
+      PistolStationReloadSpriteSheet_26: 1997296817
+      PistolStationReloadSpriteSheet_27: -1913841045
+      PistolStationReloadSpriteSheet_28: -769487736
+      PistolStationReloadSpriteSheet_29: 1461355058
+      PistolStationReloadSpriteSheet_3: 636166038
+      PistolStationReloadSpriteSheet_30: 435205490
+      PistolStationReloadSpriteSheet_31: 1491215146
+      PistolStationReloadSpriteSheet_32: 1404370352
+      PistolStationReloadSpriteSheet_33: -1863445811
+      PistolStationReloadSpriteSheet_34: -859519501
+      PistolStationReloadSpriteSheet_35: 557684816
+      PistolStationReloadSpriteSheet_36: 2086970833
+      PistolStationReloadSpriteSheet_37: -1793555681
+      PistolStationReloadSpriteSheet_38: 731879644
+      PistolStationReloadSpriteSheet_39: 1297237247
+      PistolStationReloadSpriteSheet_4: 570779980
+      PistolStationReloadSpriteSheet_40: 1758185916
+      PistolStationReloadSpriteSheet_41: -407105011
+      PistolStationReloadSpriteSheet_42: 1419284612
+      PistolStationReloadSpriteSheet_43: 832341701
+      PistolStationReloadSpriteSheet_44: -1311472997
+      PistolStationReloadSpriteSheet_45: 1036865272
+      PistolStationReloadSpriteSheet_46: 1079880939
+      PistolStationReloadSpriteSheet_5: -2134016056
+      PistolStationReloadSpriteSheet_6: -1048837722
+      PistolStationReloadSpriteSheet_7: -1466505660
+      PistolStationReloadSpriteSheet_8: 53553349
+      PistolStationReloadSpriteSheet_9: -1190670906
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

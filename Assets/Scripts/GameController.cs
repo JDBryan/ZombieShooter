@@ -62,12 +62,12 @@ public class GameController : MonoBehaviour
     }
 
     public void StartGame() {
+        this.userInterface.EnableHud();
         this.userInterface.Reset();
         this.gameState = GameState.Active;
         this.userInterface.SetStartMenuActive(false);
         this.player.EnableUserInput();
         this.lastWaveEndedTime = Time.time;
-        this.userInterface.EnableHud();
     }
 
     public void EndGame() {
@@ -83,6 +83,7 @@ public class GameController : MonoBehaviour
         this.waveKillCount = 0;
         this.waveInProgress = false;
         this.spawnController.KillAllEnemies();
+        this.spawnController.ClearSpawnQueues();
         this.gameState = GameState.StartMenu;
         this.userInterface.SetGameOverScreenActive(false);
         this.userInterface.SetStartMenuActive(true);
@@ -91,7 +92,7 @@ public class GameController : MonoBehaviour
         this.player = Instantiate(this.playerPrefab);
         this.playerCamera.GetNewTransform(); 
         foreach (WeaponStation station in GameObject.FindObjectsByType<WeaponStation>(FindObjectsSortMode.None)){
-            station.ResetStation(this.player);
+            station.ResetStation();
         } 
         this.ResetAreaDoors();
         this.gameObject.GetComponent<Pathfinder>().Reset();

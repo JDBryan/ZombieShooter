@@ -147,7 +147,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3166729573595171950, guid: c987ab3b6003efc41937057abe5d71ee, type: 3}
   isAutomatic: 0
   fireRate: 0.1
-  clipSize: 12
+  clipSize: 10
   hasInfiniteAmmo: 0
   initialAmmoCount: 60
   fireSound: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}

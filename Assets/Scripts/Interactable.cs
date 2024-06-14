@@ -27,7 +27,6 @@ public class Interactable : MonoBehaviour
             this.myRenderers.Add(GetComponent<SpriteRenderer>());
         }
         this.selected = false;
-        this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         this.failed = false;
         this.waitTime = 0f;
@@ -65,5 +64,5 @@ public class Interactable : MonoBehaviour
         this.failed = true;
     }
 
-    public virtual void Interact(){}
+    public virtual void Interact(Player player){}
 }

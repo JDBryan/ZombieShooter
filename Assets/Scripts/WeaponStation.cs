@@ -44,24 +44,23 @@ public class WeaponStation : Interactable
         }
     }
 
-    public void ResetStation(Player newPlayer){
-        this.player = newPlayer;
+    public void ResetStation(){
         this.RestockEnded();
         this.RestockWeapon();
     }
 
-    public override void Interact(){
-        if (this.player.money >= this.cost){
+    public override void Interact(Player player){
+        if (player.money >= this.cost){
             if (this.weaponOnSale){
-                this.player.ChangePlayerMoney(-this.cost);
+                player.ChangePlayerMoney(-this.cost);
                 player.PickupWeapon(this.weapon);
                 this.weaponOnSale = false;
                 this.restockInProgress = true;
                 animator.SetBool("Reload", true);
                 this.cost = ammoCost;
             }
-            else if (!this.weaponOnSale & !this.restockInProgress & this.player.GetActiveWeapon().gameObject.name == this.prefabWeapon.name){
-                this.player.ChangePlayerMoney(-this.cost);
+            else if (!this.weaponOnSale & !this.restockInProgress & player.GetActiveWeapon().gameObject.name == this.prefabWeapon.name){
+                player.ChangePlayerMoney(-this.cost);
                 player.RefillAmmoFromStation(this.weapon);
                 this.restockInProgress = true;
                 animator.SetBool("Reload", true);

@@ -80,4 +80,10 @@ public class Spawner : MonoBehaviour
     {
         this.bigEnemySpawnQueue += spawnAmount;
     }
+
+    public void ClearSpawnQueues() 
+    {
+        this.smallEnemySpawnQueue = 0;
+        this.bigEnemySpawnQueue = 0;
+    }
 }

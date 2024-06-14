@@ -11,7 +11,7 @@ public class AreaDoor : Interactable
     // Start is called before the first frame update
     void Start()
     {
-        base.Init();
+        this.Init();
         this.myRenderers.Add(this.transform.GetChild(0).GetComponent<SpriteRenderer>());
         this.myRenderers.Add(this.transform.GetChild(1).GetComponent<SpriteRenderer>());
         this.open = false;
@@ -29,10 +29,10 @@ public class AreaDoor : Interactable
         this.open = true;
     }
 
-    public override void Interact(){
+    public override void Interact(Player player){
         if (this.open == false){
-            if (this.player.money >= this.baseCost){
-                this.player.ChangePlayerMoney(-this.baseCost);
+            if (player.money >= this.baseCost){
+                player.ChangePlayerMoney(-this.baseCost);
                 this.Open();
             }
             else {
