@@ -123,6 +123,21 @@ public class Player : MonoBehaviour
 		transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle+90));
     }
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        //Check if collision object is a health pack
+        if (collider.gameObject.tag == "Health")
+        {   
+            this.currentHealth += collider.gameObject.GetComponent<HealthPack>().healthAmount;
+            if (this.currentHealth > this.maxHealth){
+                this.currentHealth = this.maxHealth;
+            }
+            this.gameController.UpdatePlayerHealth(this.currentHealth);
+            Debug.Log(this.currentHealth);
+            Destroy(collider.gameObject);
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         //Check if collision object is a pickup
@@ -146,18 +161,6 @@ public class Player : MonoBehaviour
                 RefillWeaponAmmo(weapon);
             }
             userInterface.UpdateWeaponInfo();
-            Destroy(collision.gameObject);
-        }
-
-        //Check if collision object is a health pack
-        if (collision.gameObject.tag == "Health")
-        {   
-            this.currentHealth += collision.gameObject.GetComponent<SetHealthPack>().healthAmount;
-            if (this.currentHealth > this.maxHealth){
-                this.currentHealth = this.maxHealth;
-            }
-            this.gameController.UpdatePlayerHealth(this.currentHealth);
-            Debug.Log(this.currentHealth);
             Destroy(collision.gameObject);
         }
 
