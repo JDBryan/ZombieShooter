@@ -202,6 +202,18 @@ public class Player : MonoBehaviour
         this.GetComponent<PlayerUserInput>().enabled = false;
     }
 
+    public void EndGame(){
+        gameController.EndGame();
+    }
+
+    public void ActivateDeathCircle(){
+        Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        this.UpdateRotation(mousePosition);
+        Transform circle = this.transform.GetChild(1);
+        circle.gameObject.SetActive(true);
+        circle.localRotation = Quaternion.Euler(0f, 0f, -this.transform.eulerAngles.z);
+    }
+
     public void PickupWeapon(GameObject weapon)
     {
         if (this.GetHeldWeapons().Count >= this.inventorySize) {

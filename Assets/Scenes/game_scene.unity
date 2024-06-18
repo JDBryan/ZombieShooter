@@ -806,8 +806,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.08164996, y: -0.60485, z: 0}
-    m_Extent: {x: 1.9832499, y: 1.6349499, z: 0}
+    m_Center: {x: -0.0747, y: -0.6042, z: 0}
+    m_Extent: {x: 1.9787999, y: 1.6312, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1484,6 +1484,7 @@ GameObject:
   - component: {fileID: 293484548}
   - component: {fileID: 293484551}
   - component: {fileID: 293484552}
+  - component: {fileID: 293484553}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1580,6 +1581,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 527493354}
+  gameController: {fileID: 514899037}
+  isMoving: 0
+  target: {x: 0, y: 0, z: 0}
 --- !u!114 &293484552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1624,6 +1628,27 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!95 &293484553
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293484547}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 40a0384af0e7c944d9e7d05bcb9df643, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &301351377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2164,8 +2189,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.17849994, y: -0.07459998, z: 0}
-    m_Extent: {x: 2.1882, y: 2.1912, z: 0}
+    m_Center: {x: -0.18879998, y: -0.063899994, z: 0}
+    m_Extent: {x: 2.1901002, y: 2.1903, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2652,34 +2677,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -7960225832099072131, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: pistol
-      value: 
-      objectReference: {fileID: -6174521936289684252, guid: 3ff905448549311419ed7967c6305f87, type: 3}
-    - target: {fileID: -7960225832099072131, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -7960225832099072131, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: UserInterface
-      value: 
-      objectReference: {fileID: 8518180655679291186}
-    - target: {fileID: -7960225832099072131, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: gameController
-      value: 
-      objectReference: {fileID: 514899037}
-    - target: {fileID: -7960225832099072131, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: playerUserInput
-      value: 
-      objectReference: {fileID: 527493360}
-    - target: {fileID: 2994765142340533550, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994765142340533550, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 3976891506391244170, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1
@@ -2720,45 +2717,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4074988203105084791, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: clipSize
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4074988203105084791, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: clipCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4074988203105084791, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: gunUISprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ce5cc658dbf9bfe40a35fb8ed5899613, type: 3}
-    - target: {fileID: 5954684194975434499, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 527493355}
     - target: {fileID: 7677924341975350108, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8451752539662794209, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: m_Color.g
-      value: 0.8931044
-      objectReference: {fileID: 0}
-    - target: {fileID: 8451752539662794209, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: m_Color.r
-      value: 0.6462264
-      objectReference: {fileID: 0}
-    - target: {fileID: 8451752539662794209, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8451752539662794209, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 1.4028143
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6363302180253955593, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
@@ -2776,17 +2740,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcd3a722739cd0b418c1b0838b59d96f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &527493360 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5954684194975434499, guid: 2edf8bd19f1382c46a7390cfbe97bae3, type: 3}
-  m_PrefabInstance: {fileID: 527493353}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3917d52263ffa8b4bb2d9a19196e39db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &536932001
