@@ -87,6 +87,7 @@ public class GameController : MonoBehaviour
         this.userInterface.SetGameOverScreenActive(false);
         this.userInterface.SetStartMenuActive(true);
         this.DestroyBloodSplats();
+        this.DestroyHealthPacks();
         Destroy(this.player.gameObject);
         this.player = Instantiate(this.playerPrefab);
         this.playerCamera.GetNewTransform(); 
@@ -162,6 +163,12 @@ public class GameController : MonoBehaviour
     private void DestroyBloodSplats(){
         foreach (Transform splat in this.bloodParent.transform){
             Destroy(splat.gameObject);
+        }
+    }
+
+    private void DestroyHealthPacks(){
+        foreach (HealthPack pack in GameObject.FindObjectsByType<HealthPack>(FindObjectsSortMode.None)){
+            Destroy(pack.gameObject);
         }
     }
 
