@@ -10,7 +10,7 @@ public class AutomaticRifle : Weapon
         Transform player = this.transform.parent;
         this.ChangeSpriteToFire();
         GetComponent<AudioSource>().PlayOneShot(fireSound);
-        GameObject bullet = Instantiate(bulletPrefab, player.position, player.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, player.position + Vector3.Normalize(player.transform.rotation * new Vector3(0f,1f,0f))*1.5f, player.rotation);
         bullet.transform.eulerAngles = new Vector3(
                 bullet.transform.eulerAngles.x,
                 bullet.transform.eulerAngles.y,
