@@ -15,7 +15,7 @@ public class Shotgun : Weapon
         //Instantiate(shockwavePrefab, this.transform.position, Quaternion.identity, player);
         for (int i = 0; i < this.bulletsPerShot; i++)
         {
-            GameObject bullet = Instantiate(bulletPrefab, player.position, player.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, player.position + Vector3.Normalize(player.transform.rotation * new Vector3(0f,1f,0f))*1.5f, player.rotation);
             bullet.transform.eulerAngles = new Vector3(
                 bullet.transform.eulerAngles.x,
                 bullet.transform.eulerAngles.y,
