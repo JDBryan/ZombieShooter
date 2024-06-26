@@ -133,7 +133,6 @@ public class Player : MonoBehaviour
                 this.currentHealth = this.maxHealth;
             }
             this.gameController.UpdatePlayerHealth(this.currentHealth);
-            Debug.Log(this.currentHealth);
             Destroy(collider.gameObject);
         }
     }

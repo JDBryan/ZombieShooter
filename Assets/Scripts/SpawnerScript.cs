@@ -18,9 +18,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         this.AllEnemies = new GameObject();
-        foreach(Transform spawnArea in transform) {
-            spawnAreas.Add(spawnArea);
-        }
+        AddSpawnAreas("cockpit");
         lastSpawnTime = Time.time;
     }
 
@@ -31,6 +29,14 @@ public class Spawner : MonoBehaviour
         if (smallEnemySpawnQueue + bigEnemySpawnQueue > 0 && Time.time - lastSpawnTime >= spawnInterval) {
             this.SpawnEnemy();
             lastSpawnTime = Time.time;
+        }
+    }
+
+    public void AddSpawnAreas(string room){
+        Debug.Log("working");
+        foreach(GameObject spawnArea in GameObject.FindGameObjectsWithTag(room)) {
+            spawnAreas.Add(spawnArea.transform);
+            Debug.Log(room);
         }
     }
 

@@ -7,6 +7,8 @@ public class AreaDoor : Interactable
     [SerializeField] private Animator leftAnimator;
     [SerializeField] private Animator rightAnimator;
     public bool open;
+    private GameController gameController;
+    public List<string> connectedRooms;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +17,7 @@ public class AreaDoor : Interactable
         this.myRenderers.Add(this.transform.GetChild(0).GetComponent<SpriteRenderer>());
         this.myRenderers.Add(this.transform.GetChild(1).GetComponent<SpriteRenderer>());
         this.open = false;
+        this.gameController = FindObjectOfType<GameController>();
     }
 
     private void Close(){
@@ -34,6 +37,7 @@ public class AreaDoor : Interactable
             if (player.money >= this.baseCost){
                 player.ChangePlayerMoney(-this.baseCost);
                 this.Open();
+                this.gameController.UpdateRooms(connectedRooms);
             }
             else {
                 this.TriggerFailedInteract();

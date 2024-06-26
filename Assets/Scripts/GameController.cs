@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private AudioClip deathNoise;
     public GameObject bloodParent;
-    [SerializeField] private GameObject doorPrefab;
+    [SerializeField] private GameObject doorsPrefab;
     [HideInInspector] public GameState gameState;
     private int waveNumber;
     private bool waveInProgress;
@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
     private int waveKillCount;
     private float lastWaveEndedTime;
     private int waveIntervalTime;
+    public Dictionary<string, bool> roomsDict;
 
     void Start()
     {
@@ -42,6 +43,13 @@ public class GameController : MonoBehaviour
         this.bigEnemyIncrementalSpawnAmount = 0.5f;
         this.waveIntervalTime = 5;
         this.spawnController.SetSpawnInterval(2);
+        this.roomsDict = new Dictionary<string, bool>(){
+            {"cockpit", true},
+            {"weaponsBay", false},
+            {"main", false},
+            {"medBay", false},
+            {"engineRoom", false}
+        };
     }
 
     void Update()
@@ -129,7 +137,6 @@ public class GameController : MonoBehaviour
     }
 
     private void StartWave() {
-        Debug.Log("Starting wave");
         this.waveInProgress = true;
         this.waveKillCount = 0;
         this.waveNumber += 1;
@@ -174,6 +181,15 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void UpdateRooms(List<string> rooms){
+        foreach (string room in rooms){
+            if (!roomsDict[room]){
+                roomsDict[room] = true;
+                spawnController.AddSpawnAreas(room);
+            }
+        }
+    }
+
     private void DestroyBloodSplats(){
         foreach (Transform splat in this.bloodParent.transform){
             Destroy(splat.gameObject);
@@ -187,14 +203,9 @@ public class GameController : MonoBehaviour
     }
 
     private void ResetAreaDoors(){
-        Transform doorParent = GameObject.Find("AreaDoors").transform;
-        List<Transform> locations = new List<Transform>();
-        foreach (AreaDoor door in GameObject.FindObjectsByType<AreaDoor>(FindObjectsSortMode.None)){
-            locations.Add(door.transform);
-            Destroy(door.gameObject);
-        }
-        foreach (Transform newTransform in locations){
-            Instantiate(doorPrefab, newTransform.position, newTransform.rotation, doorParent);
-        }
+        Transform doors = GameObject.Find("AreaDoors").transform;
+        Destroy(doors.gameObject);
+        GameObject newDoors = Instantiate(doorsPrefab);
+        newDoors.name = doorsPrefab.name;
     }
 }
