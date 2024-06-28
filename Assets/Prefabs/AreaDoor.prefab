@@ -454,6 +454,7 @@ MonoBehaviour:
   myRenderers: []
   selected: 0
   baseCost: 1
+  promptPrefab: {fileID: 241591102894992615, guid: d3f45232ad61abd4aada7b7e74fda34c, type: 3}
   player: {fileID: 0}
   leftAnimator: {fileID: 2922530470862107126}
   rightAnimator: {fileID: 1992969972101460640}
