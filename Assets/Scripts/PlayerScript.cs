@@ -194,12 +194,26 @@ public class Player : MonoBehaviour
 
     private void Kill() {
         GetComponent<AudioSource>().PlayOneShot(deathNoise);
+        //Starts Player Death Animation
         this.animator.SetBool("Dead", true);
         if (this.GetActiveWeapon() != null){
             this.GetActiveWeapon().GetComponent<SpriteRenderer>().enabled = false;
         }
         this.GetComponent<Rigidbody2D>().simulated = false;
         this.GetComponent<PlayerUserInput>().enabled = false;
+    }
+
+    public void EndGame(){ 
+        //Gets Triggered by and event at the end of the Player Death Animation
+        gameController.EndGame();
+    }
+
+    public void ActivateDeathCircle(){
+        Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        this.UpdateRotation(mousePosition);
+        Transform circle = this.transform.GetChild(1);
+        circle.gameObject.SetActive(true);
+        circle.localRotation = Quaternion.Euler(0f, 0f, -this.transform.eulerAngles.z);
     }
 
     public void PickupWeapon(GameObject weapon)
