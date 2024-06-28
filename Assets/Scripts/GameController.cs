@@ -92,7 +92,8 @@ public class GameController : MonoBehaviour
         Destroy(this.player.gameObject);
         this.player = Instantiate(this.playerPrefab);
         this.playerCamera.GetNewTransform(); 
-        foreach (WeaponStation station in GameObject.FindObjectsByType<WeaponStation>(FindObjectsSortMode.None)){
+        foreach (WeaponStation station in GameObject.FindObjectsByType<WeaponStation>(FindObjectsInactive.Include, FindObjectsSortMode.None)){
+            station.enabled = true;
             station.ResetStation();
         } 
         this.ResetAreaDoors();
@@ -176,7 +177,7 @@ public class GameController : MonoBehaviour
     private void ResetAreaDoors(){
         Transform doorParent = GameObject.Find("AreaDoors").transform;
         List<Transform> locations = new List<Transform>();
-        foreach (AreaDoor door in GameObject.FindObjectsByType<AreaDoor>(FindObjectsSortMode.None)){
+        foreach (AreaDoor door in GameObject.FindObjectsByType<AreaDoor>(FindObjectsInactive.Include, FindObjectsSortMode.None)){
             locations.Add(door.transform);
             Destroy(door.gameObject);
         }

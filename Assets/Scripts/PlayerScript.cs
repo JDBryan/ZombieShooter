@@ -193,6 +193,10 @@ public class Player : MonoBehaviour
     }
 
     private void Kill() {
+        if (this.selectedInteractable != null){
+            this.selectedInteractable.DisplayPrompt(false);
+            this.selectedInteractable.gameObject.GetComponent<Interactable>().enabled = false;
+        }
         GetComponent<AudioSource>().PlayOneShot(deathNoise);
         this.animator.SetBool("Dead", true);
         if (this.GetActiveWeapon() != null){
@@ -290,7 +294,7 @@ public class Player : MonoBehaviour
     }
 
     public void FindClosestInteractable(){
-        Interactable[] interactables = FindObjectsByType<Interactable>(FindObjectsSortMode.None);
+        Interactable[] interactables = FindObjectsByType<Interactable>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         if (interactables != null & interactables.Length != 0){
             Interactable closestItem = interactables[0];
             float smallestDistance = Mathf.Infinity;

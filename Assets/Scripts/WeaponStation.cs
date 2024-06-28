@@ -35,12 +35,13 @@ public class WeaponStation : Interactable
     }
 
     public void RestockWeapon(){
-        if (this.transform.childCount == 1){
+        if (this.transform.childCount == 2){
             this.ammoSprite.SetActive(false);
             this.weapon = Instantiate(prefabWeapon, this.transform);
             this.weapon.name = prefabWeapon.name;
             this.weaponOnSale = true;
             this.cost = baseCost;
+            this.SetPromptText(this.cost);
         }
     }
 
@@ -58,6 +59,7 @@ public class WeaponStation : Interactable
                 this.restockInProgress = true;
                 animator.SetBool("Reload", true);
                 this.cost = ammoCost;
+                this.SetPromptText(this.cost);
             }
             else if (!this.weaponOnSale & !this.restockInProgress & player.GetActiveWeapon().gameObject.name == this.prefabWeapon.name){
                 player.ChangePlayerMoney(-this.cost);
