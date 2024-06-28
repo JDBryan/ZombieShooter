@@ -70,14 +70,28 @@ public class GameController : MonoBehaviour
         this.lastWaveEndedTime = Time.time;
     }
 
-    public void EndGame() {
+    public void EndGame() { //Gets triggered in Player
         this.gameState = GameState.Over;
-        this.userInterface.DisableHud();
+        this.playerCamera.DeathCameraAnimation(true);
+    }
+
+    public void SetDeathMenuActive(){ //Triggered in Player Camera
         this.userInterface.SetGameOverScreenActive(true);
+    }
+
+    public void DeathScreen() {
+        this.userInterface.DisableHud();
+        this.player.GetComponent<SpriteRenderer>().sortingOrder = 10;
+        this.player.ActivateDeathCircle();
+        //Starts Camera move
+        this.playerCamera.target = this.player.transform.position + Vector3.Normalize(this.player.transform.rotation * new Vector3(0f,1f,0f));
+        this.playerCamera.isMoving = true;
     }
 
     public void ResetGame() {
         Time.timeScale = 1;
+        this.playerCamera.DeathCameraAnimation(false);
+        this.playerCamera.isMoving = false;
         this.userInterface.SetPauseMenuActive(false);
         this.waveNumber = 0;
         this.waveKillCount = 0;
@@ -157,7 +171,7 @@ public class GameController : MonoBehaviour
     public void UpdatePlayerHealth(int health) {
         this.userInterface.UpdateHealthBar();
         if (health <= 0) {
-            this.EndGame();
+            this.DeathScreen();
         }
     }
 
