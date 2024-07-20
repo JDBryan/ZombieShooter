@@ -8,30 +8,39 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject smallEnemy;
     [SerializeField] private GameObject bigEnemy;
-    [SerializeField] private List<Transform> spawnAreas;
-    private int spawnInterval;
-    private int smallEnemySpawnQueue;
-    private int bigEnemySpawnQueue;
-    private float lastSpawnTime;
-    private GameObject AllEnemies;
+    [SerializeField] private Transform spawnAreaParent;
+    [SerializeField] private int spawnInterval;
+    [HideInInspector] private List<Transform> activeSpawnAreas;
+    [HideInInspector] private int smallEnemySpawnQueue;
+    [HideInInspector] private int bigEnemySpawnQueue;
+    [HideInInspector] private float lastSpawnTime;
+    [HideInInspector] private GameObject AllEnemies;
 
     void Start()
     {
         this.AllEnemies = new GameObject();
-        foreach(Transform spawnArea in transform) {
-            spawnAreas.Add(spawnArea);
-        }
+        activeSpawnAreas = new List<Transform>();
+        ActivateRoomSpawning("Cockpit");
         lastSpawnTime = Time.time;
     }
 
     void Update() 
     {
-        // Per spawn interval, if the spawnQueue is not empty, spawn a single enemy
-        // and decrement the spawn queue
         if (smallEnemySpawnQueue + bigEnemySpawnQueue > 0 && Time.time - lastSpawnTime >= spawnInterval) {
             this.SpawnEnemy();
             lastSpawnTime = Time.time;
         }
+    }
+
+    public void ActivateRoomSpawning(string roomName){
+        foreach(Transform spawnArea in spawnAreaParent.Find(roomName)) {
+            activeSpawnAreas.Add(spawnArea.transform);
+        }
+    }
+
+    public void ResetRoomSpawnAreas(){
+        activeSpawnAreas.Clear();
+        ActivateRoomSpawning("Cockpit");
     }
 
     public void KillAllEnemies() {
@@ -44,7 +53,7 @@ public class Spawner : MonoBehaviour
     {
         // Get a random spawn area from the list of spawn areas 
         System.Random random = new System.Random();
-        Transform spawnArea = spawnAreas[random.Next(spawnAreas.Count)].transform;
+        Transform spawnArea = activeSpawnAreas[random.Next(activeSpawnAreas.Count)].transform;
 
         // Find a random point within this spawn area
         Vector3 extents = spawnArea.GetComponent<SpriteRenderer>().bounds.extents; 

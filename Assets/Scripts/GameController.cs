@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private AudioClip deathNoise;
     public GameObject bloodParent;
-    [SerializeField] private GameObject doorPrefab;
+    [SerializeField] private GameObject doorsPrefab;
     [HideInInspector] public GameState gameState;
     private int waveNumber;
     private bool waveInProgress;
@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
     private int waveKillCount;
     private float lastWaveEndedTime;
     private int waveIntervalTime;
+    public Dictionary<string, bool> roomsDict;
 
     void Start()
     {
@@ -42,6 +43,13 @@ public class GameController : MonoBehaviour
         this.bigEnemyIncrementalSpawnAmount = 0.5f;
         this.waveIntervalTime = 5;
         this.spawnController.SetSpawnInterval(2);
+        this.roomsDict = new Dictionary<string, bool>(){
+            {"Cockpit", true},
+            {"WeaponsBay", false},
+            {"CentralRoom", false},
+            {"MedBay", false},
+            {"EngineRoom", false}
+        };
     }
 
     void Update()
@@ -98,11 +106,14 @@ public class GameController : MonoBehaviour
         this.waveInProgress = false;
         this.spawnController.KillAllEnemies();
         this.spawnController.ClearSpawnQueues();
+        this.spawnController.ResetRoomSpawnAreas();
         this.gameState = GameState.StartMenu;
         this.userInterface.SetGameOverScreenActive(false);
         this.userInterface.SetStartMenuActive(true);
         this.DestroyBloodSplats();
         this.DestroyHealthPacks();
+
+        // Create new player
         Destroy(this.player.gameObject);
         this.player = Instantiate(this.playerPrefab);
         this.playerCamera.GetNewTransform(); 
@@ -130,7 +141,6 @@ public class GameController : MonoBehaviour
     }
 
     private void StartWave() {
-        Debug.Log("Starting wave");
         this.waveInProgress = true;
         this.waveKillCount = 0;
         this.waveNumber += 1;
@@ -175,6 +185,15 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void UpdateRooms(List<string> roomNames){
+        foreach (string roomName in roomNames){
+            if (!roomsDict[roomName]){
+                roomsDict[roomName] = true;
+                spawnController.ActivateRoomSpawning(roomName);
+            }
+        }
+    }
+
     private void DestroyBloodSplats(){
         foreach (Transform splat in this.bloodParent.transform){
             Destroy(splat.gameObject);
@@ -188,14 +207,9 @@ public class GameController : MonoBehaviour
     }
 
     private void ResetAreaDoors(){
-        Transform doorParent = GameObject.Find("AreaDoors").transform;
-        List<Transform> locations = new List<Transform>();
-        foreach (AreaDoor door in GameObject.FindObjectsByType<AreaDoor>(FindObjectsSortMode.None)){
-            locations.Add(door.transform);
-            Destroy(door.gameObject);
-        }
-        foreach (Transform newTransform in locations){
-            Instantiate(doorPrefab, newTransform.position, newTransform.rotation, doorParent);
-        }
+        Transform doors = GameObject.Find("AreaDoors").transform;
+        Destroy(doors.gameObject);
+        GameObject newDoors = Instantiate(doorsPrefab);
+        newDoors.name = doorsPrefab.name;
     }
 }

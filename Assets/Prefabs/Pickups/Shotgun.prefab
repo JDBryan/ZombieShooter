@@ -154,6 +154,7 @@ MonoBehaviour:
   reloadTime: 2
   bulletSpeed: 20
   bulletSpread: 15
+  damage: 10
   fireSprite: {fileID: 21300000, guid: 1841aa09ba4bb5d47a1b503c1ff5ec48, type: 3}
   idleSprite: {fileID: 21300000, guid: 38243ca7872576a4d82a1e852cd38ecb, type: 3}
   userInterfaceSprite: {fileID: 21300000, guid: cad678de96c422f44a428206fa355b47, type: 3}

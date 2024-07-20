@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -7,6 +8,7 @@ public class Enemy : MonoBehaviour
     // Parameters
     [SerializeField] private int maxHealth;
     [SerializeField] private float speed;
+    [SerializeField] private float speedVariance;
     [SerializeField] private float rotateSpeed;
     [SerializeField] public int moneyForPlayer;
     [SerializeField] private float chanceToDropHealth;
@@ -27,6 +29,7 @@ public class Enemy : MonoBehaviour
         // Tracking
         this.spawnEnded = false;
         this.currentHealth = this.maxHealth;
+        this.speed += Random.Range(-this.speedVariance, this.speedVariance);
         this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         this.target = GameObject.FindGameObjectWithTag("Player").transform.position;
 
