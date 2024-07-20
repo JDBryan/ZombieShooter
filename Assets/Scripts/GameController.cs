@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private AudioClip deathNoise;
     public GameObject bloodParent;
     [SerializeField] private GameObject doorsPrefab;
+    [SerializeField] private GameObject roomDarknessPrefab;
+    private GameObject roomDarkness;
     [HideInInspector] public GameState gameState;
     private int waveNumber;
     private bool waveInProgress;
@@ -50,6 +52,8 @@ public class GameController : MonoBehaviour
             {"MedBay", false},
             {"EngineRoom", false}
         };
+        this.roomDarkness = Instantiate(roomDarknessPrefab);
+        this.roomDarkness.name = roomDarknessPrefab.name;
     }
 
     void Update()
@@ -122,6 +126,9 @@ public class GameController : MonoBehaviour
         } 
         this.ResetAreaDoors();
         this.gameObject.GetComponent<Pathfinder>().Reset();
+        Destroy(this.roomDarkness);
+        this.roomDarkness = Instantiate(roomDarknessPrefab);
+        this.roomDarkness.name = roomDarknessPrefab.name;
     }
 
     public void PauseGame() {
@@ -190,6 +197,7 @@ public class GameController : MonoBehaviour
             if (!roomsDict[roomName]){
                 roomsDict[roomName] = true;
                 spawnController.ActivateRoomSpawning(roomName);
+                this.roomDarkness.transform.Find(roomName).GetComponent<Animator>().SetBool("Open", true);
             }
         }
     }
