@@ -453,7 +453,7 @@ MonoBehaviour:
   failMaterial: {fileID: 2100000, guid: bcea251ff2398384f941ab29b2062a9a, type: 2}
   myRenderers: []
   selected: 0
-  baseCost: 1
+  baseCost: 60
   player: {fileID: 0}
   leftAnimator: {fileID: 2922530470862107126}
   rightAnimator: {fileID: 1992969972101460640}

@@ -14,6 +14,11 @@ TagManager:
   - Floor
   - ShotgunStation
   - AutomaticRifleStation
+  - cockpit
+  - weaponsBay
+  - main
+  - medBay
+  - engineRoom
   layers:
   - Default
   - TransparentFX

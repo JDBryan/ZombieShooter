@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float reloadTime;
     [SerializeField] public float bulletSpeed;
     [SerializeField] public float bulletSpread;
+    [SerializeField] public int damage;
 
     // Sprite rendering
     [SerializeField] public Sprite fireSprite; 
@@ -84,6 +85,21 @@ public class Weapon : MonoBehaviour
     public virtual void Fire()
     {
         return;
+    }
+
+    public void CreateProjectile()
+    {
+        Transform player = this.transform.parent;
+        GameObject bullet = Instantiate(bulletPrefab, player.position + Vector3.Normalize(player.transform.rotation * new Vector3(0f,1f,0f))*1.5f, player.rotation);
+        bullet.transform.eulerAngles = new Vector3(
+                bullet.transform.eulerAngles.x,
+                bullet.transform.eulerAngles.y,
+                bullet.transform.eulerAngles.z + Random.Range(-this.bulletSpread, this.bulletSpread)
+            );
+        bullet.GetComponent<Bullet>().damage = this.damage;
+        Physics2D.IgnoreCollision(bullet.GetComponent<BoxCollider2D>(), player.GetComponent<CircleCollider2D>());
+        Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
+        bulletBody.velocity = bulletBody.transform.up * this.bulletSpeed;
     }
 
     public void PullTrigger()

@@ -27,6 +27,7 @@ public class UserInterface : MonoBehaviour
     void Start() {
         this.UpdateWeaponInfo();
         this.DisableHud();
+        this.SetMoneyNumber(0);
     }
 
     public void Reset()
