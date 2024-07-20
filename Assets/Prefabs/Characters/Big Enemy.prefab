@@ -188,6 +188,6 @@ MonoBehaviour:
   speedVariance: 0
   rotateSpeed: 4
   moneyForPlayer: 30
-  chanceToDropHealth: 0
+  chanceToDropHealth: 0.5
   bloodSplat: {fileID: 1481774045222291892, guid: db5a0d9353b24504482a89a6b7ddb343, type: 3}
   healthPack: {fileID: 4960805736172919309, guid: 760a924b8285d7d488c609f722c60ab9, type: 3}
