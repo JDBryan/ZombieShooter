@@ -30,6 +30,7 @@ public class AreaDoor : Interactable
         leftAnimator.SetBool("Open", true);
         rightAnimator.SetBool("Open", true);
         this.open = true;
+        this.DisplayPrompt(false);
     }
 
     public override void Interact(Player player){

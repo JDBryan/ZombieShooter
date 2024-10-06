@@ -15,4 +15,8 @@ public class CalibratePathfinding: MonoBehaviour
         this.pathfinder.Graph.CalibrateGraph();
     }
 
+    public void SetInactive(){
+        this.transform.parent.gameObject.SetActive(false);
+    }
+
 }
