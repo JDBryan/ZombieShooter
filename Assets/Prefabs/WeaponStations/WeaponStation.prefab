@@ -107,6 +107,7 @@ MonoBehaviour:
   myRenderers: []
   selected: 0
   baseCost: 2
+  promptPrefab: {fileID: 241591102894992615, guid: d3f45232ad61abd4aada7b7e74fda34c, type: 3}
   player: {fileID: 0}
   prefabWeapon: {fileID: 0}
   ammoCost: 1

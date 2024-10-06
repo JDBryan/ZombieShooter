@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Interactable : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Interactable : MonoBehaviour
     [HideInInspector] private bool failed;
     [HideInInspector] private float waitTime;
     [SerializeField] public int baseCost;
+    [SerializeField] public GameObject promptPrefab;
+    [HideInInspector] private GameObject prompt;
     [HideInInspector] public Player player;
 
     // Start is called before the first frame update
@@ -30,6 +33,10 @@ public class Interactable : MonoBehaviour
 
         this.failed = false;
         this.waitTime = 0f;
+        this.prompt = Instantiate(promptPrefab, this.transform.position + new Vector3(0.2f,1.5f,0) , promptPrefab.transform.rotation);
+        this.prompt.transform.parent = this.transform;
+        this.SetPromptText(baseCost);
+        this.DisplayPrompt(false);
     }
 
     private void LateUpdate(){
@@ -44,6 +51,7 @@ public class Interactable : MonoBehaviour
                 this.failed = false;
             }
         }
+        this.DisplayPrompt(this.selected);
     }
 
     public void Select(){
@@ -58,6 +66,18 @@ public class Interactable : MonoBehaviour
         foreach (SpriteRenderer renderer in this.myRenderers){
             renderer.material = defaultMaterial;
         }
+    } 
+
+    public void DisplayPrompt(bool enabled){
+        this.prompt.GetComponent<SpriteRenderer>().enabled = enabled;
+        GameObject text = this.prompt.transform.GetChild(0).transform.GetChild(0).gameObject;
+        text.SetActive(enabled);
+        this.prompt.transform.GetChild(1).gameObject.SetActive(enabled);
+    }
+
+    public void SetPromptText(int cost){
+        GameObject text = this.prompt.transform.GetChild(0).transform.GetChild(0).gameObject;
+        text.GetComponent<TMP_Text>().text = cost.ToString();
     }
 
     public void TriggerFailedInteract(){

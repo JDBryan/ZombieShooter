@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 4788fcd05ace63244865d02a750637e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -227,7 +227,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 4788fcd05ace63244865d02a750637e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -396,8 +396,8 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 6
-  m_BackSortingOrder: 4
+  m_FrontSortingOrder: 8
+  m_BackSortingOrder: 6
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
 --- !u!1 &4275567397792216893
@@ -454,6 +454,7 @@ MonoBehaviour:
   myRenderers: []
   selected: 0
   baseCost: 60
+  promptPrefab: {fileID: 241591102894992615, guid: d3f45232ad61abd4aada7b7e74fda34c, type: 3}
   player: {fileID: 0}
   leftAnimator: {fileID: 2922530470862107126}
   rightAnimator: {fileID: 1992969972101460640}
@@ -538,7 +539,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 6
-  m_BackSortingOrder: 4
+  m_FrontSortingOrder: 8
+  m_BackSortingOrder: 6
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
