@@ -6,7 +6,8 @@ public class BloodMaskScript : MonoBehaviour
 {
     private SpriteRenderer bloodRenderer;
 
-    public void DestroyMask(){
+    public void DestroyMask()
+    {
 
         bloodRenderer = GetComponentInParent<SpriteRenderer>();
         bloodRenderer.maskInteraction = SpriteMaskInteraction.None;

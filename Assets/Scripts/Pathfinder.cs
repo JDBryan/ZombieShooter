@@ -13,20 +13,25 @@ public class Pathfinder : MonoBehaviour
     private Dictionary<Vector2,Vector2> cameFrom;
     private Vector2 lastValidCell;
 
+    // Singleton instance
+    public static Pathfinder Instance { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         this.Graph = new PathfindingGrid(200,170,0.5f,-50f,-10f);
         this.start = new Vector3(0f,0f,0f);
-        this.goal = GameObject.FindGameObjectWithTag("Player").transform.position;
+        this.goal = Player.Instance.transform.position;
         this.cameFrom = new Dictionary<Vector2,Vector2>();
         this.lastValidCell = new Vector2();
+        GameController.OnGameReset += Reset;
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.goal = GameObject.FindGameObjectWithTag("Player").transform.position;
+        this.goal = Player.Instance.transform.position;
         Vector2 goalCell = Graph.GetClosestCell(this.goal);
         if (Graph.pathfindingGraph.ContainsKey(goalCell)){
             this.lastValidCell = goalCell;
@@ -34,7 +39,8 @@ public class Pathfinder : MonoBehaviour
         this.cameFrom = BreadthFirstSearch(this.lastValidCell);
     }
 
-    public void Reset(){
+    public void Reset()
+    {
         this.Graph = new PathfindingGrid(200,170,0.5f,-50f,-10f);
     }
 

@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-
-    public Transform playerTransform;
-    public GameController gameController;
     public bool isMoving;
     private bool isAnimating;
     public Vector3 target;
     Vector3 moveVelocity;
 
+    // Singleton instance
+    public static PlayerCamera Instance { get; private set; }
+
+    void Start()
+    {
+        Instance = this;
+        GameController.OnGameReset += OnGameReset;
+        Player.OnKilled += OnPlayerKilled;
+    }
+
     void LateUpdate()
     {
         if (!isAnimating && !isMoving){
-            this.transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, this.transform.position.z);
+            this.transform.position = new Vector3(Player.Instance.transform.position.x, Player.Instance.transform.position.y, this.transform.position.z);
         }
         else if (isMoving && !isAnimating){
             Vector3 positionMove = Vector3.SmoothDamp(this.transform.position, target, ref moveVelocity, 0.5f, 10f);
@@ -23,19 +30,29 @@ public class PlayerCamera : MonoBehaviour
         }
     }
 
-    public void GetNewTransform() 
+    void OnGameReset()
     {
-        this.playerTransform = FindObjectOfType<Player>().transform;
-        this.transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, this.transform.position.z);
+        this.DeathCameraAnimation(false);
+        this.isMoving = false;
     }
 
-    public void DeathCameraAnimation(bool dead){ 
-        isAnimating = dead;
+    void OnPlayerKilled()
+    {
+        // Begins moving camera for death animation
+        this.target = Player.Instance.transform.position + Vector3.Normalize(Player.Instance.transform.rotation * new Vector3(0f,1f,0f));
+        this.isMoving = true;
+    }
+
+    public void DeathCameraAnimation(bool dead)
+    { 
+        this.isAnimating = dead;
         //Triggers the Camera Death Animation Attached to the Main Camera
         this.GetComponent<Animator>().SetBool("playerDead", dead);
     }
 
-    public void ShowDeathMenu(){ //Triggered by an event in the middle of the Camera Death animation
-        gameController.SetDeathMenuActive();
+    // Triggered by an event in the middle of the Camera Death animation
+    public void ShowDeathMenu()
+    { 
+        GameController.Instance.SetDeathMenuActive();
     }
 }

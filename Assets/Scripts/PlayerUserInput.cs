@@ -4,41 +4,34 @@ using UnityEngine;
 
 public class PlayerUserInput : MonoBehaviour
 {
-    private Player player;
-
-    void Start()
-    {
-        this.player = this.GetComponent<Player>();
-    }
-
     void Update()
     {
-        player.SetVelocity(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        Player.Instance.SetVelocity(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
 
         if (Input.GetKeyDown("e")) {
-            player.SwitchWeapon();
+            Player.Instance.SwitchWeapon();
         }
 
         if (Input.GetKeyDown("r")) {
-            player.ReloadWeapon();
+            Player.Instance.ReloadWeapon();
         }
 
         if (Input.GetMouseButtonDown(0)) {
-            player.PullTrigger();
+            Player.Instance.PullTrigger();
         }
 
         if (Input.GetMouseButtonUp(0)) {
-            player.ReleaseTrigger();
+            Player.Instance.ReleaseTrigger();
         }
 
         if (Input.GetKeyDown("f")) {
-            player.Interact();
+            Player.Instance.Interact();
         }
     }
 
     void LateUpdate() 
     {
         Vector2 mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        player.UpdateRotation(mousePosition);
+        Player.Instance.UpdateRotation(mousePosition);
     }
 }
