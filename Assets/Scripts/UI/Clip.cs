@@ -39,8 +39,6 @@ public class Clip : MonoBehaviour
     {
         int bulletsInClip = activeWeapon.roundsLeftInClip;
         for (int i = 0; i < bulletsInClip; i++) {
-            Debug.Log(bulletList);
-            Debug.Log(i);
             this.bulletList[i].SetActive(true);
         }
         for (int i = bulletsInClip; i < this.clipSize; i++) {
