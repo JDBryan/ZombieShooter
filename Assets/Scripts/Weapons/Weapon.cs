@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -33,6 +32,17 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public float lastRoundFiredTime;
     [HideInInspector] public bool triggerHeld;
     [HideInInspector] public int roundsFiredWhileTriggerHeld;
+    [HideInInspector] public bool isActive;
+
+    // Events
+    // Fires whenever the number of rounds in the clip changes
+    public static event Action<Weapon> OnRoundsInClipChanged;
+
+    // Fires whenever the ammo total changes (does not include changes to clip)
+    public static event Action<Weapon> OnAmmoCountChanged;
+
+
+    
 
     public void Start()
     {
@@ -56,6 +66,7 @@ public class Weapon : MonoBehaviour
             {
                 this.Fire();
                 this.StopReload();
+                OnRoundsInClipChanged.Invoke(this);
             }
             else
             {
@@ -76,7 +87,8 @@ public class Weapon : MonoBehaviour
                 this.currentAmmoCount -= roundsToReload;
                 this.roundsLeftInClip += roundsToReload;
                 this.reloadInProgress = false;
-                userInterface.UpdateWeaponInfo();
+                OnRoundsInClipChanged.Invoke(this);
+                OnAmmoCountChanged.Invoke(this);
             }
         }
     }
@@ -89,15 +101,14 @@ public class Weapon : MonoBehaviour
 
     public void CreateProjectile()
     {
-        Transform player = this.transform.parent;
-        GameObject bullet = Instantiate(bulletPrefab, player.position + Vector3.Normalize(player.transform.rotation * new Vector3(0f,1f,0f))*1.5f, player.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, Player.Instance.transform.position + Vector3.Normalize(Player.Instance.transform.rotation * new Vector3(0f,1f,0f))*1.5f, Player.Instance.transform.rotation);
         bullet.transform.eulerAngles = new Vector3(
                 bullet.transform.eulerAngles.x,
                 bullet.transform.eulerAngles.y,
-                bullet.transform.eulerAngles.z + Random.Range(-this.bulletSpread, this.bulletSpread)
+                bullet.transform.eulerAngles.z + UnityEngine.Random.Range(-this.bulletSpread, this.bulletSpread)
             );
         bullet.GetComponent<Bullet>().damage = this.damage;
-        Physics2D.IgnoreCollision(bullet.GetComponent<BoxCollider2D>(), player.GetComponent<CircleCollider2D>());
+        Physics2D.IgnoreCollision(bullet.GetComponent<BoxCollider2D>(), Player.Instance.transform.GetComponent<CircleCollider2D>());
         Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
         bulletBody.velocity = bulletBody.transform.up * this.bulletSpeed;
     }
@@ -135,5 +146,11 @@ public class Weapon : MonoBehaviour
     {
         this.reloadInProgress = false;
         this.userInterface.SetReloadBar(1);
-    }   
+    }
+
+    public void RefillAmmo()
+    {
+        this.currentAmmoCount = this.initialAmmoCount;
+        OnAmmoCountChanged.Invoke(this);
+    }
 }

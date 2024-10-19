@@ -9,10 +9,8 @@ public class Shotgun : Weapon
     public override void Fire()
     {
         // Fire round
-        Transform player = this.transform.parent;
         this.ChangeSpriteToFire();
         GetComponent<AudioSource>().PlayOneShot(fireSound);
-        //Instantiate(shockwavePrefab, this.transform.position, Quaternion.identity, player);
         for (int i = 0; i < this.bulletsPerShot; i++)
         {
             this.CreateProjectile();
@@ -22,9 +20,6 @@ public class Shotgun : Weapon
         this.roundsLeftInClip -= 1;
         this.roundsFiredWhileTriggerHeld += 1;
         this.lastRoundFiredTime = Time.time;
-
-        // Update user interface
-        userInterface.UpdateWeaponInfo();
     }
 }
 

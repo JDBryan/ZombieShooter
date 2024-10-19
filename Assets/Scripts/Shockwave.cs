@@ -32,8 +32,7 @@ public class Shockwave : MonoBehaviour
     }
 
     void Update(){
-        GameController controller = GameObject.Find("GameController").GetComponent<GameController>();
-        if (controller.gameState != GameState.Active){
+        if (GameController.Instance.gameState != GameState.Active){
             Destroy(this.gameObject);
         }
     }

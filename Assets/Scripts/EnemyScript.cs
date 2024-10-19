@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class Enemy : MonoBehaviour
 {
@@ -21,26 +21,19 @@ public class Enemy : MonoBehaviour
     // Object references
     [SerializeField] private GameObject bloodSplat;
     [SerializeField] private GameObject healthPack;
-    [HideInInspector] private GameController gameController;
-    [HideInInspector] private Pathfinder pathfinder;
-    private Player player;
+    public static event Action<Enemy> OnKilled;
 
     private void Start() {
         // Tracking
         this.spawnEnded = false;
         this.currentHealth = this.maxHealth;
-        this.speed += Random.Range(-this.speedVariance, this.speedVariance);
-        this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        this.target = GameObject.FindGameObjectWithTag("Player").transform.position;
-
-        // Object references
-        this.gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        this.pathfinder = GameObject.Find("GameController").GetComponent<Pathfinder>();
+        this.speed += UnityEngine.Random.Range(-this.speedVariance, this.speedVariance);
+        this.target = Player.Instance.transform.position;
     }
 
     private void FixedUpdate() {
-        if (this.pathfinder.CheckIfCellInCameFrom(this.gameObject.transform.position)){
-            this.target = this.pathfinder.NextDestination(this.gameObject.transform.position);
+        if (Pathfinder.Instance.CheckIfCellInCameFrom(this.gameObject.transform.position)){
+            this.target = Pathfinder.Instance.NextDestination(this.gameObject.transform.position);
         }
         RotateTowardsTarget();
         if (spawnEnded == true) {
@@ -60,11 +53,11 @@ public class Enemy : MonoBehaviour
             this.currentHealth -= damageAmount;
             if (this.currentHealth <= 0) {
                 Instantiate(this.bloodSplat, this.transform.position, bulletRotation);
-                if (Random.Range(0f,1f) <= chanceToDropHealth){
+                if (UnityEngine.Random.Range(0f,1f) <= chanceToDropHealth){
                     GameObject pack = Instantiate(healthPack, this.transform.position, Quaternion.identity);
                     pack.GetComponent<HealthPack>().AddKnockBack(bulletRotation * Vector3.up, 0.2f, 0.4f);
                 }
-                gameController.RegisterEnemyDeath(this);
+                OnKilled.Invoke(this);
                 Destroy(this.gameObject);
             }
         }

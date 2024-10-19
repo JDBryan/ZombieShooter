@@ -6,10 +6,10 @@ public class HealthPack : MonoBehaviour
 {
     public int healthAmount;
     private List<KnockBack> activeKnockBacks = new List<KnockBack>();
-    // Start is called before the first frame update
+
     void Start()
     {
-        this.healthAmount = 10;
+        GameController.OnGameReset += () => Destroy(this.gameObject);
     }
 
     void FixedUpdate() {

@@ -13,9 +13,6 @@ public class Pistol : Weapon
         this.lastRoundFiredTime = Time.time;
         this.roundsFiredWhileTriggerHeld += 1;
         this.roundsLeftInClip -= 1;
-
-        // Update user interface
-        userInterface.UpdateWeaponInfo();
     }
 }
 

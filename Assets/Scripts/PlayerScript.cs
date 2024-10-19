@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // Singleton instance
+    public static Player Instance { get; private set; }
+
+    // Events
+    // Fired when health total is changed, integer representing new health total
+    public static event Action<int> OnHealthTotalChanged;
+    // Fired when player is killed
+    public static event Action OnKilled;
+    // Fired when the players active weapon is changed
+    public static event Action<Weapon, Weapon> OnActiveWeaponChanged;
+
     // Player parameters
     [SerializeField] private int maxHealth;
     [SerializeField] private float speed;
@@ -21,12 +32,13 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip deathNoise;
     [SerializeField] private AudioClip hitNoise;
     [HideInInspector] private Animator animator;
-    [HideInInspector] private GameController gameController;
     [HideInInspector] private UserInterface userInterface;
     private Interactable selectedInteractable;
 
     void Start()
     {
+        Instance = this;
+
         // Tracking
         this.velocity = new Vector2(0, 0);
         this.activeWeaponIndex = 0;
@@ -35,10 +47,15 @@ public class Player : MonoBehaviour
         this.money = 0;
 
         // Game object references
-        this.gameController = FindObjectOfType<GameController>();
         this.userInterface = FindObjectOfType<UserInterface>();
         this.animator = this.GetComponent<Animator>();
         this.selectedInteractable = null;
+        OnHealthTotalChanged.Invoke(this.currentHealth);
+
+        // Event Handlers
+        GameController.OnGameStart += EnableUserInput;
+        GameController.OnGamePaused += DisableUserInput;
+        GameController.OnGameResumed += EnableUserInput;
     }
     
     void Update()
@@ -132,7 +149,7 @@ public class Player : MonoBehaviour
             if (this.currentHealth > this.maxHealth){
                 this.currentHealth = this.maxHealth;
             }
-            this.gameController.UpdatePlayerHealth(this.currentHealth);
+            OnHealthTotalChanged.Invoke(this.currentHealth);
             Destroy(collider.gameObject);
         }
     }
@@ -148,8 +165,7 @@ public class Player : MonoBehaviour
         //Check if collision object is an ammo pack single
         if (collision.gameObject.tag == "AmmoSingleWeapon" && this.GetActiveWeapon() != null)
         {
-            RefillWeaponAmmo(GetActiveWeapon());
-            userInterface.UpdateWeaponInfo();
+            GetActiveWeapon().RefillAmmo();
             Destroy(collision.gameObject);
         }
 
@@ -157,9 +173,8 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "AmmoAllWeapons")
         {
             foreach (Weapon weapon in GetHeldWeapons()){
-                RefillWeaponAmmo(weapon);
+                weapon.RefillAmmo();
             }
-            userInterface.UpdateWeaponInfo();
             Destroy(collision.gameObject);
         }
 
@@ -174,7 +189,7 @@ public class Player : MonoBehaviour
 
     public void Damage(int damageAmount) {
         this.currentHealth -= damageAmount;
-        this.gameController.UpdatePlayerHealth(this.currentHealth);
+        OnHealthTotalChanged.Invoke(this.currentHealth);
         if (this.currentHealth <= 0){
             this.Kill();
         } else {
@@ -197,8 +212,13 @@ public class Player : MonoBehaviour
             this.selectedInteractable.gameObject.GetComponent<Interactable>().enabled = false;
         }
         GetComponent<AudioSource>().PlayOneShot(deathNoise);
+        OnKilled.Invoke();
+        
         //Starts Player Death Animation
         this.animator.SetBool("Dead", true);
+        this.GetComponent<SpriteRenderer>().sortingOrder = 10;
+        this.ActivateDeathCircle();
+
         if (this.GetActiveWeapon() != null){
             this.GetActiveWeapon().GetComponent<SpriteRenderer>().enabled = false;
         }
@@ -208,7 +228,7 @@ public class Player : MonoBehaviour
 
     public void EndGame(){ 
         //Gets Triggered by and event at the end of the Player Death Animation
-        gameController.EndGame();
+        GameController.Instance.EndGame();
     }
 
     public void ActivateDeathCircle(){
@@ -252,10 +272,12 @@ public class Player : MonoBehaviour
     private void SetActiveWeapon(int index) {
         foreach(Weapon weapon in this.GetHeldWeapons()) {
             weapon.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            weapon.isActive = false;
         }
         this.GetHeldWeapons()[index].gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        this.GetHeldWeapons()[index].isActive = true;
         this.activeWeaponIndex = index;
-        this.userInterface.UpdateWeaponInfo();
+        OnActiveWeaponChanged.Invoke(this.GetHeldWeapons()[index] ?? null, this.GetHeldWeapons().Count > 1 ? this.GetHeldWeapons()[(index + 1) % 2] : null);
     }
 
     // Helper function to calculate the angle from point a to point b
@@ -300,8 +322,7 @@ public class Player : MonoBehaviour
     public void RefillAmmoFromStation(GameObject stationWeapon){
         foreach (Transform child in this.transform){
             if (child.gameObject == stationWeapon) {
-                this.RefillWeaponAmmo(child.GetComponent<Weapon>());
-                userInterface.UpdateWeaponInfo();
+                child.GetComponent<Weapon>().RefillAmmo();
             }
         }
     }
@@ -332,7 +353,7 @@ public class Player : MonoBehaviour
 
     public void Interact(){
         if (this.selectedInteractable != null){
-            this.selectedInteractable.Interact(this);
+            this.selectedInteractable.Interact();
         }
     }
 
